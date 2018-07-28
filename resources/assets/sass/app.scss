@@ -1,0 +1,22 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.icon {
+  width: 250px;
+}
+
+.nav-item {
+  margin-right: 20px
+}
