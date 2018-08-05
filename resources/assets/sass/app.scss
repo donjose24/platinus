@@ -1,6 +1,8 @@
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
 
 
 // Variables
@@ -13,10 +15,38 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+h1 {
+  font-family: 'Dancing Script', sans-serif;
+}
+p {
+  font-size: 15px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.navbar {
+ color: white;
+}
+
 .icon {
   width: 250px;
 }
 
 .nav-item {
   margin-right: 20px
+}
+
+.jumbotron {
+  background-image: url("/images/room-bg.jpg")
+}
+
+.banner {
+  background-color: rgba(0,0,0,0.6);
+  padding: 20px;
+  color: white;
+}
+
+.location {
+  padding: 20px;
+  color: white;
+  background-color: #59A6CE;
 }
