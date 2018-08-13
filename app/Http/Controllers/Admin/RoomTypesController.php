@@ -31,7 +31,7 @@ class RoomTypesController extends Controller
             $roomtypes = RoomType::latest()->paginate($perPage);
         }
 
-        return view('admin/room_types.room-types.index', compact('roomtypes'));
+        return view('admin/room_types.index', compact('roomtypes'));
     }
 
     /**
@@ -41,7 +41,7 @@ class RoomTypesController extends Controller
      */
     public function create()
     {
-        return view('admin/room_types.room-types.create');
+        return view('admin/room_types.create');
     }
 
     /**
@@ -64,7 +64,7 @@ class RoomTypesController extends Controller
         
         RoomType::create($requestData);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType added!');
+        return redirect('admin/room_types')->with('flash_message', 'RoomType added!');
     }
 
     /**
@@ -78,7 +78,7 @@ class RoomTypesController extends Controller
     {
         $roomtype = RoomType::findOrFail($id);
 
-        return view('admin/room_types.room-types.show', compact('roomtype'));
+        return view('admin/room_types.show', compact('roomtype'));
     }
 
     /**
@@ -92,7 +92,7 @@ class RoomTypesController extends Controller
     {
         $roomtype = RoomType::findOrFail($id);
 
-        return view('admin/room_types.room-types.edit', compact('roomtype'));
+        return view('admin/room_types.edit', compact('roomtype'));
     }
 
     /**
@@ -117,7 +117,7 @@ class RoomTypesController extends Controller
         $roomtype = RoomType::findOrFail($id);
         $roomtype->update($requestData);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType updated!');
+        return redirect('admin/room_types')->with('flash_message', 'RoomType updated!');
     }
 
     /**
@@ -131,6 +131,6 @@ class RoomTypesController extends Controller
     {
         RoomType::destroy($id);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType deleted!');
+        return redirect('admin/room_types')->with('flash_message', 'RoomType deleted!');
     }
 }

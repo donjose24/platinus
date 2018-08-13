@@ -23,7 +23,7 @@
 
                         {!! Form::open(['url' => '/admin/room', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('admin/rooms.room.form', ['formMode' => 'create'])
+                        @include ('admin/rooms.form', ['formMode' => 'create'])
 
                         {!! Form::close() !!}
 

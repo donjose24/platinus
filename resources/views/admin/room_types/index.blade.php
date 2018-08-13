@@ -9,11 +9,11 @@
                 <div class="card">
                     <div class="card-header">Roomtypes</div>
                     <div class="card-body">
-                        <a href="{{ url('/room/room-types/create') }}" class="btn btn-success btn-sm" title="Add New RoomType">
+                        <a href="{{ url('/admin/room_types/create') }}" class="btn btn-success btn-sm" title="Add New RoomType">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/room/room-types', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
+                        {!! Form::open(['method' => 'GET', 'url' => '/admin/room_types', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                             <span class="input-group-append">
@@ -39,11 +39,11 @@
                                         <td>{{ $loop->iteration or $item->id }}</td>
                                         <td>{{ $item->name }}</td><td>{{ $item->description }}</td><td>{{ $item->image_url }}</td>
                                         <td>
-                                            <a href="{{ url('/room/room-types/' . $item->id) }}" title="View RoomType"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                            <a href="{{ url('/room/room-types/' . $item->id . '/edit') }}" title="Edit RoomType"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <a href="{{ url('/admin/room_types/' . $item->id) }}" title="View RoomType"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                            <a href="{{ url('/admin/room_types/' . $item->id . '/edit') }}" title="Edit RoomType"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                             {!! Form::open([
                                                 'method' => 'DELETE',
-                                                'url' => ['/room/room-types', $item->id],
+                                                'url' => ['/admin/room_types', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                                 {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(

@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Edit Room #{{ $room->id }}</div>
+                    <div class="card-header">Create New RoomType</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/room') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/room_types') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,14 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($room, [
-                            'method' => 'PATCH',
-                            'url' => ['/admin/room', $room->id],
-                            'class' => 'form-horizontal',
-                            'files' => true
-                        ]) !!}
+                        {!! Form::open(['url' => '/admin/room_types', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('admin/rooms.room.form', ['formMode' => 'edit'])
+                        @include ('admin.room_types.form', ['formMode' => 'create'])
 
                         {!! Form::close() !!}
 

@@ -28,7 +28,7 @@ class RoomController extends Controller
             $room = Room::latest()->paginate($perPage);
         }
 
-        return view('admin/rooms.room.index', compact('room'));
+        return view('admin/rooms.index', compact('room'));
     }
 
     /**
@@ -38,7 +38,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        return view('admin/rooms.room.create');
+        return view('admin/rooms.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class RoomController extends Controller
     {
         $room = Room::findOrFail($id);
 
-        return view('admin/rooms.room.show', compact('room'));
+        return view('admin/rooms.show', compact('room'));
     }
 
     /**
@@ -86,7 +86,7 @@ class RoomController extends Controller
     {
         $room = Room::findOrFail($id);
 
-        return view('admin/rooms.room.edit', compact('room'));
+        return view('admin/rooms.edit', compact('room'));
     }
 
     /**
