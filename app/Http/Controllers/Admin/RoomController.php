@@ -21,17 +21,14 @@ class RoomController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $room = Room::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('description', 'LIKE', "%$keyword%")
-                ->orWhere('capacity', 'LIKE', "%$keyword%")
-                ->orWhere('image_url', 'LIKE', "%$keyword%")
-                ->orWhere('price', 'LIKE', "%$keyword%")
+            $room = Room::where('number', 'LIKE', "%$keyword%")
+                ->orWhere('room_type_id', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
             $room = Room::latest()->paginate($perPage);
         }
 
-        return view('admin.room.index', compact('room'));
+        return view('admin/rooms.room.index', compact('room'));
     }
 
     /**
@@ -41,7 +38,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        return view('admin.room.create');
+        return view('admin/rooms.room.create');
     }
 
     /**
@@ -54,10 +51,8 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'name' => 'required',
-			'description' => 'required',
-			'capacity' => 'required',
-			'image_url' => 'required'
+			'number' => 'required',
+			'room_type_id' => 'required'
 		]);
         $requestData = $request->all();
         
@@ -77,7 +72,7 @@ class RoomController extends Controller
     {
         $room = Room::findOrFail($id);
 
-        return view('admin.room.show', compact('room'));
+        return view('admin/rooms.room.show', compact('room'));
     }
 
     /**
@@ -91,7 +86,7 @@ class RoomController extends Controller
     {
         $room = Room::findOrFail($id);
 
-        return view('admin.room.edit', compact('room'));
+        return view('admin/rooms.room.edit', compact('room'));
     }
 
     /**
@@ -105,10 +100,8 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'name' => 'required',
-			'description' => 'required',
-			'capacity' => 'required',
-			'image_url' => 'required'
+			'number' => 'required',
+			'room_type_id' => 'required'
 		]);
         $requestData = $request->all();
         

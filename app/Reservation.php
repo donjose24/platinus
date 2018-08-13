@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Room extends Model
+class Reservation extends Model
 {
     use LogsActivity;
     use SoftDeletes;
@@ -17,7 +17,7 @@ class Room extends Model
      *
      * @var string
      */
-    protected $table = 'rooms';
+    protected $table = 'reservations';
 
     /**
     * The database primary key value.
@@ -31,7 +31,7 @@ class Room extends Model
      *
      * @var array
      */
-    protected $fillable = ['number', 'room_type_id'];
+    protected $fillable = ['room_id', 'transaction_id'];
 
     
 

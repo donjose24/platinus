@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\RoomType;
+use App\Transaction;
 use Illuminate\Http\Request;
 
-class RoomTypesController extends Controller
+class TransactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,17 +21,19 @@ class RoomTypesController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $roomtypes = RoomType::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('description', 'LIKE', "%$keyword%")
-                ->orWhere('image_url', 'LIKE', "%$keyword%")
-                ->orWhere('price', 'LIKE', "%$keyword%")
-                ->orWhere('capacity', 'LIKE', "%$keyword%")
+            $transactions = Transaction::where('from_date', 'LIKE', "%$keyword%")
+                ->orWhere('reservation_id', 'LIKE', "%$keyword%")
+                ->orWhere('user_id', 'LIKE', "%$keyword%")
+                ->orWhere('to_date', 'LIKE', "%$keyword%")
+                ->orWhere('is_paid', 'LIKE', "%$keyword%")
+                ->orWhere('deposit_slip', 'LIKE', "%$keyword%")
+                ->orWhere('expiration_date', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $roomtypes = RoomType::latest()->paginate($perPage);
+            $transactions = Transaction::latest()->paginate($perPage);
         }
 
-        return view('admin/room_types.room-types.index', compact('roomtypes'));
+        return view('admin/transactions.transactions.index', compact('transactions'));
     }
 
     /**
@@ -41,7 +43,7 @@ class RoomTypesController extends Controller
      */
     public function create()
     {
-        return view('admin/room_types.room-types.create');
+        return view('admin/transactions.transactions.create');
     }
 
     /**
@@ -54,17 +56,18 @@ class RoomTypesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'name' => 'required',
-			'description' => 'required',
-			'image_url' => 'required',
-			'price' => 'required',
-			'capacity' => 'required'
+			'from_date' => 'required',
+			'reservation_id' => 'required',
+			'user_id' => 'required',
+			'to_date' => 'required',
+			'is_paid' => 'required',
+			'expiration_date' => 'required'
 		]);
         $requestData = $request->all();
         
-        RoomType::create($requestData);
+        Transaction::create($requestData);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType added!');
+        return redirect('admin/transactions')->with('flash_message', 'Transaction added!');
     }
 
     /**
@@ -76,9 +79,9 @@ class RoomTypesController extends Controller
      */
     public function show($id)
     {
-        $roomtype = RoomType::findOrFail($id);
+        $transaction = Transaction::findOrFail($id);
 
-        return view('admin/room_types.room-types.show', compact('roomtype'));
+        return view('admin/transactions.transactions.show', compact('transaction'));
     }
 
     /**
@@ -90,9 +93,9 @@ class RoomTypesController extends Controller
      */
     public function edit($id)
     {
-        $roomtype = RoomType::findOrFail($id);
+        $transaction = Transaction::findOrFail($id);
 
-        return view('admin/room_types.room-types.edit', compact('roomtype'));
+        return view('admin/transactions.transactions.edit', compact('transaction'));
     }
 
     /**
@@ -106,18 +109,19 @@ class RoomTypesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'name' => 'required',
-			'description' => 'required',
-			'image_url' => 'required',
-			'price' => 'required',
-			'capacity' => 'required'
+			'from_date' => 'required',
+			'reservation_id' => 'required',
+			'user_id' => 'required',
+			'to_date' => 'required',
+			'is_paid' => 'required',
+			'expiration_date' => 'required'
 		]);
         $requestData = $request->all();
         
-        $roomtype = RoomType::findOrFail($id);
-        $roomtype->update($requestData);
+        $transaction = Transaction::findOrFail($id);
+        $transaction->update($requestData);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType updated!');
+        return redirect('admin/transactions')->with('flash_message', 'Transaction updated!');
     }
 
     /**
@@ -129,8 +133,8 @@ class RoomTypesController extends Controller
      */
     public function destroy($id)
     {
-        RoomType::destroy($id);
+        Transaction::destroy($id);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType deleted!');
+        return redirect('admin/transactions')->with('flash_message', 'Transaction deleted!');
     }
 }

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\RoomType;
+use App\Reservation;
 use Illuminate\Http\Request;
 
-class RoomTypesController extends Controller
+class ReservationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,17 +21,14 @@ class RoomTypesController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $roomtypes = RoomType::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('description', 'LIKE', "%$keyword%")
-                ->orWhere('image_url', 'LIKE', "%$keyword%")
-                ->orWhere('price', 'LIKE', "%$keyword%")
-                ->orWhere('capacity', 'LIKE', "%$keyword%")
+            $reservations = Reservation::where('room_id', 'LIKE', "%$keyword%")
+                ->orWhere('transaction_id', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $roomtypes = RoomType::latest()->paginate($perPage);
+            $reservations = Reservation::latest()->paginate($perPage);
         }
 
-        return view('admin/room_types.room-types.index', compact('roomtypes'));
+        return view('admin/reservations.reservations.index', compact('reservations'));
     }
 
     /**
@@ -41,7 +38,7 @@ class RoomTypesController extends Controller
      */
     public function create()
     {
-        return view('admin/room_types.room-types.create');
+        return view('admin/reservations.reservations.create');
     }
 
     /**
@@ -54,17 +51,13 @@ class RoomTypesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'name' => 'required',
-			'description' => 'required',
-			'image_url' => 'required',
-			'price' => 'required',
-			'capacity' => 'required'
+			'room_id' => 'required'
 		]);
         $requestData = $request->all();
         
-        RoomType::create($requestData);
+        Reservation::create($requestData);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType added!');
+        return redirect('admin/reservations')->with('flash_message', 'Reservation added!');
     }
 
     /**
@@ -76,9 +69,9 @@ class RoomTypesController extends Controller
      */
     public function show($id)
     {
-        $roomtype = RoomType::findOrFail($id);
+        $reservation = Reservation::findOrFail($id);
 
-        return view('admin/room_types.room-types.show', compact('roomtype'));
+        return view('admin/reservations.reservations.show', compact('reservation'));
     }
 
     /**
@@ -90,9 +83,9 @@ class RoomTypesController extends Controller
      */
     public function edit($id)
     {
-        $roomtype = RoomType::findOrFail($id);
+        $reservation = Reservation::findOrFail($id);
 
-        return view('admin/room_types.room-types.edit', compact('roomtype'));
+        return view('admin/reservations.reservations.edit', compact('reservation'));
     }
 
     /**
@@ -106,18 +99,14 @@ class RoomTypesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'name' => 'required',
-			'description' => 'required',
-			'image_url' => 'required',
-			'price' => 'required',
-			'capacity' => 'required'
+			'room_id' => 'required'
 		]);
         $requestData = $request->all();
         
-        $roomtype = RoomType::findOrFail($id);
-        $roomtype->update($requestData);
+        $reservation = Reservation::findOrFail($id);
+        $reservation->update($requestData);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType updated!');
+        return redirect('admin/reservations')->with('flash_message', 'Reservation updated!');
     }
 
     /**
@@ -129,8 +118,8 @@ class RoomTypesController extends Controller
      */
     public function destroy($id)
     {
-        RoomType::destroy($id);
+        Reservation::destroy($id);
 
-        return redirect('room/room-types')->with('flash_message', 'RoomType deleted!');
+        return redirect('admin/reservations')->with('flash_message', 'Reservation deleted!');
     }
 }

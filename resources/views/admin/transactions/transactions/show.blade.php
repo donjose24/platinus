@@ -7,20 +7,20 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Room {{ $room->id }}</div>
+                    <div class="card-header">Transaction {{ $transaction->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/admin/room') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/admin/room/' . $room->id . '/edit') }}" title="Edit Room"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                        <a href="{{ url('/admin/transactions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/transactions/' . $transaction->id . '/edit') }}" title="Edit Transaction"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['admin/room', $room->id],
+                            'url' => ['admin/transactions', $transaction->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
                                     'type' => 'submit',
                                     'class' => 'btn btn-danger btn-sm',
-                                    'title' => 'Delete Room',
+                                    'title' => 'Delete Transaction',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             ))!!}
                         {!! Form::close() !!}
@@ -31,9 +31,9 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>ID</th><td>{{ $room->id }}</td>
+                                        <th>ID</th><td>{{ $transaction->id }}</td>
                                     </tr>
-                                    <tr><th> Name </th><td> {{ $room->name }} </td></tr><tr><th> Description </th><td> {{ $room->description }} </td></tr><tr><th> Capacity </th><td> {{ $room->capacity }} </td></tr>
+                                    <tr><th> From Date </th><td> {{ $transaction->from_date }} </td></tr><tr><th> Reservation Id </th><td> {{ $transaction->reservation_id }} </td></tr><tr><th> User Id </th><td> {{ $transaction->user_id }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

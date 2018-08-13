@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Create New RoomType</div>
+                    <div class="card-header">Create New Transaction</div>
                     <div class="card-body">
-                        <a href="{{ url('/room/room-types') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/transactions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/room/room-types', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/transactions', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('admin/room_types.room-types.form', ['formMode' => 'create'])
+                        @include ('admin/transactions.transactions.form', ['formMode' => 'create'])
 
                         {!! Form::close() !!}
 

@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">Edit RoomType #{{ $roomtype->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/room-types') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/room/room-types') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -23,7 +23,7 @@
 
                         {!! Form::model($roomtype, [
                             'method' => 'PATCH',
-                            'url' => ['/admin/room-types', $roomtype->id],
+                            'url' => ['/room/room-types', $roomtype->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}

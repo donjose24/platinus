@@ -28,7 +28,7 @@
                             'files' => true
                         ]) !!}
 
-                        @include ('admin.room.form', ['formMode' => 'edit'])
+                        @include ('admin/rooms.room.form', ['formMode' => 'edit'])
 
                         {!! Form::close() !!}
 

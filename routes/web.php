@@ -37,3 +37,7 @@ Route::post('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\P
 
 Route::resource('admin/room', 'Admin\RoomController');
 Route::resource('admin/room-types', 'Admin\RoomTypesController');
+Route::resource('admin/transactions', 'Admin\\TransactionsController');
+Route::resource('admin/reservations', 'Admin\\ReservationsController');
+Route::resource('room/room-types', 'Admin\\RoomTypesController');
+Route::resource('admin/room', 'Admin\\RoomController');

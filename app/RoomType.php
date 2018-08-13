@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RoomType extends Model
 {
     use LogsActivity;
+    use SoftDeletes;
     
 
     /**
@@ -29,12 +31,8 @@ class RoomType extends Model
      *
      * @var array
      */
-    protected $fillable = ['number', 'room_id'];
+    protected $fillable = ['name', 'description', 'image_url', 'price', 'capacity'];
 
-    public function rooms()
-    {
-        return $this->onToMany('Room');
-    }
     
 
     /**
