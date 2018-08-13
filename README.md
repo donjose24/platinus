@@ -21,3 +21,13 @@ Migration creates your database tables. Run the by doing the following steps:
 * Run `vagrant ssh` so we can go to the virtualbox
 * You can run migrations using `php artisan migrate`
 
+#### Seeding
+Seeding creates dummy data on your database
+* Open up a terminal and go to the project directory
+* Run `vagrant ssh` so we can go to the virtualbox
+* You can run the seeder using `php artisan db:seed`
+
+#### Asset building
+This will build the asset pipeline (css, js, etc..)
+* Open up a terminal and go to the project directory
+* `npm run dev` or `npm run watch` will build your assets
