@@ -46,4 +46,14 @@ class Room extends Model
     {
         return __CLASS__ . " model has been {$eventName}";
     }
+
+    /**
+     * Returns the associated room type
+     *
+     * @return mixed
+     */
+    public function roomType()
+    {
+        return $this->belongsTo('App\RoomType');
+    }
 }

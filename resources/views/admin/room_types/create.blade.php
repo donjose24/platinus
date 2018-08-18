@@ -7,7 +7,7 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Create New RoomType</div>
+                    <div class="card-header">Create New Room Type</div>
                     <div class="card-body">
                         <a href="{{ url('/admin/room_types') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />

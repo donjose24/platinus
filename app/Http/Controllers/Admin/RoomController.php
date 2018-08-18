@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Room;
+use App\RoomType;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -25,9 +26,10 @@ class RoomController extends Controller
                 ->orWhere('room_type_id', 'LIKE', "%$keyword%")
                 ->orWhere('daily_rate', 'LIKE', "%$keyword%")
                 ->orWhere('weekly_rate', 'LIKE', "%$keyword%")
+                ->with('roomType')
                 ->latest()->paginate($perPage);
         } else {
-            $room = Room::latest()->paginate($perPage);
+            $room = Room::latest()->with('roomType')->paginate($perPage);
         }
 
         return view('admin/rooms.index', compact('room'));
@@ -40,7 +42,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        return view('admin/rooms.create');
+        $roomTypes = RoomType::pluck('name', 'id');
+        return view('admin/rooms.create', ['roomTypes' => $roomTypes]);
     }
 
     /**
@@ -89,8 +92,9 @@ class RoomController extends Controller
     public function edit($id)
     {
         $room = Room::findOrFail($id);
+        $roomTypes = RoomType::pluck('name', 'id');
 
-        return view('admin/rooms.edit', compact('room'));
+        return view('admin/rooms.edit', compact('room', 'roomTypes'));
     }
 
     /**
