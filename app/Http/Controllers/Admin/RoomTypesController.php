@@ -24,7 +24,6 @@ class RoomTypesController extends Controller
             $roomtypes = RoomType::where('name', 'LIKE', "%$keyword%")
                 ->orWhere('description', 'LIKE', "%$keyword%")
                 ->orWhere('image_url', 'LIKE', "%$keyword%")
-                ->orWhere('price', 'LIKE', "%$keyword%")
                 ->orWhere('capacity', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
@@ -57,7 +56,6 @@ class RoomTypesController extends Controller
 			'name' => 'required',
 			'description' => 'required',
 			'image_url' => 'required',
-			'price' => 'required',
 			'capacity' => 'required'
 		]);
         $requestData = $request->all();
@@ -109,7 +107,6 @@ class RoomTypesController extends Controller
 			'name' => 'required',
 			'description' => 'required',
 			'image_url' => 'required',
-			'price' => 'required',
 			'capacity' => 'required'
 		]);
         $requestData = $request->all();

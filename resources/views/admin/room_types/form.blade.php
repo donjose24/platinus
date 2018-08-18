@@ -13,11 +13,6 @@
     {!! Form::text('image_url', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('image_url', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group{{ $errors->has('price') ? 'has-error' : ''}}">
-    {!! Form::label('price', 'Price', ['class' => 'control-label']) !!}
-    {!! Form::number('price', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
-    {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
-</div>
 <div class="form-group{{ $errors->has('capacity') ? 'has-error' : ''}}">
     {!! Form::label('capacity', 'Capacity', ['class' => 'control-label']) !!}
     {!! Form::number('capacity', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}

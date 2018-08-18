@@ -19,7 +19,6 @@ class CreateRoomTypesTable extends Migration
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('image_url')->nullable();
-            $table->decimal('price')->nullable();
             $table->integer('capacity')->nullable();
             });
     }

@@ -31,7 +31,7 @@ class Room extends Model
      *
      * @var array
      */
-    protected $fillable = ['number', 'room_type_id'];
+    protected $fillable = ['number', 'room_type_id', 'weekly_rate', 'daily_rate'];
 
     
 
