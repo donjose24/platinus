@@ -1,24 +1,24 @@
-<div class="col-md-3">
-    @foreach($laravelAdminMenus->menus as $section)
-        @if($section->items)
-            <div class="card">
-                <div class="card-header">
-                    {{ $section->section }}
-                </div>
-
-                <div class="card-body">
-                    <ul class="nav flex-column" role="tablist">
-                        @foreach($section->items as $menu)
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" href="{{ url($menu->url) }}">
-                                    {{ $menu->title }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-            <br/>
-        @endif
-    @endforeach
+<div class="sidebar-content">
+    <div class="sidebar-profile">
+        <div class="user-image"><img src="/images/user.jpg" alt="" /></div>
+        <div class="user-desc">
+            <p class="name">{{ Auth::user()->name }}</p>
+            <p class="type">{{ Auth::user()->name }}</p>
+        </div>
+    </div>
+    <div class="sidebar-nav">
+        @foreach($laravelAdminMenus->menus as $section)
+            @if($section->items)
+                <ul class="flex-column">
+                    @foreach($section->items as $menu)
+                        <li>
+                            <a  href="{{ url($menu->url) }}">
+                                <span><i class="fa fa-{{$menu->icon}}"></i>{{ $menu->title }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        @endforeach
+    </div>
 </div>

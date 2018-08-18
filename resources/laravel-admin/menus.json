@@ -1,1 +1,20 @@
-{"menus":[{"section":"Resources","items":[{"title":"Users","url":"\/admin\/users"},{"title":"Roles","url":"\/admin\/roles"},{"title":"Permissions","url":"\/admin\/permissions"},{"title":"Settings","url":"\/admin\/settings"},{"title":"Transactions","url":"\/admin\/transactions"},{"title":"Room Types","url":"\/admin\/room_types"},{"title":"Room","url":"\/admin\/room"}]},{"section":"Tools","items":[{"title":"Generator","url":"\/admin\/generator"}]}]}
+{
+    "menus": [
+        {
+            "section": "Resources",
+            "items": [
+                { "title": "Users", "url": "/admin/users" , "icon":"user"},
+                { "title": "Roles", "url": "/admin/roles" , "icon":"users"},
+                { "title": "Permissions", "url": "/admin/permissions" , "icon":"address-book"},
+                { "title": "Settings", "url": "/admin/settings" , "icon":"cogs"},
+                { "title": "Transactions", "url": "/admin/transactions" , "icon":"calendar"},
+                { "title": "Room Types", "url": "/admin/room_types" , "icon":"diamond"},
+                { "title": "Room", "url": "/admin/room" , "icon":"bed"}
+            ]
+        },
+        {
+            "section": "Tools",
+            "items": [{ "title": "Generator", "url": "/admin/generator", "icon": "bolt" }]
+        }
+    ]
+}
