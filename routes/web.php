@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middlewares' => ['auth', 'roles'], 'roles' => 'admin'], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
     Route::resource('roles', 'RolesController');
     Route::resource('permissions', 'PermissionsController');
