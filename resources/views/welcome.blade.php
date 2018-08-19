@@ -4,12 +4,14 @@
 <div class="home-content">
     <h1 class="welcome-text">Experience leisure and recreation within the hustle of Barretto ,Olongapo City</h1>
     <div class="reservation-container">
-        <ul>
-            <li><input type="text" placeholder="From" class="datetime-picker" /></li>
-            <li><input type="text" placeholder="To" class="datetime-picker" /></li>
-            <li><input type="text" placeholder="No. of guests" class="no-guest" /></li>
-            <li><button class="btn-book-now">Book Now</button></li>
-        </ul>
+        {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
+            <ul>
+                <li><input type="text" name="start_date" placeholder="From" class="datetime-picker" /></li>
+                <li><input type="text" name="end_date" placeholder="To" class="datetime-picker" /></li>
+                <li><input type="text" name="guests" placeholder="No. of guests" class="no-guest" /></li>
+                <li><button class="btn-book-now">Book Now</button></li>
+            </ul>
+        {{Form::close()}}
     </div>
 </div>
 <div class="welcome-content">

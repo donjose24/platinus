@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class reservation extends Model
+class Reservation extends Model
 {
     use LogsActivity;
     use SoftDeletes;
@@ -45,5 +45,15 @@ class reservation extends Model
     public function getDescriptionForEvent($eventName)
     {
         return __CLASS__ . " model has been {$eventName}";
+    }
+
+    /**
+     * Get rooms associated with the reservation
+     *
+     * @return mixed
+     */
+    public function rooms()
+    {
+        return $this->belongsToMany('App\Room', 'reservation_rooms');
     }
 }

@@ -46,4 +46,9 @@ class RoomType extends Model
     {
         return __CLASS__ . " model has been {$eventName}";
     }
+
+    public function rooms()
+    {
+        return $this->hasMany("App\Room");
+    }
 }

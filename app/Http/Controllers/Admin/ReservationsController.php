@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\ReservationController;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\reservation;
+use App\Reservation;
 use Illuminate\Http\Request;
 
-class reservationsController extends Controller
+class ReservationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,14 +21,14 @@ class reservationsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $reservations = reservation::where('start_date', 'LIKE', "%$keyword%")
+            $reservations = Reservation::where('start_date', 'LIKE', "%$keyword%")
                 ->orWhere('end_date', 'LIKE', "%$keyword%")
                 ->orWhere('status', 'LIKE', "%$keyword%")
                 ->orWhere('user_id', 'LIKE', "%$keyword%")
                 ->orWhere('deposit_slip', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $reservations = reservation::latest()->paginate($perPage);
+            $reservations = Reservation::latest()->paginate($perPage);
         }
 
         return view('admin/reservations.reservations.index', compact('reservations'));
@@ -61,7 +61,7 @@ class reservationsController extends Controller
 		]);
         $requestData = $request->all();
         
-        reservation::create($requestData);
+        Reservation::create($requestData);
 
         return redirect('admin/reservations')->with('flash_message', 'reservation added!');
     }
@@ -75,7 +75,7 @@ class reservationsController extends Controller
      */
     public function show($id)
     {
-        $reservation = reservation::findOrFail($id);
+        $reservation = Reservation::findOrFail($id);
 
         return view('admin/reservations.reservations.show', compact('reservation'));
     }
@@ -89,7 +89,7 @@ class reservationsController extends Controller
      */
     public function edit($id)
     {
-        $reservation = reservation::findOrFail($id);
+        $reservation = Reservation::findOrFail($id);
 
         return view('admin/reservations.reservations.edit', compact('reservation'));
     }
@@ -112,7 +112,7 @@ class reservationsController extends Controller
 		]);
         $requestData = $request->all();
         
-        $reservation = reservation::findOrFail($id);
+        $reservation = Reservation::findOrFail($id);
         $reservation->update($requestData);
 
         return redirect('admin/reservations')->with('flash_message', 'reservation updated!');
@@ -127,7 +127,7 @@ class reservationsController extends Controller
      */
     public function destroy($id)
     {
-        reservation::destroy($id);
+        Reservation::destroy($id);
 
         return redirect('admin/reservations')->with('flash_message', 'reservation deleted!');
     }

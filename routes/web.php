@@ -34,9 +34,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('room_types', 'RoomTypesController');
     Route::resource('room_types', 'RoomTypesController');
     Route::resource('room', 'RoomController');
+    Route::resource('reservations', 'ReservationsController');
+    Route::resource('transactions', 'TransactionsController');
 });
 
-
-
-Route::resource('admin/reservations', 'ReservationController\\reservationsController');
-Route::resource('admin/transactions', 'Transaction\\TransactionsController');
+Route::get('/room/search', 'GuestController@search');
