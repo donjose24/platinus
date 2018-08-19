@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\ReservationController;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Transaction;
+use App\reservation;
 use Illuminate\Http\Request;
 
-class TransactionsController extends Controller
+class reservationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,19 +21,17 @@ class TransactionsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $transactions = Transaction::where('from_date', 'LIKE', "%$keyword%")
-                ->orWhere('reservation_id', 'LIKE', "%$keyword%")
+            $reservations = reservation::where('start_date', 'LIKE', "%$keyword%")
+                ->orWhere('end_date', 'LIKE', "%$keyword%")
+                ->orWhere('status', 'LIKE', "%$keyword%")
                 ->orWhere('user_id', 'LIKE', "%$keyword%")
-                ->orWhere('to_date', 'LIKE', "%$keyword%")
-                ->orWhere('is_paid', 'LIKE', "%$keyword%")
                 ->orWhere('deposit_slip', 'LIKE', "%$keyword%")
-                ->orWhere('expiration_date', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $transactions = Transaction::latest()->paginate($perPage);
+            $reservations = reservation::latest()->paginate($perPage);
         }
 
-        return view('admin/transactions.transactions.index', compact('transactions'));
+        return view('admin/reservations.reservations.index', compact('reservations'));
     }
 
     /**
@@ -43,7 +41,7 @@ class TransactionsController extends Controller
      */
     public function create()
     {
-        return view('admin/transactions.transactions.create');
+        return view('admin/reservations.reservations.create');
     }
 
     /**
@@ -56,18 +54,16 @@ class TransactionsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'from_date' => 'required',
-			'reservation_id' => 'required',
-			'user_id' => 'required',
-			'to_date' => 'required',
-			'is_paid' => 'required',
-			'expiration_date' => 'required'
+			'start_date' => 'required',
+			'end_date' => 'required',
+			'status' => 'required',
+			'user_id' => 'required'
 		]);
         $requestData = $request->all();
         
-        Transaction::create($requestData);
+        reservation::create($requestData);
 
-        return redirect('admin/transactions')->with('flash_message', 'Transaction added!');
+        return redirect('admin/reservations')->with('flash_message', 'reservation added!');
     }
 
     /**
@@ -79,9 +75,9 @@ class TransactionsController extends Controller
      */
     public function show($id)
     {
-        $transaction = Transaction::findOrFail($id);
+        $reservation = reservation::findOrFail($id);
 
-        return view('admin/transactions.transactions.show', compact('transaction'));
+        return view('admin/reservations.reservations.show', compact('reservation'));
     }
 
     /**
@@ -93,9 +89,9 @@ class TransactionsController extends Controller
      */
     public function edit($id)
     {
-        $transaction = Transaction::findOrFail($id);
+        $reservation = reservation::findOrFail($id);
 
-        return view('admin/transactions.transactions.edit', compact('transaction'));
+        return view('admin/reservations.reservations.edit', compact('reservation'));
     }
 
     /**
@@ -109,19 +105,17 @@ class TransactionsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'from_date' => 'required',
-			'reservation_id' => 'required',
-			'user_id' => 'required',
-			'to_date' => 'required',
-			'is_paid' => 'required',
-			'expiration_date' => 'required'
+			'start_date' => 'required',
+			'end_date' => 'required',
+			'status' => 'required',
+			'user_id' => 'required'
 		]);
         $requestData = $request->all();
         
-        $transaction = Transaction::findOrFail($id);
-        $transaction->update($requestData);
+        $reservation = reservation::findOrFail($id);
+        $reservation->update($requestData);
 
-        return redirect('admin/transactions')->with('flash_message', 'Transaction updated!');
+        return redirect('admin/reservations')->with('flash_message', 'reservation updated!');
     }
 
     /**
@@ -133,8 +127,8 @@ class TransactionsController extends Controller
      */
     public function destroy($id)
     {
-        Transaction::destroy($id);
+        reservation::destroy($id);
 
-        return redirect('admin/transactions')->with('flash_message', 'Transaction deleted!');
+        return redirect('admin/reservations')->with('flash_message', 'reservation deleted!');
     }
 }

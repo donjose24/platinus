@@ -32,10 +32,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
     Route::resource('room', 'RoomController');
     Route::resource('room_types', 'RoomTypesController');
-    Route::resource('transactions', 'TransactionsController');
-    Route::resource('reservations', 'ReservationsController');
     Route::resource('room_types', 'RoomTypesController');
     Route::resource('room', 'RoomController');
 });
 
 
+
+Route::resource('admin/reservations', 'ReservationController\\reservationsController');
+Route::resource('admin/transactions', 'Transaction\\TransactionsController');

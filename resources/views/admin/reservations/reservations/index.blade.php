@@ -5,13 +5,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Transactions</div>
+                    <div class="card-header">Reservations</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/transactions/create') }}" class="btn btn-success btn-sm" title="Add New Transaction">
+                        <a href="{{ url('/admin/reservations/create') }}" class="btn btn-success btn-sm" title="Add New reservation">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/admin/transactions', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
+                        {!! Form::open(['method' => 'GET', 'url' => '/admin/reservations', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                             <span class="input-group-append">
@@ -28,26 +28,26 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Check In</th><th>Check Out</th><th>Reservation Id</th><th>Actions</th>
+                                        <th>#</th><th>Start Date</th><th>End Date</th><th>Status</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($transactions as $item)
+                                @foreach($reservations as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->check_in }}</td><td>{{ $item->check_out }}</td><td>{{ $item->reservation_id }}</td>
+                                        <td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->status }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/transactions/' . $item->id) }}" title="View Transaction"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                            <a href="{{ url('/admin/transactions/' . $item->id . '/edit') }}" title="Edit Transaction"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <a href="{{ url('/admin/reservations/' . $item->id) }}" title="View reservation"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                            <a href="{{ url('/admin/reservations/' . $item->id . '/edit') }}" title="Edit reservation"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                             {!! Form::open([
                                                 'method' => 'DELETE',
-                                                'url' => ['/admin/transactions', $item->id],
+                                                'url' => ['/admin/reservations', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                                 {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(
                                                         'type' => 'submit',
                                                         'class' => 'btn btn-danger btn-sm',
-                                                        'title' => 'Delete Transaction',
+                                                        'title' => 'Delete reservation',
                                                         'onclick'=>'return confirm("Confirm delete?")'
                                                 )) !!}
                                             {!! Form::close() !!}
@@ -56,7 +56,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $transactions->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $reservations->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>

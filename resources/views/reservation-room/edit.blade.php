@@ -3,11 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            @include('admin.sidebar')
+
+            <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Edit Transaction #{{ $transaction->id }}</div>
+                    <div class="card-header">Edit ReservationRoom #{{ $reservationroom->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/transactions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/reservation-room') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -19,14 +21,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($transaction, [
+                        {!! Form::model($reservationroom, [
                             'method' => 'PATCH',
-                            'url' => ['/admin/transactions', $transaction->id],
+                            'url' => ['/reservation-room', $reservationroom->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('admin/transactions.transactions.form', ['formMode' => 'edit'])
+                        @include ('reservation-room.form', ['formMode' => 'edit'])
 
                         {!! Form::close() !!}
 

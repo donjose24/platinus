@@ -7,20 +7,20 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Transaction {{ $transaction->id }}</div>
+                    <div class="card-header">reservation {{ $reservation->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/admin/transactions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/admin/transactions/' . $transaction->id . '/edit') }}" title="Edit Transaction"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                        <a href="{{ url('/admin/reservations') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/reservations/' . $reservation->id . '/edit') }}" title="Edit reservation"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['admin/transactions', $transaction->id],
+                            'url' => ['admin/reservations', $reservation->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
                                     'type' => 'submit',
                                     'class' => 'btn btn-danger btn-sm',
-                                    'title' => 'Delete Transaction',
+                                    'title' => 'Delete reservation',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             ))!!}
                         {!! Form::close() !!}
@@ -31,9 +31,9 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>ID</th><td>{{ $transaction->id }}</td>
+                                        <th>ID</th><td>{{ $reservation->id }}</td>
                                     </tr>
-                                    <tr><th> Check In </th><td> {{ $transaction->check_in }} </td></tr><tr><th> Check Out </th><td> {{ $transaction->check_out }} </td></tr><tr><th> Reservation Id </th><td> {{ $transaction->reservation_id }} </td></tr>
+                                    <tr><th> Start Date </th><td> {{ $reservation->start_date }} </td></tr><tr><th> End Date </th><td> {{ $reservation->end_date }} </td></tr><tr><th> Status </th><td> {{ $reservation->status }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

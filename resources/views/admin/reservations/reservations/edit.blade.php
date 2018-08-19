@@ -5,9 +5,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Create New Transaction</div>
+                    <div class="card-header">Edit reservation #{{ $reservation->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/transactions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/reservations') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -19,9 +19,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/admin/transactions', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::model($reservation, [
+                            'method' => 'PATCH',
+                            'url' => ['/admin/reservations', $reservation->id],
+                            'class' => 'form-horizontal',
+                            'files' => true
+                        ]) !!}
 
-                        @include ('admin/transactions.transactions.form', ['formMode' => 'create'])
+                        @include ('admin/reservations.reservations.form', ['formMode' => 'edit'])
 
                         {!! Form::close() !!}
 
