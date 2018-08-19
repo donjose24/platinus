@@ -1,0 +1,22 @@
+.back-content {
+    width: 72%;
+    margin-left: auto;
+    padding: 20px;
+
+    .view-card-content {
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            .card {
+                width: 23%;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

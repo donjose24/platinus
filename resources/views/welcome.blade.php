@@ -5,8 +5,8 @@
     <h1 class="welcome-text">Experience leisure and recreation within the hustle of Barretto ,Olongapo City</h1>
     <div class="reservation-container">
         <ul>
-            <li><input type="text" placeholder="From" class="datepicker-from" /></li>
-            <li><input type="text" placeholder="To" class="datepicker-to" /></li>
+            <li><input type="text" placeholder="From" class="datetime-picker" /></li>
+            <li><input type="text" placeholder="To" class="datetime-picker" /></li>
             <li><input type="text" placeholder="No. of guests" class="no-guest" /></li>
             <li><button class="btn-book-now">Book Now</button></li>
         </ul>

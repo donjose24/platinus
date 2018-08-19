@@ -13,7 +13,9 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
-    .sass('resources/assets/sass/front/header.scss', 'public/css')
-    .sass('resources/assets/sass/front/content.scss', 'public/css');
+    .sass('resources/assets/sass/front/front-header.scss', 'public/css')
+    .sass('resources/assets/sass/front/front-content.scss', 'public/css')
+    .sass('resources/assets/sass/back/back-sidebar.scss', 'public/css')
+    .sass('resources/assets/sass/back/back-content.scss', 'public/css');
 
 mix.disableSuccessNotifications();
