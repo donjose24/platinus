@@ -25,15 +25,16 @@
             <table class="table table-borderless">
                 <thead>
                     <tr>
-                        <th>#</th><th>Room Number</th><th>Room Type Id</th><th>Actions</th>
+                        <th>Room Number</th><th>Room Type </th> <th>Daily Rate</th><th>Weekly Rate</th><th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach($room as $item)
                     <tr>
-                        <td>{{ $loop->iteration or $item->id }}</td>
                         <td>{{ $item->number }}</td>
                         <td>{{ $item->roomType->name }}</td>
+                        <td>{{ number_format($item->daily_rate,2) }}</td>
+                        <td>{{ number_format($item->weekly_rate,2) }}</td>
                         <td>
                             <a href="{{ url('/admin/room/' . $item->id) }}" title="View Room"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                             <a href="{{ url('/admin/room/' . $item->id . '/edit') }}" title="Edit Room"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
