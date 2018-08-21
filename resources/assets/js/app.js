@@ -1,4 +1,6 @@
 $(document).ready(() => {
     //date time pickers
-    $('.datetime-picker').datepicker();
+    if ($('.datetime-picker').length) {
+        $('.datetime-picker').datepicker();
+    }
 });
