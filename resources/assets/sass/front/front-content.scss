@@ -51,58 +51,105 @@
     }
 }
 
-.welcome-content {
-  width: 85%;
-  margin: 0 auto;
-  padding: 20px 0;
+.page-content {
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px 0;
 
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 500;
-    margin-bottom: 20px;
-  }
+    .btn-custom-primary {
+        color: #fff;
+        border: 1px solid #651cf5;
+        background-color: #651cf5;
+        font-size: 1rem;
+        font-weight: bold;
 
-  .welcome-description {
-    padding: 25px;
-    font-size: 1.2rem;
-
-    p {
-      margin-bottom: 10px;
+        &:hover {
+            color: #651cf5;
+            background-color: transparent;
+        }
     }
-  }
 
-  .services-section {
-    display: flex;
-    justify-content: space-between;
-
-    .service-box {
-      width: 330px;
-      border: 2px solid #888;
-      padding: 15px;
-      text-align: center;
-
-      a {
-        text-decoration: none;
-        font-size: 15px;
-
-        p {
-          margin-bottom: 10px;
+    &.welcome-content {
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
         }
 
-        .icon-img  {
-          margin-bottom: 10px;
-          i {
+        .welcome-description {
+            padding: 25px;
+            font-size: 1.2rem;
 
-            font-size: 6rem;
-          }
+            p {
+                margin-bottom: 10px;
+            }
         }
 
-        .title {
-          font-size: 20px;
-          font-weight: bold;
+        .services-section {
+            display: flex;
+            justify-content: space-between;
+
+            .service-box {
+                width: 330px;
+                border: 2px solid #888;
+                padding: 15px;
+                text-align: center;
+
+                a {
+                    text-decoration: none;
+                    font-size: 15px;
+
+                    p {
+                        margin-bottom: 10px;
+                    }
+
+                    .icon-img {
+                        margin-bottom: 10px;
+                        i {
+                            font-size: 6rem;
+                        }
+                    }
+
+                    .title {
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                }
+            }
         }
-      }
     }
-  }
+
+    &.reservation-content {
+        h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .reservation-room {
+            width: 27%;
+            margin-bottom: 20px;
+
+            border: none;
+            border-radius: 0;
+
+            .card-img-top-container {
+                overflow: hidden;
+                height: 150px;
+
+                .card-img-top {
+                    border-radius: 0;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    position: absolute;
+                }
+            }
+
+            .card-body {
+                background-color: #e5e5e5;
+            }
+        }
+    }
 }

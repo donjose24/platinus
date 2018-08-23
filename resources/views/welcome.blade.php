@@ -8,13 +8,13 @@
             <ul>
                 <li><input type="text" name="start_date" placeholder="From" class="datetime-picker" /></li>
                 <li><input type="text" name="end_date" placeholder="To" class="datetime-picker" /></li>
-                <li><input type="text" name="guests" placeholder="No. of guests" class="no-guest" /></li>
+                <li><input type="number" min="0" name="guests" placeholder="No. of guests" class="no-guest" /></li>
                 <li><button class="btn-book-now">Book Now</button></li>
             </ul>
         {{Form::close()}}
     </div>
 </div>
-<div class="welcome-content">
+<div class="page-content welcome-content">
     <h1>WELCOME TO HOTEL BELLA MONTE</h1>
     <div class="welcome-description">
         <p>Hotel Bella Monte is an established hotel in Barrio Barretto that offers leisure and recreation within the hustle of Barretto, Olongapo City. Only 10 minutes away from the bars and restaurants that offer a broad selection of diverse cuisines from all over the world.</p>

@@ -27,39 +27,87 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-/* 
-h1 {
-    font-family: 'Dancing Script', sans-serif;
-}
-p {
-    font-size: 15px;
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-.navbar {
-    color: white;
+// parent must be a relative
+%absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.icon {
-    width: 250px;
-}
+#app-login {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
 
-.nav-item {
-    margin-right: 20px;
-}
+    .btn-custom-primary {
+        border: 1px solid #4c66ff;
+        background-color: #4c66ff;
+        font-size: 1rem;
+        padding: 10px;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: uppercase;
 
-.jumbotron {
-    background-image: url('/images/room-bg.jpg');
-}
+        &:hover {
+            background-color: transparent;
+            color: #4c66ff;
+        }
+    }
 
-.banner {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    color: white;
-}
+    & > .side-content {
+        width: 40%;
+        position: relative;
+        background-color: $indigo;
 
-.location {
-    padding: 20px;
-    color: white;
-    background-color: #59a6ce;
-} */
+        color: #fff;
+
+        .side-notes {
+            @extend %absolute-center;
+
+            padding: 10px;
+            width: 80%;
+
+            h1 {
+                margin-bottom: 20px;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    & > .main-content {
+        width: 100%;
+        position: relative;
+
+        .form-control {
+            border: 1px solid #d2d2d2;
+            background: none;
+            outline: none;
+            border-radius: 0;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .content-box {
+            @extend %absolute-center;
+            width: 500px;
+
+            .logo {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 20px;
+
+                img {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
