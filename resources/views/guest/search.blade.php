@@ -6,8 +6,8 @@
         <div class="reservation-container">
             {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
             <ul>
-                <li><input type="text" name="start_date" value="{{$from}}" placeholder="From" class="datetime-picker" /></li>
-                <li><input type="text" name="end_date" placeholder="To" value="{{$to}}" class="datetime-picker" /></li>
+                <li><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker" /></li>
+                <li><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker" /></li>
                 <li><input type="text" name="guests" placeholder="No. of guests" value="{{$guests}}" class="no-guest" /></li>
                 <li><button class="btn-book-now">Book Now</button></li>
             </ul>
@@ -15,29 +15,24 @@
         </div>
     </div>
     <div class="welcome-content">
-        <h1>Search Results</h1>
-        <div class="welcome-description">
-            @if(count($roomTypes) == 0)
-                No Rooms Available!
-            @else
-                <div class="row">
-                    @foreach($roomTypes as $type)
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <img src="{{ $type->image_url }}" width="200px">
-                                </div>
-                                <div class="col-md-3">
-                                    <small>{{ $type->name }}</small>
-                                </div>
-                                <div class="col-md-3">
-                                    <small>{{ $type->description }}</small>
-                                </div>
-                            </div>
+        <div class="page-content reservation-content">
+            <h1>Available Rooms</h1>
+            <div class="d-flex justify-content-around flex-wrap">
+                @foreach($roomTypes as $type)
+                    <div class="card reservation-room">
+                        <div class="position-relative card-img-top-container">
+                            <img class="card-img-top w-100" src="{{ $type->image_url }}">
                         </div>
-                    @endforeach
-                </div>
-            @endif
+                        <div class="card-body">
+                            <h5 class="font-weight-bold card-title">{{ $type->name }}</h5>
+                            <h6 class="font-weight-bold sub-card-title">{{ $type->capacity }} persons</h6>
+                            <p class="card-text">{{ $type->description}} </p>
+                            <h4 class="font-weight-bold mb-3 room-price">PHP {{ number_format($type->daily_rate) }} per night</h4>
+                            <a href="#" class="btn w-100 p-2 btn-custom-primary">Book Now</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection

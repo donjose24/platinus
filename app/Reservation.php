@@ -52,8 +52,8 @@ class Reservation extends Model
      *
      * @return mixed
      */
-    public function rooms()
+    public function roomTypes()
     {
-        return $this->belongsToMany('App\Room', 'reservation_rooms');
+        return $this->belongsToMany('App\RoomType', 'reservation_rooms', 'reservation_id', 'room_id');
     }
 }

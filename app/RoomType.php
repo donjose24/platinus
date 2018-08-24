@@ -51,4 +51,9 @@ class RoomType extends Model
     {
         return $this->hasMany("App\Room");
     }
+
+    public function validRooms()
+    {
+        return $this->hasMany("App\Room")->where('status', 'active');
+    }
 }

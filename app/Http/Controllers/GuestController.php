@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\RoomType;
 use Illuminate\Http\Request;
 use App\Reservation;
-use App\Room;
 
 class GuestController extends Controller
 {
@@ -15,36 +14,43 @@ class GuestController extends Controller
      */
     public function search(Request $request)
     {
-        $startDate = \DateTime::createFromFormat("m/d/Y", $request->get('start_date'))->format('Y-m-d');
-        $endDate = \DateTime::createFromFormat("m/d/Y", $request->get('end_date'))->format('Y-m-d');
+        $startDate = \DateTime::createFromFormat("Y-m-d", $request->get('start_date'))->format('Y-m-d');
+        $endDate = \DateTime::createFromFormat("Y-m-d", $request->get('end_date'))->format('Y-m-d');
+        $guests = $request->get('numeric');
 
         $reservations = Reservation::whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->get();
-        $roomIDS = [];
+
+        //this will hold the value of room id and its corresponding current quantity in the reservations selected
+        $rooms = [];
         foreach ($reservations as $reservation) {
-           $rooms  = $reservation->rooms;
-           foreach ($rooms as $room) {
-               if (!in_array($room->id, $roomIDS)) {
-                   $roomIDS[] = $room->id;
-               }
-           }
-        }
-
-        $rooms = Room::whereIn('id', $roomIDS)->get();
-        $roomTypeIDS = [];
-        foreach ($rooms as $room) {
-            $roomTypeIDS[] = $room->roomType->id;
-        }
-
-        $roomTypes = RoomType::whereNotIn('id', $roomTypeIDS)->get();
-
-        //only display room types with rooms
-        $finalRoomTypes = [];
-        foreach($roomTypes as $type) {
-            if ($type->rooms()->count() != 0) {
-                $finalRoomTypes[] = $type;
+            $roomTypes = $reservation->roomTypes()->pluck('room_types.id');
+            foreach ($roomTypes as $room) {
+                $rooms[$room] = 0;
             }
         }
 
-       return view('guest.search', ['roomTypes' => $finalRoomTypes, 'from' => $request->get('start_date'), 'to' => $request->get('end_date'), 'guests' => $request->get('guests') ]);
+        foreach ($reservations as $reservation) {
+            foreach($reservation->roomTypes()->get() as $type) {
+                foreach($rooms as $key => $room) {
+                    if($type->id == $key) {
+                        $rooms[$key] = $room + 1 ;
+                    }
+                }
+            }
+        }
+
+        $roomTypes = RoomType::whereIn('id', array_keys($rooms))->get();
+        $dontDisplay = [];
+
+        foreach($roomTypes as $type) {
+            $max = $type->rooms()->where('status', 'active')->count();
+            if($max <= $rooms[$type->id]) {
+                $dontDisplay[] = $type->id;
+            }
+        }
+
+        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
+
+        return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'guests'));
     }
 }
