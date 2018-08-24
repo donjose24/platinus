@@ -24,6 +24,8 @@ class RoomTypesController extends Controller
             $roomtypes = RoomType::where('name', 'LIKE', "%$keyword%")
                 ->orWhere('description', 'LIKE', "%$keyword%")
                 ->orWhere('image_url', 'LIKE', "%$keyword%")
+                ->orWhere('daily_rate', 'LIKE', "%$keyword%")
+                ->orWhere('weekly_rate', 'LIKE', "%$keyword%")
                 ->orWhere('capacity', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
@@ -53,13 +55,15 @@ class RoomTypesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'name' => 'required',
-			'description' => 'required',
-			'image_url' => 'required',
-			'capacity' => 'required'
-		]);
+            'name' => 'required',
+            'description' => 'required',
+            'weekly_rate' => 'required|numeric',
+            'daily_rate' => 'required|numeric',
+            'image_url' => 'required',
+            'capacity' => 'required'
+        ]);
         $requestData = $request->all();
-        
+
         RoomType::create($requestData);
 
         return redirect('admin/room_types')->with('flash_message', 'RoomType added!');
@@ -104,13 +108,15 @@ class RoomTypesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'name' => 'required',
-			'description' => 'required',
-			'image_url' => 'required',
-			'capacity' => 'required'
-		]);
+            'name' => 'required',
+            'description' => 'required',
+            'weekly_rate' => 'required|numeric',
+            'daily_rate' => 'required|numeric',
+            'image_url' => 'required',
+            'capacity' => 'required'
+        ]);
         $requestData = $request->all();
-        
+
         $roomtype = RoomType::findOrFail($id);
         $roomtype->update($requestData);
 

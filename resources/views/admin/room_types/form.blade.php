@@ -13,6 +13,16 @@
     {!! Form::text('image_url', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('image_url', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group{{ $errors->has('daily_rate') ? 'has-error' : ''}}">
+    {!! Form::label('daily_rate', 'Daily Rate', ['class' => 'control-label']) !!}
+    {!! Form::number('daily_rate', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('daily_rate', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group{{ $errors->has('weekly_rate') ? 'has-error' : ''}}">
+    {!! Form::label('weekly_rate', 'Weekly Rate', ['class' => 'control-label']) !!}
+    {!! Form::number('weekly_rate', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('weekly_rate', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group{{ $errors->has('capacity') ? 'has-error' : ''}}">
     {!! Form::label('capacity', 'Capacity', ['class' => 'control-label']) !!}
     {!! Form::number('capacity', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}

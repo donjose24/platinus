@@ -17,8 +17,8 @@ class CreateRoomsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->string('number')->nullable();
-            $table->decimal('daily_rate',16,2);
-            $table->decimal('weekly_rate',16,2);
+            $table->string('status')->nullable();
+            $table->string('note')->nullable();
             $table->integer('room_type_id')->nullable();
             });
     }

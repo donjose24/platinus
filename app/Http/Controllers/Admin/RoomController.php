@@ -24,8 +24,6 @@ class RoomController extends Controller
         if (!empty($keyword)) {
             $room = Room::where('number', 'LIKE', "%$keyword%")
                 ->orWhere('room_type_id', 'LIKE', "%$keyword%")
-                ->orWhere('daily_rate', 'LIKE', "%$keyword%")
-                ->orWhere('weekly_rate', 'LIKE', "%$keyword%")
                 ->with('roomType')
                 ->latest()->paginate($perPage);
         } else {
@@ -58,8 +56,7 @@ class RoomController extends Controller
         $this->validate($request, [
 			'number' => 'required',
 			'room_type_id' => 'required',
-            'daily_rate' => 'required|numeric',
-            'weekly_rate' => 'required|numeric',
+            'status' => 'required',
 		]);
         $requestData = $request->all();
         
@@ -110,8 +107,7 @@ class RoomController extends Controller
         $this->validate($request, [
 			'number' => 'required',
 			'room_type_id' => 'required',
-            'daily_rate' => 'required|numeric',
-            'weekly_rate' => 'required|numeric',
+            'status' => 'required',
 		]);
         $requestData = $request->all();
         

@@ -8,14 +8,14 @@
     {!! Form::select('room_type_id', $roomTypes, null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('room_type_id', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group{{ $errors->has('daily_rate') ? 'has-error' : ''}}">
-    {!! Form::label('daily_rate', 'Daily Rate', ['class' => 'control-label']) !!}
-    {!! Form::number('daily_rate', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required', 'step' => '.01'] : ['class' => 'form-control']) !!}
-    {!! $errors->first('number', '<p class="help-block">:message</p>') !!}
+<div class="form-group{{ $errors->has('status') ? 'has-error' : ''}}">
+    {!! Form::label('status', 'Status', ['class' => 'control-label']) !!}
+    {!! Form::select('status', ['active' => 'Active', 'inactive' => 'Inactive'], null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group{{ $errors->has('weekly_rate') ? 'has-error' : ''}}">
-    {!! Form::label('weekly_rate', 'Weekly Rate', ['class' => 'control-label']) !!}
-    {!! Form::number('weekly_rate', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required', 'step' => '.01'] : ['class' => 'form-control']) !!}
+<div class="form-group{{ $errors->has('note') ? 'has-error' : ''}}">
+    {!! Form::label('note', 'Note', ['class' => 'control-label']) !!}
+    {!! Form::text('note', null, ('required' == 'required') ? ['class' => 'form-control', 'step' => '.01'] : ['class' => 'form-control']) !!}
     {!! $errors->first('number', '<p class="help-block">:message</p>') !!}
 </div>
 

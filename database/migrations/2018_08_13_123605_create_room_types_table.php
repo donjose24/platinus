@@ -18,6 +18,8 @@ class CreateRoomTypesTable extends Migration
             $table->softDeletes();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
+            $table->decimal('daily_rate', 16, 2)->nullable();
+            $table->decimal('weekly_rate', 16, 2)->nullable();
             $table->string('image_url')->nullable();
             $table->integer('capacity')->nullable();
             });
