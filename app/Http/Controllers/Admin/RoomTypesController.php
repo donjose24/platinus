@@ -27,9 +27,9 @@ class RoomTypesController extends Controller
                 ->orWhere('daily_rate', 'LIKE', "%$keyword%")
                 ->orWhere('weekly_rate', 'LIKE', "%$keyword%")
                 ->orWhere('capacity', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
+                ->latest()->with('rooms')->paginate($perPage);
         } else {
-            $roomtypes = RoomType::latest()->paginate($perPage);
+            $roomtypes = RoomType::latest()->with('rooms')->paginate($perPage);
         }
 
         return view('admin/room_types.index', compact('roomtypes'));

@@ -25,14 +25,16 @@
             <table class="table table-borderless">
                 <thead>
                     <tr>
-                        <th>#</th><th>Name</th><th>Description</th><th>Image</th><th>Actions</th>
+                        <th>#</th><th>Name</th><th>Description</th><th>Quantity</th><th>Image</th><th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach($roomtypes as $item)
                     <tr>
                         <td>{{ $loop->iteration or $item->id }}</td>
-                        <td>{{ $item->name }}</td><td>{{ $item->description }}</td><td><img src="{{ $item->image_url }}" width="100px"></td>
+                        <td>{{ $item->name }}</td><td>{{ $item->description }}</td>
+                        <td> {{ $item->rooms()->count() }}</td>
+                        <td><img src="{{ $item->image_url }}" width="100px"></td>
                         <td>
                             <a href="{{ url('/admin/room_types/' . $item->id) }}" title="View RoomType"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                             <a href="{{ url('/admin/room_types/' . $item->id . '/edit') }}" title="Edit RoomType"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
