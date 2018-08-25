@@ -11,6 +11,13 @@
                 <li><input type="number" min="0" name="guests" placeholder="No. of guests" class="no-guest" /></li>
                 <li><button class="btn-book-now">Book Now</button></li>
             </ul>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
         {{Form::close()}}
     </div>
 </div>

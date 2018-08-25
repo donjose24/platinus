@@ -14,6 +14,15 @@ class GuestController extends Controller
      */
     public function search(Request $request)
     {
+        $rules = [
+            'start_date' => 'required|date|date_format:Y-m-d|before:end_date',
+            'end_date' => 'required|date|date_format:Y-m-d|after:start_date',
+            'guests' => 'required|numeric',
+        ];
+
+        //this will redirect back on validation error
+        $request->validate($rules);
+
         $startDate = \DateTime::createFromFormat("Y-m-d", $request->get('start_date'))->format('Y-m-d');
         $endDate = \DateTime::createFromFormat("Y-m-d", $request->get('end_date'))->format('Y-m-d');
         $guests = $request->get('numeric');

@@ -53,6 +53,7 @@
                                                         'onclick'=>'return confirm("Confirm delete?")'
                                                 )) !!}
                                             {!! Form::close() !!}
+                                            {!! $errors->first('start_date', '<p class="help-block">:message</p>') !!}
                                         </td>
                                     </tr>
                                 @endforeach
