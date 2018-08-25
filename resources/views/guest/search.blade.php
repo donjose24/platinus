@@ -26,6 +26,7 @@
                         <div class="card-body">
                             <h5 class="font-weight-bold card-title">{{ $type->name }}</h5>
                             <h6 class="font-weight-bold sub-card-title">{{ $type->capacity }} persons</h6>
+                            <h6 class="card-text">{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }} room(s) remaining</h6>
                             <p class="card-text">{{ $type->description}} </p>
                             <h4 class="font-weight-bold mb-3 room-price">PHP {{ number_format($type->daily_rate) }} per night</h4>
                             <a href="#" class="btn w-100 p-2 btn-custom-primary">Book Now</a>
