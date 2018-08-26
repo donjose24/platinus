@@ -3,4 +3,6 @@ $(document).ready(() => {
     if ($('.datetime-picker').length) {
         $(".datetime-picker").flatpickr();
     }
+
+    $( ".spinner" ).spinner();
 });

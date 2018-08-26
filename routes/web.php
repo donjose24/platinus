@@ -43,3 +43,7 @@ Route::group(['namespace' => 'Customer', 'prefix' => 'customer', 'middleware' =>
 });
 
 Route::get('/room/search', 'GuestController@search');
+Route::post('/reservation', 'GuestController@addToCart');
+Route::post('/remove-reservation', 'GuestController@removeToCart');
+Route::get('/reservation/clear', 'GuestController@clearCart');
+Route::get('/reservation/checkout', 'GuestController@preview');
