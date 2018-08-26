@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\RoomType;
 use Illuminate\Http\Request;
 use App\Reservation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class GuestController extends Controller
 {
@@ -14,6 +16,11 @@ class GuestController extends Controller
      */
     public function search(Request $request)
     {
+        if (!(Auth::check())) {
+            Session::put('reroute',$request->getRequestUri());
+            return redirect('/login');
+        }
+
         $rules = [
             'start_date' => 'required|date|date_format:Y-m-d|before:end_date',
             'end_date' => 'required|date|date_format:Y-m-d|after:start_date',

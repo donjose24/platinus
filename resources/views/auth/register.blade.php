@@ -95,6 +95,17 @@
                 {{ __('Register') }}
             </button>
         </div>
+
+            <div class="form-group mb-0">
+                <div class="text-center">
+                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                        {{ __('Forgot Your Password?') }}
+                    </a>
+                    <a class="btn btn-link" href="/login">
+                        Already have an account?
+                    </a>
+                </div>
+            </div>
     </form>
 </div>
 @endsection

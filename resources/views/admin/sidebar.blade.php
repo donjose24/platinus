@@ -20,7 +20,7 @@
                 <ul class="flex-column">
                     @foreach($section->items as $menu)
                         <li>
-                            <a  href="{{ url($menu->url) }}">
+                            <a href="{{ url($menu->url) }}">
                                 <span><i class="fa fa-{{$menu->icon}}"></i>{{ $menu->title }}</span>
                             </a>
                         </li>

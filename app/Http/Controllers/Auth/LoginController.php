@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -40,7 +41,9 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        if ($user->hasRole("customer")) {
+        if (Session::has('reroute') && $user->hasRole("customer")) {
+            $this->redirectTo = Session::get('reroute');
+        } else if ($user->hasRole("customer")) {
             $this->redirectTo = "/customer";
         } else if ($user->hasRole("cashier")) {
             $this->redirectTo = "/cashier";

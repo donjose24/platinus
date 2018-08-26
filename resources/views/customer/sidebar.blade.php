@@ -17,8 +17,18 @@
     <div class="sidebar-nav">
         <ul class="flex-column">
             <li>
+                <a href="/customer">
+                    <span><i class="fa fa-home"></i>Home</span>
+                </a>
+            </li>
+            <li>
                 <a href="/customer/reservation">
                     <span><i class="fa fa-address-book"></i>Reserve Now</span>
+                </a>
+            </li>
+            <li>
+                <a href="/customer/booking">
+                    <span><i class="fa fa-archive"></i>My Bookings</span>
                 </a>
             </li>
         </ul>
