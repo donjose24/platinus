@@ -62,8 +62,6 @@
                     <h5>Total Bill: {{ number_format($total, 2) }}</h5>
                     <a href="{{ $backUrl }}" class="btn btn-primary btn-block"> Back </a>
                     {{ Form::open(['url' => '/reservation', 'method' => 'POST']) }}
-                        {{Form::hidden('start_date', $details['start_date'])}}
-                        {{Form::hidden('end_date', $details['end_date'])}}
                         <button class="btn btn-success btn-block">Reserve</button>
                     {{ Form::close() }}
                 </div>

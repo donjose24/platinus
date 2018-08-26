@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\RoomType;
 use Illuminate\Http\Request;
 use App\Reservation;
+use App\ReservationRoom;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -139,11 +140,12 @@ class GuestController extends Controller
 
     public function preview()
     {
-        $details = Session::get('details');
-        if(!Session::has('items')) {
+        if(!Session::has('items') || !Session::has('details')) {
             Session::flash('error_message', 'Session expired. Please select your rooms again');
             redirect()->back();
         }
+
+        $details = Session::get('details');
         $items = Session::get('items');
 
         $records = [];
@@ -161,5 +163,40 @@ class GuestController extends Controller
         $backUrl = url()->previous();
 
         return view('reservation.checkout', compact('items', 'rooms', 'details', 'diff', 'backUrl'));
+    }
+
+    public function reserve()
+    {
+        if(!Session::has('items') || !Session::has('details')) {
+            Session::flash('error_message', 'Session expired. Please select your rooms again');
+            redirect()->back();
+        }
+        //TODO: validate if the room is still available before inserting.
+
+        $details = Session::get('details');
+        $items = Session::get('items');
+        $id = Auth::user()->id;
+
+        $reservation = Reservation::create([
+            'start_date' => $details['start_date'],
+            'end_date' => $details['end_date'],
+            'status' => 'pending',
+            'deposit_slip' => '',
+            'user_id' => $id,
+        ]);
+
+        foreach($items as $key => $value) {
+            for($index = 0; $index < $value; $index++){
+                ReservationRoom::create([
+                    'reservation_id' => $reservation->id,
+                    'room_id' => $key,
+                ]);
+            }
+        }
+
+        Session::forget('details');
+        Session::forget('items');
+
+        return view('reservation.success');
     }
 }

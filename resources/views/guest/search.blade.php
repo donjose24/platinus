@@ -44,10 +44,10 @@
                                 @if(array_key_exists($type->id, Session::get('items')))
                                     {{ Form::open(['url' => '/remove-reservation', 'method' => 'POST']) }}
                                 @else
-                                    {{ Form::open(['url' => '/reservation', 'method' => 'POST']) }}
+                                    {{ Form::open(['url' => '/reservation/preview', 'method' => 'POST']) }}
                                 @endif
                             @else
-                                {{ Form::open(['url' => '/reservation', 'method' => 'POST']) }}
+                                {{ Form::open(['url' => '/reservation/preview', 'method' => 'POST']) }}
                             @endif
 
                             <h5 class="font-weight-bold card-title">{{ $type->name }}</h5>
