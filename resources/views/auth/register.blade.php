@@ -72,6 +72,24 @@
             >
         </div>
 
+        <div class="form-group">
+            <input
+                id="contact_number"
+                type="text"
+                class="form-control{{ $errors->has('contact_number') ? ' is-invalid' : '' }}"
+                name="contact_number"
+                value="{{ old('contact_number') }}"
+                required
+                placeholder="Contact Number"
+            >
+
+            @if ($errors->has('contact_number'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('contact_number') }}</strong>
+                </span>
+            @endif
+        </div>
+
         <div class="form-group text-center mb-0">
             <button type="submit" class="btn w-25 btn-custom-primary">
                 {{ __('Register') }}

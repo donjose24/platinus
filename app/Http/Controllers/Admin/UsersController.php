@@ -57,7 +57,8 @@ class UsersController extends Controller
                 'name' => 'required',
                 'email' => 'required|string|max:255|email|unique:users',
                 'password' => 'required',
-                'roles' => 'required'
+                'roles' => 'required',
+                'contact_number' => ['required', 'regex:/^(09|\+639)\d{9}$/'],
             ]
         );
 
@@ -122,7 +123,8 @@ class UsersController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required|string|max:255|email|unique:users,email,' . $id,
-                'roles' => 'required'
+                'roles' => 'required',
+                'contact_number' => ['required', 'regex:/^(09|\+639)\d{9}$/'],
             ]
         );
 

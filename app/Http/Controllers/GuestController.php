@@ -25,7 +25,7 @@ class GuestController extends Controller
 
         $startDate = \DateTime::createFromFormat("Y-m-d", $request->get('start_date'))->format('Y-m-d');
         $endDate = \DateTime::createFromFormat("Y-m-d", $request->get('end_date'))->format('Y-m-d');
-        $guests = $request->get('numeric');
+        $guests = $request->get('guests');
 
         $reservations = Reservation::whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->get();
 

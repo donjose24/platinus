@@ -25,14 +25,13 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID</th><th>Name</th><th>Email</th><th>Actions</th>
+                        <th>Name</th><th>Contact Number</th><th>Email</th><th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach($users as $item)
                     <tr>
-                        <td>{{ $item->id }}</td>
-                        <td><a href="{{ url('/admin/users', $item->id) }}">{{ $item->name }}</a></td><td>{{ $item->email }}</td>
+                        <td><a href="{{ url('/admin/users', $item->id) }}">{{ $item->name }}</a></td><td>{{ $item->contact_number }}</td><td>{{ $item->email }}</td>
                         <td>
                             <a href="{{ url('/admin/users/' . $item->id) }}" title="View User"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                             <a href="{{ url('/admin/users/' . $item->id . '/edit') }}" title="Edit User"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>

@@ -3,6 +3,11 @@
     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
     {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group{{ $errors->has('contact_number') ? ' has-error' : ''}}">
+    {!! Form::label('contact_number', 'Contact Number: ', ['class' => 'control-label']) !!}
+    {!! Form::text('contact_number', null, ['class' => 'form-control', 'required' => 'required']) !!}
+    {!! $errors->first('contact_number', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group{{ $errors->has('email') ? ' has-error' : ''}}">
     {!! Form::label('email', 'Email: ', ['class' => 'control-label']) !!}
     {!! Form::email('email', null, ['class' => 'form-control', 'required' => 'required']) !!}
