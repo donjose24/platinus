@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'contact_number' => $data['contact_number'],
         ]);
 
-        $user->roles()->attach(3);
+        $user->roles()->attach(2);
         return $user;
     }
 }

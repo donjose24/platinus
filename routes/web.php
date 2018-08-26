@@ -38,4 +38,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('transactions', 'TransactionsController');
 });
 
+Route::group(['namespace' => 'Customer', 'prefix' => 'customer', 'middleware' => ['auth', 'roles'], 'roles' => 'customer'], function () {
+    Route::get('/', 'CustomerController@index');
+});
+
 Route::get('/room/search', 'GuestController@search');
