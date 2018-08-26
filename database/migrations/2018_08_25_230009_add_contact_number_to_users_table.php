@@ -14,7 +14,7 @@ class AddContactNumberToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('contact_number');
+            $table->string('contact_number')->default('');
         });
     }
 
