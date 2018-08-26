@@ -18,6 +18,7 @@ class GuestController extends Controller
     {
         if (!(Auth::check())) {
             Session::put('reroute',$request->getRequestUri());
+            Session::flash('flash_message', 'You should be logged in to proceed');
             return redirect('/login');
         }
 
