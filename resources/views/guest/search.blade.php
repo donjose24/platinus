@@ -6,10 +6,10 @@
         <div class="reservation-container">
             {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
             <ul>
-                <li><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker" /></li>
-                <li><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker" /></li>
-                <li><input type="text" name="guests" placeholder="No. of guests" value="{{$guests}}" class="no-guest" /></li>
-                <li><button class="btn-book-now">Book Now</button></li>
+                <li><label for="start_date">Start Date</label><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker form-control" /></li>
+                <li><label for="end_date">End Date</label><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker form-control" /></li>
+                <li><label for="guests"># of Guests</label><input type="text" name="guests" placeholder="No. of guests" value="{{$guests}}" class="no-guest form-control" /></li>
+                <li><button class="btn btn-success">Book Now</button></li>
             </ul>
             {{Form::close()}}
         </div>
