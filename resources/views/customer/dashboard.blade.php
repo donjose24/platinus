@@ -22,6 +22,8 @@
                         <h6>Check In: {{ $reservation->start_date }} </h6>
                         <h6>Check Out: {{ $reservation->end_date }} </h6>
                         {{ Form::file('image') }}
+                        {{ Form::hidden('id', $reservation->id) }}
+                        <button class="btn btn-primary"> Submit Deposit Slip </button>
                     {{ Form::close() }}
                     <hr>
                 @endforeach
