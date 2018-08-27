@@ -6,9 +6,9 @@
     <div class="reservation-container">
         {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
             <ul>
-                <li><label for="start_date">Start Date</label><input type="text" name="start_date"  placeholder="From" class="datetime-picker form-control" /></li>
-                <li><label for="from_date">End Date</label><input type="text" name="end_date" placeholder="To" class="datetime-picker form-control" /></li>
-                <li><label for="guests"># of Guests</label><input type="number" min="0" name="guests" placeholder="No. of guests" class="no-guest form-control" /></li>
+                <li><input type="text" name="start_date"  placeholder="From" class="datetime-picker form-control" /></li>
+                <li><input type="text" name="end_date" placeholder="To" class="datetime-picker form-control" /></li>
+                <li><input type="number" min="0" name="guests" placeholder="No. of guests" class="no-guest form-control" /></li>
                 <li><button class="btn btn-success">Book Now</button></li>
             </ul>
         @if ($errors->any())
