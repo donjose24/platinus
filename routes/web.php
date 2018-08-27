@@ -40,6 +40,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
 Route::group(['namespace' => 'Customer', 'prefix' => 'customer', 'middleware' => ['auth', 'roles'], 'roles' => 'customer'], function () {
     Route::get('/', 'CustomerController@index');
+    Route::get('booking', 'BookingController@index');
 });
 
 Route::get('/room/search', 'GuestController@search');
@@ -47,4 +48,9 @@ Route::post('/reservation/preview', 'GuestController@addToCart');
 Route::post('/remove-reservation', 'GuestController@removeToCart');
 Route::get('/reservation/clear', 'GuestController@clearCart');
 Route::get('/reservation/checkout', 'GuestController@preview');
-ROute::post('reservation', 'GuestController@reserve');
+Route::post('reservation', 'GuestController@reserve');
+
+Route::get('/test', function (){
+    return new \App\Mail\ReservationCreated($reservation);
+});
+

@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/customer';
 
     /**
      * Create a new controller instance.
@@ -47,6 +47,8 @@ class LoginController extends Controller
             $this->redirectTo = "/customer";
         } else if ($user->hasRole("cashier")) {
             $this->redirectTo = "/cashier";
+        } else if ($user->hasRole('admin')) {
+            $this->redirectTo = "/admin";
         }
     }
 }

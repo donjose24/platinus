@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Mail\ReservationCreated;
 use App\RoomType;
 use Illuminate\Http\Request;
 use App\Reservation;
 use App\ReservationRoom;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class GuestController extends Controller
@@ -193,6 +195,8 @@ class GuestController extends Controller
                 ]);
             }
         }
+
+        Mail::to(Auth::user()->email)->send(new ReservationCreated($reservation));
 
         Session::forget('details');
         Session::forget('items');
