@@ -24,7 +24,9 @@ $(document).ready(() => {
         $('.datetime-picker').flatpickr();
     }
 
-    $('.spinner').spinner();
+    if ($('.spinnter').length) {
+        $('.spinner').spinner();
+    }
 
     if ($('.full-date').length) {
         const arrDateVal = Array.prototype.slice.call(

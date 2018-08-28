@@ -22,7 +22,7 @@
     <main>
         <div class="row no-gutters">
             @include('customer.sidebar')
-            <div class="back-content">
+            <div class="back-content customer-content">
                 @if (Session::has('flash_message'))
                     <div class="container-fluid">
                         <div class="alert alert-success">
