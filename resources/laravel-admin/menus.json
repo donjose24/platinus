@@ -3,19 +3,35 @@
         {
             "section": "Resources",
             "items": [
-                { "title": "Users", "url": "/admin/users" , "icon":"user"},
-                { "title": "Roles", "url": "/admin/roles" , "icon":"users"},
-                { "title": "Permissions", "url": "/admin/permissions" , "icon":"address-book"},
-                { "title": "Settings", "url": "/admin/settings" , "icon":"cogs"},
-                { "title": "Reservations", "url": "/admin/reservations" , "icon":"book"},
-                { "title": "Transactions", "url": "/admin/transactions" , "icon":"calendar"},
-                { "title": "Room Types", "url": "/admin/room_types" , "icon":"diamond"},
-                { "title": "Room", "url": "/admin/room" , "icon":"bed"}
+                { "title": "Users", "url": "/admin/users", "icon": "user" },
+                { "title": "Roles", "url": "/admin/roles", "icon": "users" },
+                {
+                    "title": "Permissions",
+                    "url": "/admin/permissions",
+                    "icon": "address-book"
+                },
+                {
+                    "title": "Settings",
+                    "url": "/admin/settings",
+                    "icon": "cogs"
+                },
+                {
+                    "title": "Reservations",
+                    "url": "/admin/reservations",
+                    "icon": "book"
+                },
+                {
+                    "title": "Transactions",
+                    "url": "/admin/transactions",
+                    "icon": "calendar"
+                },
+                {
+                    "title": "Room Types",
+                    "url": "/admin/room_types",
+                    "icon": "cubes"
+                },
+                { "title": "Room", "url": "/admin/room", "icon": "bed" }
             ]
-        },
-        {
-            "section": "Tools",
-            "items": [{ "title": "Generator", "url": "/admin/generator", "icon": "bolt" }]
         }
     ]
 }

@@ -13,6 +13,17 @@
         margin-bottom: 40px;
     }
 
+    .btn-custom-default {
+        color: #fff;
+        border: 1px solid #3490dc;
+        background-color: #3490dc;
+        font-weight: bold;
+
+        &:hover {
+            background-color: #1f74bb;
+        }
+    }
+
     .reservation-container {
         color: #000;
         background-color: #fff;
@@ -63,6 +74,17 @@
         &:hover {
             color: #651cf5;
             background-color: transparent;
+        }
+    }
+
+    .btn-custom-default {
+        color: #fff;
+        border: 1px solid #3490dc;
+        background-color: #3490dc;
+        font-weight: bold;
+
+        &:hover {
+            background-color: #1f74bb;
         }
     }
 
@@ -121,7 +143,6 @@
         h1 {
             font-size: 2rem;
             font-weight: 500;
-            margin-bottom: 20px;
         }
 
         .reservation-room {
@@ -146,6 +167,87 @@
 
             .card-body {
                 background-color: #e5e5e5;
+
+                .room-desc {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    max-width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+    }
+
+    &.contact-content {
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            border: 2px solid #651cf5;
+
+            .contact-form-container {
+                padding: 20px;
+            }
+        }
+
+        .contact-instruction {
+            border: 2px solid #651cf5;
+
+            ol {
+                margin: 0;
+                margin-bottom: 20px;
+                padding: 0;
+                list-style-position: inside;
+
+                li {
+                    margin-bottom: 10px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &.checkout-content {
+        .checkout-container {
+            border: 2px solid #651cf5;
+            padding: 10px;
+        }
+
+        ol {
+            list-style-position: inside;
+            counter-reset: item;
+
+            li {
+                margin-bottom: 10px;
+                list-style-type: none;
+                counter-increment: item;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &:before {
+                    display: inline-block;
+                    font-weight: bold;
+                    padding-right: 5px;
+                    content: counter(item, upper-alpha) '.';
+                }
+            }
+        }
+    }
+
+    &.location-content {
+        ul {
+            list-style-type: none;
+
+            li {
+                font-size: 1rem;
             }
         }
     }

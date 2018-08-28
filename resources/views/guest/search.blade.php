@@ -6,18 +6,26 @@
         <div class="reservation-container">
             {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
             <ul>
-                <li><label for="start_date">Start Date</label><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker form-control" /></li>
-                <li><label for="end_date">End Date</label><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker form-control" /></li>
-                <li><label for="guests"># of Guests</label><input type="text" name="guests" placeholder="No. of guests" value="{{$guests}}" class="no-guest form-control" /></li>
-                <li><button class="btn btn-success">Book Now</button></li>
+                <li><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker form-control" /></li>
+                <li><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker form-control" /></li>
+                <li><input type="number" name="guests" placeholder="No. of guests" value="{{$guests}}" class="no-guest form-control" /></li>
+                <li><button class="btn btn-custom-default">Book Now</button></li>
             </ul>
             {{Form::close()}}
         </div>
     </div>
     <div class="welcome-content">
         <div class="page-content reservation-content">
-            <h1>Available Rooms</h1>
-            <div class="d-flex justify-content-around flex-wrap">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1>Available Rooms</h1>
+                @if(Session::has('items') )
+                    <div class="d-flex justify-content-between">
+                        <a href="/reservation/clear" class="btn d-block mr-2 w-100 p-2 btn-danger">Clear your selection</a>
+                        <a href="/reservation/checkout" class="btn d-block w-100 p-2 btn-custom-default">Checkout</a>
+                    </div>
+                @endif
+            </div>
+            <div class="d-flex justify-content-between flex-wrap">
                 @if (Session::has('flash_message'))
                     <div class="container-fluid">
                         <div class="alert alert-success">
@@ -50,31 +58,31 @@
                                 {{ Form::open(['url' => '/reservation/preview', 'method' => 'POST']) }}
                             @endif
 
-                            <h5 class="font-weight-bold card-title">{{ $type->name }}</h5>
-                            <h6 class="font-weight-bold sub-card-title">{{ $type->capacity }} persons</h6>
-                            <h6 class="card-text">{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }} room(s) remaining</h6>
-                            <p class="card-text">{{ $type->description }} </p>
-                            <h4 class="font-weight-bold mb-3 room-price">PHP {{ number_format($type->daily_rate) }} per night</h4>
+                            <h4 class="font-weight-bold card-title">{{ $type->name }}</h4>
+                            <h5 class="font-weight-bold sub-card-title">{{ $type->capacity }} persons</h5>
+                            <h6 class="font-weight-bold card-text">{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }} room(s) remaining</h6>
+                            <p class="card-text room-desc">{{ $type->description }}</p>
+                            <h5 class="font-weight-bold mb-3 room-price">PHP {{ number_format($type->daily_rate) }} per night</h5>
                             @if(Session::has('items'))
                                 @if(array_key_exists($type->id, Session::get('items')))
                                     <button class="btn w-100 p-2 btn-danger">Remove Room</button>
                                 @else
-                                    <input class="spinner" readonly name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
-                                    <button class="btn w-75 p-2 btn-custom-primary add-room">Add Room</button>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <input class="form-control w-25 mr-2" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
+                                        <button class="btn w-75 p-2 btn-custom-primary add-room">Add Room</button>
+                                    </div>
                                 @endif
                             @else
-                                <input class="spinner" readonly name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
-                                <button class="btn w-75 p-2 btn-custom-primary add-room">Add Room</button>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <input class="form-control w-25 mr-2" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
+                                    <button class="btn w-75 p-2 btn-custom-primary add-room">Add Room</button>
+                                </div>
                             @endif
                             <input class="room-id" type="hidden" name="id" value="{{ $type->id }}">
                             {{ Form::close() }}
                         </div>
                     </div>
                 @endforeach
-                @if(Session::has('items') )
-                    <a href="/reservation/clear" class="btn w-75 p-2 btn-danger">Clear your selection</a>
-                    <a href="/reservation/checkout" class="btn w-75 p-2 btn-success">Checkout</a>
-                @endif
             </div>
         </div>
     </div>

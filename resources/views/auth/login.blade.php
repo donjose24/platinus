@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="form-group mb-0">
-                    <div class="text-center">
+                    <div class="text-center d-flex justify-content-between">
                         <a class="btn btn-link" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
                         </a>
