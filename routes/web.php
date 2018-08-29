@@ -23,6 +23,17 @@ Route::get('/location', function () {
     return view('webpage.location');
 });
 
+//tests reports only
+Route::get('/reports/reservations', function () {
+    return view('reports.reservation');
+});
+Route::get('/reports/users', function () {
+    return view('reports.users');
+});
+Route::get('/reports/transaction', function () {
+    return view('reports.transaction');
+});
+
 Auth::routes();
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
