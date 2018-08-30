@@ -23,6 +23,10 @@ Route::get('/location', function () {
     return view('webpage.location');
 });
 
+Route::get('/roomrates', function () {
+    return view('webpage.roomrates');
+});
+
 //tests reports only
 Route::get('/reports/reservations', function () {
     return view('reports.reservation');

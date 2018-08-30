@@ -261,7 +261,7 @@ footer {
         margin: 0 auto;
 
         .footer-content-block {
-            width: 45%;
+            width: 35%;
             background-color: #fff;
 
             ul {
@@ -272,6 +272,11 @@ footer {
                     li {
                         font-size: 1rem;
                         margin-bottom: 10px;
+
+                        span:first-child {
+                            font-size: 1.5rem;
+                            color: #1AAE9F;
+                        }
                     }
                 }
             }
