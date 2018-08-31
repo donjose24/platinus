@@ -37,6 +37,15 @@ Route::get('/reports/users', function () {
 Route::get('/reports/transaction', function () {
     return view('reports.transaction');
 });
+Route::get('/cashier/dashboard', function () {
+    return view('cashier.dashboard');
+});
+Route::get('/cashier/checkin', function () {
+    return view('cashier.checkin');
+});
+Route::get('/cashier/checkout', function () {
+    return view('cashier.checkout');
+});
 
 Auth::routes();
 
