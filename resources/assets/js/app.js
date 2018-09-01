@@ -24,7 +24,7 @@ $(document).ready(() => {
         $('.datetime-picker').flatpickr();
     }
 
-    if ($('.spinnter').length) {
+    if ($('.spinner').length) {
         $('.spinner').spinner();
     }
 

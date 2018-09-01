@@ -56,4 +56,9 @@ class Reservation extends Model
     {
         return $this->belongsToMany('App\RoomType', 'reservation_rooms', 'reservation_id', 'room_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

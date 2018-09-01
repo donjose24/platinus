@@ -27,8 +27,8 @@ class RedirectIfAuthenticated
                 return redirect('/customer');
             }
 
-            if ($user->hasRole('cashier')) {
-                return redirect('/cashier');
+            if ($user->hasRole('Cashier')) {
+                return redirect('/Cashier');
             }
         }
 

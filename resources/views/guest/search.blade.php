@@ -74,7 +74,7 @@
                                 @endif
                             @else
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <input class="form-control w-25 mr-2" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
+                                    <input class="spinner" readonly name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
                                     <button class="btn w-75 p-2 btn-custom-primary add-room">Add Room</button>
                                 </div>
                             @endif

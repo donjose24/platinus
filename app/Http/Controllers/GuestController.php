@@ -178,6 +178,7 @@ class GuestController extends Controller
         $details = Session::get('details');
         $items = Session::get('items');
         $id = Auth::user()->id;
+        $rand = substr(md5(microtime()),rand(0,26),10);
 
         $reservation = Reservation::create([
             'start_date' => $details['start_date'],
@@ -185,6 +186,7 @@ class GuestController extends Controller
             'status' => 'pending',
             'deposit_slip' => '',
             'user_id' => $id,
+            'code' => $rand
         ]);
 
         foreach($items as $key => $value) {

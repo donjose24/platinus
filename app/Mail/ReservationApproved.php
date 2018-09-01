@@ -7,11 +7,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ReservationCreated extends Mailable
+class ReservationApproved extends Mailable
 {
     use Queueable, SerializesModels;
-
-    private $reservation;
 
     /**
      * Create a new message instance.
@@ -32,9 +30,8 @@ class ReservationCreated extends Mailable
     {
         $startDate = \DateTime::createFromFormat('Y-m-d', $this->reservation->start_date);
         $endDate = \DateTime::createFromFormat('Y-m-d', $this->reservation->end_date);
-
         $diff = date_diff($startDate, $endDate);
-        $url = config('APP_URL') . '/login';
-        return $this->markdown('emails.reservation.created')->with(['reservation' => $this->reservation, 'diff' => $diff, 'url' => $url])->subject("Reservation Successful!");
+
+        return $this->markdown('emails.reservation.approved')->with(['reservation' => $this->reservation, 'diff' => $diff])->subject("Your reservation has been approved");
     }
 }

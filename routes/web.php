@@ -37,14 +37,14 @@ Route::get('/reports/users', function () {
 Route::get('/reports/transaction', function () {
     return view('reports.transaction');
 });
-Route::get('/cashier/dashboard', function () {
-    return view('cashier.dashboard');
+Route::get('/Cashier/dashboard', function () {
+    return view('Cashier.dashboard');
 });
-Route::get('/cashier/checkin', function () {
-    return view('cashier.checkin');
+Route::get('/Cashier/checkin', function () {
+    return view('Cashier.checkin');
 });
-Route::get('/cashier/checkout', function () {
-    return view('cashier.checkout');
+Route::get('/Cashier/checkout', function () {
+    return view('Cashier.checkout');
 });
 
 Auth::routes();

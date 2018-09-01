@@ -3,6 +3,8 @@
 
 Below are the details of your reservation:
 
+## Reservation ID: {{ $reservation->code }}
+
 Check In Date: {{ $reservation->start_date }}
 
 Check Out Date: {{ $reservation->end_date }}
