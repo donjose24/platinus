@@ -33,7 +33,7 @@
                                     <tr>
                                         <th>ID</th><td>{{ $transaction->id }}</td>
                                     </tr>
-                                    <tr><th> Check In </th><td> {{ $transaction->check_in }} </td></tr><tr><th> Check Out </th><td> {{ $transaction->check_out }} </td></tr><tr><th> Reservation Id </th><td> {{ $transaction->reservation_id }} </td></tr>
+                                    <tr><th> Item </th><td> {{ $transaction->item }} </td></tr><tr><th> Price </th><td> {{ $transaction->price }} </td></tr><tr><th> Reservation ID </th><td> {{ $transaction->reservation_id }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

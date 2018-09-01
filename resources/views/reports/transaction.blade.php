@@ -54,8 +54,8 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Check In</th>
-                <th>Check Out</th>
+                <th>Item</th>
+                <th>Price</th>
                 <th>Reservation Number</th>
             </tr>
         </thead>

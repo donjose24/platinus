@@ -16,9 +16,9 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
-            $table->dateTime('check_in')->nullable();
-            $table->dateTime('check_out')->nullable();
             $table->string('reservation_id')->nullable();
+            $table->string('item')->nullable();
+            $table->decimal('price', 16, 2);
             });
     }
 

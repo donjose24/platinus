@@ -28,14 +28,14 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Check In</th><th>Check Out</th><th>Reservation Id</th><th>Actions</th>
+                                        <th>#</th><th>Item</th><th>Price</th><th>Reservation Id</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($transactions as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->check_in }}</td><td>{{ $item->check_out }}</td><td>{{ $item->reservation_id }}</td>
+                                        <td>{{ $item->item }}</td><td>{{ $item->price }}</td><td>{{ $item->reservation_id }}</td>
                                         <td>
                                             <a href="{{ url('/admin/transactions/' . $item->id) }}" title="View Transaction"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                                             <a href="{{ url('/admin/transactions/' . $item->id . '/edit') }}" title="Edit Transaction"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>

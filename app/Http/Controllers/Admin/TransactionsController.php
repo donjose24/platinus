@@ -21,8 +21,8 @@ class TransactionsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $transactions = Transaction::where('check_in', 'LIKE', "%$keyword%")
-                ->orWhere('check_out', 'LIKE', "%$keyword%")
+            $transactions = Transaction::where('item', 'LIKE', "%$keyword%")
+                ->orWhere('price', 'LIKE', "%$keyword%")
                 ->orWhere('reservation_id', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
@@ -52,8 +52,8 @@ class TransactionsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'check_in' => 'required',
-			'check_out' => 'required',
+			'item' => 'required',
+			'price' => 'required',
 			'reservation_id' => 'required'
 		]);
         $requestData = $request->all();
@@ -102,8 +102,8 @@ class TransactionsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'check_in' => 'required',
-			'check_out' => 'required',
+			'item' => 'required',
+			'price' => 'required',
 			'reservation_id' => 'required'
 		]);
         $requestData = $request->all();

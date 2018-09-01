@@ -1,12 +1,12 @@
-<div class="form-group{{ $errors->has('check_in') ? 'has-error' : ''}}">
-    {!! Form::label('check_in', 'Check In', ['class' => 'control-label']) !!}
-    {!! Form::input('datetime-local', 'check_in', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
-    {!! $errors->first('check_in', '<p class="help-block">:message</p>') !!}
+<div class="form-group{{ $errors->has('item') ? 'has-error' : ''}}">
+    {!! Form::label('item', 'Item', ['class' => 'control-label']) !!}
+    {!! Form::input('text', 'item', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('item', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group{{ $errors->has('check_out') ? 'has-error' : ''}}">
-    {!! Form::label('check_out', 'Check Out', ['class' => 'control-label']) !!}
-    {!! Form::input('datetime-local', 'check_out', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
-    {!! $errors->first('check_out', '<p class="help-block">:message</p>') !!}
+<div class="form-group{{ $errors->has('price') ? 'has-error' : ''}}">
+    {!! Form::label('price', 'Price', ['class' => 'control-label']) !!}
+    {!! Form::input('number', 'price', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('reservation_id') ? 'has-error' : ''}}">
     {!! Form::label('reservation_id', 'Reservation Id', ['class' => 'control-label']) !!}

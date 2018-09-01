@@ -31,7 +31,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['check_in', 'check_out', 'reservation_id'];
+    protected $fillable = ['item', 'price', 'reservation_id'];
 
     
 
