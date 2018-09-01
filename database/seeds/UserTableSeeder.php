@@ -20,5 +20,13 @@ class UserTableSeeder extends Seeder
 
         $user->roles()->attach(1);
         $user->save();
+
+        $user = new User();
+        $user->name = "Benedic Cucumber";
+        $user->email = "cashier@bellamonte.com";
+        $user->password = Hash::make("password");
+
+        $user->roles()->attach(2);
+        $user->save();
     }
 }
