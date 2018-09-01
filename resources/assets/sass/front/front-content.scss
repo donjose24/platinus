@@ -252,3 +252,49 @@
         }
     }
 }
+
+footer {
+    background-color: #707070;
+    
+    .footer-content {
+        width: 85%;
+        margin: 0 auto;
+
+        .footer-content-block {
+            width: 35%;
+            background-color: #fff;
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+
+                &.reason-block {
+                    li {
+                        font-size: 1rem;
+                        margin-bottom: 10px;
+
+                        span:first-child {
+                            font-size: 1.5rem;
+                            color: #1AAE9F;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-nav {
+        background-color: #2e2e2e;
+
+        ul {
+            list-style-type: none;
+
+            a {
+                display: block;
+                padding: 10px;
+                font-size: 0.9rem;
+                text-decoration: none;
+            }
+        }
+    }
+}

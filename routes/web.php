@@ -23,6 +23,30 @@ Route::get('/location', function () {
     return view('webpage.location');
 });
 
+Route::get('/roomrates', function () {
+    return view('webpage.roomrates');
+});
+
+//tests reports only
+Route::get('/reports/reservations', function () {
+    return view('reports.reservation');
+});
+Route::get('/reports/users', function () {
+    return view('reports.users');
+});
+Route::get('/reports/transaction', function () {
+    return view('reports.transaction');
+});
+Route::get('/cashier/dashboard', function () {
+    return view('cashier.dashboard');
+});
+Route::get('/cashier/checkin', function () {
+    return view('cashier.checkin');
+});
+Route::get('/cashier/checkout', function () {
+    return view('cashier.checkout');
+});
+
 Auth::routes();
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
