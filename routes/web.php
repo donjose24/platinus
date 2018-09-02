@@ -37,13 +37,10 @@ Route::get('/reports/users', function () {
 Route::get('/reports/transaction', function () {
     return view('reports.transaction');
 });
-Route::get('/Cashier/dashboard', function () {
-    return view('Cashier.dashboard');
-});
-Route::get('/Cashier/checkin', function () {
+Route::get('/cashier/checkin', function () {
     return view('Cashier.checkin');
 });
-Route::get('/Cashier/checkout', function () {
+Route::get('/cashier/checkout', function () {
     return view('Cashier.checkout');
 });
 
@@ -73,7 +70,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 Route::group(['namespace' => 'Customer', 'prefix' => 'customer', 'middleware' => ['auth', 'roles'], 'roles' => 'customer'], function () {
     Route::get('/', 'CustomerController@index');
     Route::get('booking', 'BookingController@index');
-    Route::put('/reservation', 'CustomerController@uploadDepositSlip');
+    Route::put('reservation', 'CustomerController@uploadDepositSlip');
+});
+
+Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => ['auth', 'roles'], 'roles' => 'cashier'], function () {
+    Route::get('/', 'CashierController@index');
+    Route::get('deposit', 'CashierController@deposits');
+    Route::post('deposit/approve', 'CashierController@approve');
+    Route::post('deposit/reject', 'CashierController@reject');
+    Route::get('deposit/{id}', 'CashierController@view');
 });
 
 Route::get('/room/search', 'GuestController@search');

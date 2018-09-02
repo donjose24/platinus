@@ -29,6 +29,11 @@ class ReservationRejected extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.reservation.rejected')->with(['reservation' => $this->reservation, 'reason' => $this->reason])->subject("Your reservation has been approved");
+        $startDate = \DateTime::createFromFormat('Y-m-d', $this->reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $this->reservation->end_date);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+        return $this->markdown('emails.reservation.rejected')->with(['reservation' => $this->reservation, 'reason' => $this->reason, 'diff' => $diff])->subject("Your reservation has been rejected");
     }
 }

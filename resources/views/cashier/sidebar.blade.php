@@ -31,6 +31,16 @@
                     <span><i class="fa fa-archive"></i>Check out</span>
                 </a>
             </li>
+            <li>
+                <a href="/cashier/deposit">
+                    <span><i class="fa fa-money-bill"></i>Deposit Uploads</span>
+                </a>
+            </li>
+            <li>
+                <a href="/cashier/checkout">
+                    <span><i class="fa fa-wine-glass"></i>Additional Services</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

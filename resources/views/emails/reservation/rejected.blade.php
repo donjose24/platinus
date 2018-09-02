@@ -1,12 +1,12 @@
 @component('mail::message')
 # Hello!
 
-Your reservation with ID {{ $reservation->id  }} has been rejected.
+Your reservation with ID {{ $reservation->code }} has been rejected.
 
 Check In Date: {{ $reservation->start_date }}
 
 Check Out Date: {{ $reservation->end_date }}
-Duration of Stay: {{ $diff->days . " Nights" }}
+Duration of Stay: {{ $diff . " Nights" }}
 
 Reserved Rooms:
 @foreach($reservation->roomTypes()->get() as $room)
@@ -20,7 +20,17 @@ Room Type: {{ $room->name }}
 {{ $reason }}
 @endcomponent
 
+@component('mail::panel')
+Please upload a valid deposit slip to:
 
-See you! <br>
+East West Bank
+
+Hotel Bellamonte Inc.
+
+10802000974
+
+@endcomponent
+
+Thank you! <br>
 {{ config('app.name') }}
 @endcomponent

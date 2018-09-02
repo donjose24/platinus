@@ -28,7 +28,8 @@ class GuestController extends Controller
         $rules = [
             'start_date' => 'required|date|date_format:Y-m-d|before:end_date',
             'end_date' => 'required|date|date_format:Y-m-d|after:start_date',
-            'guests' => 'required|numeric',
+            'adults' => 'required|numeric',
+            'children' => 'required|numeric',
         ];
 
         //this will redirect back on validation error
@@ -36,11 +37,14 @@ class GuestController extends Controller
 
         $startDate = \DateTime::createFromFormat("Y-m-d", $request->get('start_date'))->format('Y-m-d');
         $endDate = \DateTime::createFromFormat("Y-m-d", $request->get('end_date'))->format('Y-m-d');
-        $guests = $request->get('guests');
+        $children = $request->get('children');
+        $adults = $request->get('adults');
+
         $details = [
             'start_date' => $startDate,
             'end_date' => $endDate,
-            'guests' => $guests,
+            'adults' => $adults,
+            'children' => $children,
         ];
 
         if(!Session::has('details')) {
@@ -87,7 +91,7 @@ class GuestController extends Controller
 
         $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
 
-        return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'guests', 'rooms'));
+        return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'children', 'adults', 'rooms'));
     }
 
     public function addToCart(Request $request)
@@ -179,6 +183,11 @@ class GuestController extends Controller
         $items = Session::get('items');
         $id = Auth::user()->id;
         $rand = substr(md5(microtime()),rand(0,26),10);
+        $startDate = \DateTime::createFromFormat('Y-m-d', $details['start_date']);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $details['end_date']);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
 
         $reservation = Reservation::create([
             'start_date' => $details['start_date'],
@@ -186,7 +195,10 @@ class GuestController extends Controller
             'status' => 'pending',
             'deposit_slip' => '',
             'user_id' => $id,
-            'code' => $rand
+            'code' => $rand,
+            'total' => 0,
+            'children' => $details['children'],
+            'adults' => $details['adults'],
         ]);
 
         foreach($items as $key => $value) {
@@ -197,6 +209,15 @@ class GuestController extends Controller
                 ]);
             }
         }
+
+        $rooms = $reservation->roomTypes()->get();
+        $total = 0;
+        foreach($rooms as $room) {
+            $total += ($room->daily_rate * $diff);
+        }
+
+        $reservation->total = $total;
+        $reservation->save();
 
         Mail::to(Auth::user()->email)->send(new ReservationCreated($reservation));
 

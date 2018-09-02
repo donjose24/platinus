@@ -31,7 +31,7 @@ class Reservation extends Model
      *
      * @var array
      */
-    protected $fillable = ['start_date', 'end_date', 'status', 'user_id', 'deposit_slip'];
+    protected $fillable = ['start_date', 'end_date', 'status', 'user_id', 'deposit_slip', 'total', 'adults', 'children', 'code'];
 
     
 

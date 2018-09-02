@@ -4,45 +4,85 @@ namespace App\Http\Controllers\Cashier;
 
 
 use App\Mail\ReservationApproved;
+use App\Mail\ReservationRejected;
 use App\Reservation;
+use App\Transaction;
+use Auth;
 use Illuminate\Http\Request;
+use Session;
 use Illuminate\Support\Facades\Mail;
 
 class CashierController
 {
     public function index()
     {
-        $id = Auth::user();
-        $reservations = Reservation::where('status', 'waiting_for_approval')->where('user_id', $id)->get();
+        $user = Auth::user();
 
-        return view('customer.dashboard', compact('reservations'));
+        return view('cashier.dashboard', compact('user'));
+    }
+
+    public function deposits()
+    {
+        $reservations = Reservation::where('status', 'waiting_for_approval')->get();
+
+        return view('cashier.deposit', compact('reservations'));
+    }
+
+    public function view($id)
+    {
+        $reservation = Reservation::find($id);
+        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+
+        return view('cashier.view', compact('reservation', 'diff'));
     }
 
     public function approve(Request $request)
     {
+        $request->validate([
+            'id' => 'required',
+            'amount' => 'required|numeric',
+        ]);
+
         $id = $request->get('id');
+        $amount = $request->get('amount');
 
         $reservation = Reservation::findOrFail($id);
         $reservation->status = "approved";
         $reservation->save();
 
-        Mail::to(Auth::user()->email)->send(new ReservationApproved($reservation));
+        $transaction = new Transaction();
+        $transaction->item = "Down Payment";
+        $transaction->price = $amount;
+        $transaction->save();
+
+        Mail::to($reservation->user()->first()->email)->send(new ReservationApproved($reservation));
 
         Session::flash('info_message', 'Reservation approved');
-        return redirect('back');
+        return redirect('/cashier/deposit');
     }
 
     public function reject(Request $request)
     {
+        $request->validate([
+            'id' => 'required',
+            'reason' => 'required',
+        ]);
+
         $id = $request->get('id');
         $reason = $request->get('reason');
 
         $reservation = Reservation::findOrFail($id);
         $reservation->status = "pending";
-        $reservation->image_url = '';
+        $reservation->deposit_slip = '';
         $reservation->save();
 
+        Mail::to($reservation->user()->first()->email)->send(new ReservationRejected($reservation, $reason));
+
         Session::flash('info_message', 'Reservation rejected');
-        return redirect('back');
+        return redirect('/cashier/deposit');
     }
 }

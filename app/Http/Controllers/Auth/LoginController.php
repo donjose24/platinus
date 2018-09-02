@@ -45,8 +45,8 @@ class LoginController extends Controller
             $this->redirectTo = Session::get('reroute');
         } else if ($user->hasRole("customer")) {
             $this->redirectTo = "/customer";
-        } else if ($user->hasRole("Cashier")) {
-            $this->redirectTo = "/Cashier";
+        } else if ($user->hasRole("cashier")) {
+            $this->redirectTo = "/cashier";
         } else if ($user->hasRole('admin')) {
             $this->redirectTo = "/admin";
         }

@@ -6,9 +6,10 @@
         <div class="reservation-container">
             {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
             <ul>
-                <li><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker form-control" /></li>
-                <li><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker form-control" /></li>
-                <li><input type="number" name="guests" placeholder="No. of guests" value="{{$guests}}" class="no-guest form-control" /></li>
+                <li><label for="start_date">Start Date</label><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker" /></li>
+                <li><label for="end_date">End Date</label><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker" /></li>
+                <li><label for="adults"># of Adults</label><input type="number" name="adults" value="{{$adults}}" class="no-guest spinner" /></li>
+                <li><label for="children"># of Children</label><input type="number" name="children" value="{{$children}}" class="no-guest spinner" /></li>
                 <li><button class="btn btn-custom-default">Book Now</button></li>
             </ul>
             {{Form::close()}}
@@ -68,7 +69,7 @@
                                     <button class="btn w-100 p-2 btn-danger">Remove Room</button>
                                 @else
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <input class="form-control w-25 mr-2" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
+                                        <input class="spinner" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
                                         <button class="btn w-75 p-2 btn-custom-primary add-room">Add Room</button>
                                     </div>
                                 @endif
