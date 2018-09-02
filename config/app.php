@@ -161,6 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yish\Imgur\UploadServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -213,6 +214,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Imgur' => Yish\Imgur\Facades\Upload::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

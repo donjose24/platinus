@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="view-content">
-        <h1 class="mb-3">Reservation Details of: {{ strtoupper($reservation->code) }}</h1>
+        <h1 class="mb-3">Reservation Details for: {{ strtoupper($reservation->code) }}</h1>
         @if ($errors->any())
             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
@@ -12,7 +12,6 @@
         @endif
         <div class="panel">
             <fieldset>
-                <legend>Reservation Details</legend>
                 <h6> Customer: {{ $reservation->user->name }} </h6>
                 <h6> Email: {{ $reservation->user->email }} </h6>
                 <h6> Check In: {{ $reservation->start_date }} </h6>
@@ -91,5 +90,9 @@
                 @endif
             </fieldset>
         </div>
+        <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-primary float-right" target="_blank"> Print </a>
+        @if($reservation->status == "checked_in")
+            <a href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-success float-right mr-3"> Check Out </a>
+        @endif
     </div>
 @endsection

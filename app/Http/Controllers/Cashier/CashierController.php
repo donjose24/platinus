@@ -10,6 +10,7 @@ use App\ReservationRoomDetail;
 use App\Transaction;
 use Auth;
 use Carbon\Carbon;
+use PDF;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Mail;
@@ -126,6 +127,48 @@ class CashierController
         $reservation->save();
 
         Session::flash('flash_message', 'Check in successful');
+        return redirect()->back();
+    }
+
+    public function reservation(Request $request)
+    {
+        $keyword = $request->get('search');
+        $perPage = 25;
+
+        if (!empty($keyword)) {
+            $reservations = Reservation::where('start_date', 'LIKE', "%$keyword%")
+                ->orWhere('end_date', 'LIKE', "%$keyword%")
+                ->orWhere('status', 'LIKE', "%$keyword%")
+                ->orWhere('user_id', 'LIKE', "%$keyword%")
+                ->orWhere('deposit_slip', 'LIKE', "%$keyword%")
+                ->latest()->paginate($perPage);
+        } else {
+            $reservations = Reservation::latest()->paginate($perPage);
+        }
+
+        return view('cashier.reservations', compact('reservations'));
+    }
+
+    public function printReservation($id)
+    {
+        $reservation = Reservation::find($id);
+        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+
+        $pdf = PDF::loadView('reports.reservation', compact('reservation', 'diff'));
+        return $pdf->stream();
+    }
+
+    public function checkOut($id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->status = "checked_out";
+        $reservation->save();
+
+        Session::flash('flash_message', 'Check out successful');
         return redirect()->back();
     }
 }

@@ -29,7 +29,9 @@ Route::get('/roomrates', function () {
 
 //tests reports only
 Route::get('/reports/reservations', function () {
-    return view('reports.reservation');
+    $reservation = \App\Reservation::find(1);
+    $diff = 2;
+    return view('reports.reservation', compact('reservation', 'diff'));
 });
 Route::get('/reports/users', function () {
     return view('reports.users');
@@ -81,6 +83,9 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
     Route::get('deposit/{id}', 'CashierController@view');
     Route::get('reservation/{id}', 'CashierController@show');
     Route::post('checkin', 'CashierController@checkIn');
+    Route::get('reservation', 'CashierController@reservation');
+    Route::get('reservation/print/{id}', 'CashierController@printReservation');
+    Route::get('reservation/checkout/{id}', 'CashierController@checkOut');
 });
 
 Route::get('dashboard', 'Auth\LoginController@redirect');

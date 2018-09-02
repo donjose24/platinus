@@ -30,10 +30,6 @@
         td {
           font-size: 12px;
         }
-        .status {
-          font-weight: bold;
-          text-align: center;
-        }
 
     </style>
 </head>
@@ -47,38 +43,35 @@
     </div>
     <br>
     <br>
-    <span class="hit">Date: September 1, 2018</span>
-    <span class="hit">Reservations</span>
-    <br>
+    <span class="hit">Date: {{ \Carbon\Carbon::now()->toDateTimeString() }}</span>
+    <span class="hit">Reservation Code: {{ strtoupper($reservation->code) }}</span>
+    <span class="hit">Customer: {{ $reservation->user->name }}</span>
+    <h3 style="text-align: center">Reservation Details</h3>
     <table>
         <thead>
             <tr>
-                <th>#</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Status</th>
+                <th>Room Name</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
             </tr>
         </thead>
         <tbody>
-           <tr>
-              <td>1</td>
-              <td>2018-08-28</td>
-              <td>2018-08-30</td>
-              <td class="status">Pending</td>
-           </tr>
-           <tr>
-              <td>2</td>
-              <td>2018-08-28</td>
-              <td>2018-08-30</td>
-              <td class="status">Pending</td>
-           </tr>
-           <tr>
-              <td>3</td>
-              <td>2018-08-28</td>
-              <td>2018-08-30</td>
-              <td class="status">Pending</td>
-           </tr>
+            @php
+                $total = 0;
+            @endphp
+            @foreach($reservation->roomTypes()->get() as $room)
+                <tr>
+                    <td>{{ $room->name }}</td>
+                    <td>{{ number_format($room->daily_rate, 2) }}</td>
+                    <td>{{ number_format(($room->daily_rate * $diff), 2) }}</td>
+                </tr>
+                @php
+                    {{ $total += ($room->daily_rate * $diff); }}
+                @endphp
+            @endforeach
         </tbody>
-    </table> 
+    </table>
+    <hr>
+    <h3 style="text-align:right">Total Amount: {{ number_format($total, 2) }}</h3>
 </body>
 </html>

@@ -195,7 +195,7 @@ class GuestController extends Controller
             'status' => 'pending',
             'deposit_slip' => '',
             'user_id' => $id,
-            'code' => $rand,
+            'code' => strtoupper($rand),
             'total' => 0,
             'children' => $details['children'],
             'adults' => $details['adults'],

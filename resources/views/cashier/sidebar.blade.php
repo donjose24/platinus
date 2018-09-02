@@ -22,13 +22,8 @@
                 </a>
             </li>
             <li>
-                <a href="/cashier/checkin">
-                    <span><i class="fa fa-address-book"></i>Check In</span>
-                </a>
-            </li>
-            <li>
-                <a href="/cashier/checkout">
-                    <span><i class="fa fa-archive"></i>Check out</span>
+                <a href="/cashier/reservation">
+                    <span><i class="fa fa-address-book"></i>Reservations</span>
                 </a>
             </li>
             <li>
@@ -37,7 +32,7 @@
                 </a>
             </li>
             <li>
-                <a href="/cashier/checkout">
+                <a href="/cashier/">
                     <span><i class="fa fa-wine-glass"></i>Additional Services</span>
                 </a>
             </li>
