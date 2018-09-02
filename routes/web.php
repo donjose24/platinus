@@ -80,6 +80,7 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
     Route::post('deposit/reject', 'CashierController@reject');
     Route::get('deposit/{id}', 'CashierController@view');
     Route::get('reservation/{id}', 'CashierController@show');
+    Route::post('checkin', 'CashierController@checkIn');
 });
 
 Route::get('dashboard', 'Auth\LoginController@redirect');

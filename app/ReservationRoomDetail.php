@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Room extends Model
+class ReservationRoomDetail extends Model
 {
     use LogsActivity;
     use SoftDeletes;
@@ -17,7 +17,7 @@ class Room extends Model
      *
      * @var string
      */
-    protected $table = 'rooms';
+    protected $table = 'reservation_room_details';
 
     /**
     * The database primary key value.
@@ -31,9 +31,7 @@ class Room extends Model
      *
      * @var array
      */
-    protected $fillable = ['number', 'room_type_id', 'status', 'note'];
-
-    
+    protected $fillable = ['reservation_id', 'room_id'];
 
     /**
      * Change activity log event description
@@ -45,20 +43,5 @@ class Room extends Model
     public function getDescriptionForEvent($eventName)
     {
         return __CLASS__ . " model has been {$eventName}";
-    }
-
-    /**
-     * Returns the associated room type
-     *
-     * @return mixed
-     */
-    public function roomType()
-    {
-        return $this->belongsTo('App\RoomType');
-    }
-
-    public  function reservationsDetails()
-    {
-        return $this->belongsTo('App\ReservationRoomDetail');
     }
 }

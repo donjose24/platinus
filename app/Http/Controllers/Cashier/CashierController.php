@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Cashier;
 use App\Mail\ReservationApproved;
 use App\Mail\ReservationRejected;
 use App\Reservation;
+use App\ReservationRoomDetail;
 use App\Transaction;
 use Auth;
 use Carbon\Carbon;
@@ -100,5 +101,31 @@ class CashierController
 
         Session::flash('flash_message', 'Reservation rejected');
         return redirect('/cashier/deposit');
+    }
+
+    public function checkIn(Request $request)
+    {
+        $request->validate([
+            'rooms.*' => 'required|not_in:-1'
+        ], [
+            'rooms.*' => 'Please select a room number'
+        ]);
+
+        $rooms = $request->get('rooms');
+        $id = $request->get('reservation_id');
+        foreach($rooms as $room) {
+            $details = new ReservationRoomDetail();
+            $details->reservation_id = $id;
+            $details->room_id = $room;
+            $details->save();
+        }
+
+        $reservation = Reservation::find($id);
+        $reservation->check_in = Carbon::now();
+        $reservation->status = "checked_in";
+        $reservation->save();
+
+        Session::flash('flash_message', 'Check in successful');
+        return redirect()->back();
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="view-content">
-        <h1 class="mb-3">Viewing Details Slip of: {{ $reservation->user->name }}</h1>
+        <h1 class="mb-3">Reservation Details of: {{ strtoupper($reservation->code) }}</h1>
         @if ($errors->any())
             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
@@ -21,20 +21,40 @@
             </fieldset>
             <fieldset class="mt-5">
                 <legend> Rooms: </legend>
+                {{ Form::open(['url' => '/cashier/checkin']) }}
                 <table class="table table-bordered">
                     <tr>
                         <td>Room Name</td>
                         <td>Unit price per night</td>
                         <td>Price</td>
+                        <td>Room Number</td>
                     </tr>
                     @php
                         $total = 0
                     @endphp
                     @foreach($reservation->roomTypes()->get() as $room)
                         <tr>
-                            <td> {{ $room->name }} </td>
-                            <td> {{ number_format($room->daily_rate, 2) }} </td>
-                            <td> {{ number_format($room->daily_rate * $diff, 2) }} </td>
+                            <td class="p-3"> {{ $room->name }} </td>
+                            <td class="p-3"> {{ number_format($room->daily_rate, 2) }} </td>
+                            <td class="p-3"> {{ number_format($room->daily_rate * $diff, 2) }} </td>
+                            <td>
+                                @php
+                                    $ids = $room->rooms()->where('status', 'active')->pluck('id');
+                                    $details = \App\ReservationRoomDetail::where('reservation_id', $reservation->id)->whereIn('id', $ids)->get();
+                                    if (count($details) == 0) {
+                                        $reservations = \App\Reservation::where('start_date', \Carbon\Carbon::today())->where('status', 'checked_in')->pluck('id');
+                                        $details = \App\ReservationRoomDetail::whereIn('reservation_id', $reservations)->pluck('room_id');
+                                        $rooms = [];
+                                        $rooms = $room->rooms()->where('status', 'active')->whereNotIn('id', $details)->pluck('number','id');
+                                        $rooms[-1] = "Please select a room";
+                                        echo Form::select('rooms[]', $rooms, '-1', ['class' => 'form-control']);
+                                    } else {
+
+                                    }
+
+                                @endphp
+                                {{ Form::hidden('reservation_id', $reservation->id) }}
+                            </td>
                             @php
                                 $total += ($room->daily_rate * $diff)
                             @endphp
@@ -42,6 +62,12 @@
                     @endforeach
                 </table>
                 <h5 class="float-right">Grand Total: {{ number_format($total, 2) }}</h5>
+                <br>
+                <br>
+                @if($reservation->status == "approved")
+                    <button class="btn btn-custom-default float-right"> Check In </button>
+                @endif
+                {{ Form::close() }}
             </fieldset>
             <fieldset class="mt-5">
                 <legend>Transactions</legend>
@@ -63,22 +89,6 @@
                 @else
                     No transactions yet!
                 @endif
-
-            </fieldset>
-            <fieldset class="mt-5">
-                <legend> Actions </legend>
-                <h6>Deposit Slip:</h6>
-                <img class="image" src="{{ $reservation->deposit_slip }}">
-                <div class="row">
-                    <div class="col-md-12">
-                        {{ Form::label('Amount Deposited') }}
-                        {{ Form::open(['url' => '/cashier/deposit/approve']) }}
-                        {{ Form::number('amount', '', ['class' => 'form-control']) }}
-                        {{ Form::hidden('id', $reservation->id) }}
-                        <button class="btn btn-success mt-2 float-md-right"> Check In </button>
-                        {{ Form::close() }}
-                    </div>
-                </div>
             </fieldset>
         </div>
     </div>
