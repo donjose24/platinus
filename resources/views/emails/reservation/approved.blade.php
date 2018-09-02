@@ -1,7 +1,9 @@
 @component('mail::message')
 # Hello!
 
-Your reservation has been approved.
+Your reservation ({{ $reservation->code  }})} has been approved.
+
+Please Print this email on your check in date and submit it to the reception upon arrival.
 
 Check In Date: {{ $reservation->start_date }}
 
@@ -12,8 +14,11 @@ Reserved Rooms:
 
 @foreach($reservation->roomTypes()->get() as $room)
 @component('mail::panel')
-Room Type: {{ $room->name }}
+Room: {{ $room->name }}
 
+Capactiy: {{ $room->capacity }}
+
+{{ $room->description }}
 @endcomponent
 @endforeach
 

@@ -17,7 +17,7 @@
           </li>
         @else
           <li class="nav-item dropdown">
-            <a href="/customer"><i class="fa fa-chart-line"></i> My Dashboard</a>
+            <a href="/dashboard"><i class="fa fa-chart-line"></i> My Dashboard</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-item" href="{{ route('logout') }}"

@@ -79,7 +79,10 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
     Route::post('deposit/approve', 'CashierController@approve');
     Route::post('deposit/reject', 'CashierController@reject');
     Route::get('deposit/{id}', 'CashierController@view');
+    Route::get('reservation/{id}', 'CashierController@show');
 });
+
+Route::get('dashboard', 'Auth\LoginController@redirect');
 
 Route::get('/room/search', 'GuestController@search');
 Route::post('/reservation/preview', 'GuestController@addToCart');

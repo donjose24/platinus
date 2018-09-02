@@ -4,6 +4,9 @@
     <div class="view-content">
         <h1 class="mb-3">Deposit Slips Upload</h1>
         <div class="d-flex justify-content-between flex-wrap">
+            @if(count($reservations) == 0)
+                No deposit slips uploaded Yet!
+            @endif
             @foreach($reservations as $reservation)
             <div class="card position-relative">
                 <div class="card-header">

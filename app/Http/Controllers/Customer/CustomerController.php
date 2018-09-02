@@ -16,8 +16,9 @@ class CustomerController extends Controller
     {
         $user = Auth::user();
         $reservations = Reservation::where('user_id', $user->id)->where('status', 'pending')->get();
+        $approvedReservations = Reservation::where('user_id', $user->id)->where('status', 'approved')->get();
 
-        return view('customer.dashboard', compact('user', 'reservations'));
+        return view('customer.dashboard', compact('user', 'reservations', 'approvedReservations'));
     }
 
     public function uploadDepositSlip(Request $request)

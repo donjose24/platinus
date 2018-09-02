@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -49,6 +50,19 @@ class LoginController extends Controller
             $this->redirectTo = "/cashier";
         } else if ($user->hasRole('admin')) {
             $this->redirectTo = "/admin";
+        }
+    }
+    public function redirect()
+    {
+        $user = Auth::user();
+        if (Session::has('reroute') && $user->hasRole("customer")) {
+            return redirect('reroute');
+        } else if ($user->hasRole("customer")) {
+            return redirect('customer');
+        } else if ($user->hasRole("cashier")) {
+            return redirect('cashier');
+        } else if ($user->hasRole('admin')) {
+            return redirect('admin');
         }
     }
 }
