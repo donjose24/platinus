@@ -4,14 +4,22 @@
 <div class="home-content">
     <h1 class="welcome-text">Room &amp; Rates</h1>
     <div class="reservation-container">
-        {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
-            <ul>
-                <li><input type="text" name="start_date" placeholder="From" class="datetime-picker" /></li>
-                <li><input type="text" name="end_date" placeholder="To" class="datetime-picker" /></li>
-                <li><input type="number" min="0" name="guests" placeholder="No. of guests" class="no-guest" /></li>
-                <li><button class="btn-book-now">Check Available Rooms</button></li>
-            </ul>
-        {{Form::close()}}
+      {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
+        <ul>
+            <li><label class="d-block" for="start_date">Start Date</label><input readonly type="text" name="start_date"  placeholder="From" class="datetime-picker" /></li>
+            <li><label class="d-block" for="end_date">End Date</label><input readonly type="text" name="end_date" placeholder="To" class="datetime-picker" /></li>
+            <li><label class="d-block" for="adults"># of Adults</label><input readonly type="number" name="adults" class="no-guest spinner" value="0" min="0"/></li>
+            <li><label class="d-block" for="children"># of Children</label><input readonly type="number" name="children" class="no-guest spinner" value="0" min="0"/></li>
+            <li><button class="btn btn-custom-default w-100">Book Now</button></li>
+        </ul>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+      {{Form::close()}}
     </div>
 </div>
 <div class="page-content reservation-content">

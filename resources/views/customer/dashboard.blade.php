@@ -39,7 +39,7 @@
     </div>
     <div class="d-flex justify-content-between flex-wrap">
         @foreach($reservations as $reservation)
-            <div class="card position-relative">
+            <div class="card position-relative w-25 m-1">
                 <div class="card-body">
                     {{ Form::open(['url' => '/customer/reservation', 'method' => 'PUT', 'files' => true]) }}
                     <div class="d-flex justify-content-between align-items-center">

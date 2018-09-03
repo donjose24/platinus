@@ -6,11 +6,11 @@
         <div class="reservation-container">
             {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
             <ul>
-                <li><label for="start_date">Start Date</label><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker" /></li>
-                <li><label for="end_date">End Date</label><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker" /></li>
-                <li><label for="adults"># of Adults</label><input type="number" name="adults" value="{{$adults}}" class="no-guest spinner" /></li>
-                <li><label for="children"># of Children</label><input type="number" name="children" value="{{$children}}" class="no-guest spinner" /></li>
-                <li><button class="btn btn-custom-default">Book Now</button></li>
+                <li><label class="d-block" for="start_date">Start Date</label><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker" /></li>
+                <li><label class="d-block" for="end_date">End Date</label><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker" /></li>
+                <li><label class="d-block" for="adults"># of Adults</label><input readonly type="number" name="adults" value="{{$adults}}" class="no-guest spinner" /></li>
+                <li><label class="d-block" for="children"># of Children</label><input readonly type="number" name="children" value="{{$children}}" class="no-guest spinner" /></li>
+                <li><button class="btn btn-custom-default w-100">Book Now</button></li>
             </ul>
             {{Form::close()}}
         </div>
@@ -70,13 +70,13 @@
                                 @else
                                     <div class="d-flex justify-content-between align-items-center">
                                         <input class="spinner" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
-                                        <button class="btn w-75 p-2 btn-custom-primary add-room">Add Room</button>
+                                        <button class="btn ml-2 w-75 p-2 btn-custom-primary add-room">Add Room</button>
                                     </div>
                                 @endif
                             @else
                                 <div class="d-flex justify-content-between align-items-center">
                                     <input class="spinner" readonly name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
-                                    <button class="btn w-75 p-2 btn-custom-primary add-room">Add Room</button>
+                                    <button class="btn ml-2 w-75 p-2 btn-custom-primary add-room">Add Room</button>
                                 </div>
                             @endif
                             <input class="room-id" type="hidden" name="id" value="{{ $type->id }}">
