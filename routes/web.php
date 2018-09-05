@@ -27,6 +27,10 @@ Route::get('/roomrates', function () {
     return view('webpage.roomrates');
 });
 
+Route::get('/facilities', function () {
+    return view('webpage.facilities');
+});
+
 //tests reports only
 Route::get('/reports/reservations', function () {
     $reservation = \App\Reservation::find(1);

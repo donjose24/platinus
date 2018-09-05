@@ -16,7 +16,8 @@ $(document).ready(() => {
             'November',
             'December',
         ];
-        return `${months[parseInt(month, 10)]} ${day}, ${year}`;
+        console.log(parseInt(month, 10))
+        return `${months[parseInt(month, 10) - 1]} ${day}, ${year}`;
     };
 
     //date time pickers

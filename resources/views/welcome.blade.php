@@ -6,11 +6,11 @@
     <div class="reservation-container">
         {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
             <ul>
-                <li><label for="start_date">Start Date</label><input type="text" name="start_date"  placeholder="From" class="datetime-picker" /></li>
-                <li><label for="end_date">End Date</label><input type="text" name="end_date" placeholder="To" class="datetime-picker" /></li>
-                <li><label for="adults"># of Adults</label><input type="number" name="adults" class="no-guest spinner" value="0" min="0"/></li>
-                <li><label for="children"># of Children</label><input type="number" name="children" class="no-guest spinner" value="0" min="0"/></li>
-                <li><button class="btn btn-success">Book Now</button></li>
+                <li><label class="d-block" for="start_date">Start Date</label><input readonly type="text" name="start_date"  placeholder="From" class="datetime-picker" /></li>
+                <li><label class="d-block" for="end_date">End Date</label><input readonly type="text" name="end_date" placeholder="To" class="datetime-picker" /></li>
+                <li><label class="d-block" for="adults"># of Adults</label><input readonly type="number" name="adults" class="no-guest spinner" value="0" min="0"/></li>
+                <li><label class="d-block" for="children"># of Children</label><input readonly type="number" name="children" class="no-guest spinner" value="0" min="0"/></li>
+                <li><button class="btn btn-custom-default w-100">Book Now</button></li>
             </ul>
         @if ($errors->any())
             <div class="alert alert-danger">

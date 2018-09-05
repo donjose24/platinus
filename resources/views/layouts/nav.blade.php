@@ -5,7 +5,7 @@
       <ul>
         <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="/roomrates"><i class="fa fa-bed"></i> Room &amp; Rates</a></li>
-        <li><a href="#"><i class="fa fa-book-open"></i> Facilities &amp; Services</a></li>
+        <li><a href="/facilities"><i class="fa fa-book-open"></i> Facilities &amp; Services</a></li>
         <li><a href="/location"><i class="fa fa-map-marker"></i> Location</a></li>
         <li><a href="/contact"><i class="fa fa-phone"></i> Contact Us</a></li>
         @guest

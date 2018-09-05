@@ -38,8 +38,22 @@
             margin: 0;
             list-style-type: none;
 
+            li {
+                width: 19%;
+
+                .ui-spinner.ui-corner-all.ui-widget.ui-widget-content {
+                    display: block;
+                    width: 100%;
+
+                    & > input {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+            }
+
             li > input {
-                width: 240px;
+                width: 100%;
                 font-size: 15px;
                 padding: 5px;
                 border-radius: 4px;
@@ -255,7 +269,7 @@
 
 footer {
     background-color: #707070;
-    
+
     .footer-content {
         width: 85%;
         margin: 0 auto;
@@ -275,7 +289,7 @@ footer {
 
                         span:first-child {
                             font-size: 1.5rem;
-                            color: #1AAE9F;
+                            color: #1aae9f;
                         }
                     }
                 }
