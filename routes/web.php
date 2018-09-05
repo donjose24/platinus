@@ -44,10 +44,10 @@ Route::get('/reports/transaction', function () {
     return view('reports.transaction');
 });
 Route::get('/cashier/checkin', function () {
-    return view('Cashier.checkin');
+    return view('cashier.checkin');
 });
 Route::get('/cashier/checkout', function () {
-    return view('Cashier.checkout');
+    return view('cashier.checkout');
 });
 
 Auth::routes();
