@@ -10,7 +10,7 @@
 </div>
 <div class="form-group{{ $errors->has('image_url') ? 'has-error' : ''}}">
     {!! Form::label('image_url', 'Image Url', ['class' => 'control-label']) !!}
-    {!! Form::text('image_url', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! Form::file('image_url', null, ('required' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('image_url', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('daily_rate') ? 'has-error' : ''}}">

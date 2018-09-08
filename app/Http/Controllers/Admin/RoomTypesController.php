@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\RoomType;
 use Illuminate\Http\Request;
+use Imgur;
 
 class RoomTypesController extends Controller
 {
@@ -59,10 +59,12 @@ class RoomTypesController extends Controller
             'description' => 'required',
             'weekly_rate' => 'required|numeric',
             'daily_rate' => 'required|numeric',
-            'image_url' => 'required',
+            'image_url' => 'required|image',
             'capacity' => 'required'
         ]);
         $requestData = $request->all();
+        $image = Imgur::upload($request->file('image_url'));
+        $requestData['image_url'] = $image->link();
 
         RoomType::create($requestData);
 
@@ -112,10 +114,12 @@ class RoomTypesController extends Controller
             'description' => 'required',
             'weekly_rate' => 'required|numeric',
             'daily_rate' => 'required|numeric',
-            'image_url' => 'required',
+            'image_url' => 'required|image',
             'capacity' => 'required'
         ]);
         $requestData = $request->all();
+        $image = Imgur::upload($request->file('image_url'));
+        $requestData['image_url'] = $image->link();
 
         $roomtype = RoomType::findOrFail($id);
         $roomtype->update($requestData);

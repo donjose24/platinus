@@ -44,7 +44,7 @@
                     <h6 class="mb-4">No. of Pax: {{ $item->rooms()->count() }}</h6>
                     <div class="options-container d-flex justify-content-between align-items-center">
                         <a class="btn btn-custom-default" href="{{ url('/admin/room_types/' . $item->id) }}" title="View RoomType">View</a>
-                        <a class="btn btn-custom-default" href="{{ url('/admin/room_types/' . $item->id . '/edit') }}" title="Edit RoomType">Edit</i></a>
+                        <a class="btn btn-custom-default" href="{{ url('/admin/room_types/' . $item->id . '/edit') }}" title="Edit RoomType">Edit</a>
                     </div>
                 </div>
             </div>
