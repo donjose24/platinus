@@ -44,23 +44,29 @@
             <fieldset>
                 <legend> Actions </legend>
                 <h6>Deposit Slip:</h6>
-                <img src="{{ $reservation->deposit_slip }}">
                 <div class="row">
                     <div class="col-md-6">
-                        {{ Form::label('Amount Deposited') }}
-                        {{ Form::open(['url' => '/cashier/deposit/approve']) }}
-                        {{ Form::number('amount', '', ['class' => 'form-control']) }}
-                        {{ Form::hidden('id', $reservation->id) }}
-                        <button class="btn btn-success mt-2 float-md-right"> Approve </button>
-                        {{ Form::close() }}
+                        <img src="{{ $reservation->deposit_slip }}">
                     </div>
                     <div class="col-md-6">
-                        {{ Form::open(['url' => '/cashier/deposit/reject']) }}
-                        {{ Form::label('Reason for rejection') }}
-                        {{ Form::text('reason', '', ['class' => 'form-control']) }}
-                        {{ Form::hidden('id', $reservation->id) }}
-                        <button class="btn btn-danger mt-2 float-md-right"> Reject </button>
-                        {{ Form::close() }}
+                        <div>
+                            {{ Form::open(['url' => '/cashier/deposit/approve']) }}
+                                {{ Form::label('Amount Deposited') }}
+                                {{ Form::number('amount', '', ['class' => 'form-control']) }}
+                                {{ Form::hidden('id', $reservation->id) }}
+                                <div class="d-flex justify-content-end"><button class="btn btn-success mt-2 mb-3"> Approve </button></div>
+                            {{ Form::close() }}
+                        </div>
+                        
+                        <div>
+                            {{ Form::open(['url' => '/cashier/deposit/reject']) }}
+                                {{ Form::label('Reason for rejection') }}
+                                {{ Form::text('reason', '', ['class' => 'form-control']) }}
+                                {{ Form::hidden('id', $reservation->id) }}
+                                <div class="d-flex justify-content-end"><button class="btn btn-danger mt-2"> Reject </button></div>
+                            {{ Form::close() }}
+                        </div>
+
                     </div>
                 </div>
             </fieldset>

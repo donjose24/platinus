@@ -9,21 +9,21 @@
             @endif
             @foreach($reservations as $reservation)
             <div class="card position-relative">
-                <div class="card-header">
-                    <h4>{{ $reservation->code }}</h4>
-                    <h6>{{ $reservation->user->name }}</h6>
-                </div>
                 <div class="card-body">
+                    <div class="mb-3">
+                        <h3 class="mb-1">{{ $reservation->user->name  }}</h3>
+                        <h5>{{ strtoupper($reservation->code) }}</h5>
+                    </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <p>Check In:</p>
-                        <p>{{ $reservation->start_date }}</p>
+                        <p class="mb-0">Check In:</p>
+                        <p class="mb-0 full-date">{{ $reservation->start_date }}</p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <p>Check Out:</p>
-                        <p>{{ $reservation->end_date }}</p>
+                        <p class="full-date">{{ $reservation->end_date }}</p>
                     </div>
                     <div class="options-container">
-                        <a href="/cashier/deposit/{{ $reservation->id }}" class="btn btn-success w-100 mt-2"> More Info </a>
+                        <a href="/cashier/deposit/{{ $reservation->id }}" class="btn btn-custom-default w-100 mt-2"> More Info </a>
                     </div>
                 </div>
             </div>

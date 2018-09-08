@@ -1,3 +1,5 @@
+@import '../variables';
+
 .back-content {
     width: 72%;
     margin-left: auto;
@@ -37,6 +39,51 @@
         position: absolute;
         right: 20px;
         font-size: 20px;
+    }
+
+    // form input
+    .custom-form-input-check {
+        input[type='checkbox'] {
+            height: 0;
+            width: 0;
+            visibility: hidden;
+        }
+
+        label {
+            cursor: pointer;
+            text-indent: -9999px;
+            width: 40px;
+            height: 20px;
+            background: grey;
+            display: block;
+            border-radius: 100px;
+            position: relative;
+        }
+
+        label:after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 14px;
+            height: 14px;
+            background: #fff;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        input:checked + label {
+            background: $blue;
+        }
+
+        input:checked + label:after {
+            left: calc(100% - 3px);
+            transform: translateX(-100%);
+        }
+
+        label:active:after {
+            width: 17px;
+        }
     }
 
     .view-content {
