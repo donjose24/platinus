@@ -34,7 +34,7 @@ class ReservationCreated extends Mailable
         $endDate = \DateTime::createFromFormat('Y-m-d', $this->reservation->end_date);
 
         $diff = date_diff($startDate, $endDate);
-        $url = config('APP_URL') . '/login';
+        $url =  'https://bellamonte-hotel.herokuapp.com/login';
         return $this->markdown('emails.reservation.created')->with(['reservation' => $this->reservation, 'diff' => $diff, 'url' => $url])->subject("Reservation Successful!");
     }
 }

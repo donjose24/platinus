@@ -38,4 +38,9 @@ class CustomerController extends Controller
         Session::flash('flash_message', 'Deposit slip successfully uploaded! Approval usually takes 1-2 days');
         return redirect()->back();
     }
+
+    public function showReservationForm()
+    {
+        return view('customer.booking.reservation');
+    }
 }

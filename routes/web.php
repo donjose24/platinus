@@ -75,6 +75,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
 Route::group(['namespace' => 'Customer', 'prefix' => 'customer', 'middleware' => ['auth', 'roles'], 'roles' => 'customer'], function () {
     Route::get('/', 'CustomerController@index');
+    Route::get('reservation', 'CustomerController@showReservationForm');
     Route::get('booking', 'BookingController@index');
     Route::put('reservation', 'CustomerController@uploadDepositSlip');
 });
