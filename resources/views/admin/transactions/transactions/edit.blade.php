@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Edit Transaction #{{ $transaction->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/transactions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/transactions') }}" title="Back"><button class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 

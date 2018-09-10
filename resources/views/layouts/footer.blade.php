@@ -25,20 +25,7 @@
         </div>
         <div class="footer-content-block p-4">
           <h4>PAYMENTS ACCEPTED</h4>
-          <ul class="image-container d-flex flex-wrap mb-3">
-            <li class="m-1"><img src="/images/payments/mastercard.gif" alt=""></li>
-            <li class="m-1"><img src="/images/payments/visa.gif" alt=""></li>
-            <li class="m-1"><img src="/images/payments/paypal.gif" alt=""></li>
-            <li class="m-1"><img src="/images/payments/bpi.gif" alt=""></li>
-            <li class="m-1"><img src="/images/payments/bdo.gif" alt=""></li>
-          </ul>
-          <h4>PAYMENTS SECURED BY</h4>
-          <ul class="image-container d-flex flex-wrap">
-            <li class="m-1"><img src="/images/payments/pci.gif" alt=""></li>
-            <li class="m-1"><img src="/images/payments/mastercardsecurecode.gif" alt=""></li>
-            <li class="m-1"><img src="/images/payments/verifiedvisa.gif" alt=""></li>
-            <li class="m-1"><img src="/images/payments/trustwave.gif" alt=""></li>
-          </ul>
+          <p class="w-50 m-auto"><img class="w-100" src="/images/payments/eastwest.png" alt="East West Bank"></p>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">Roles</div>
     <div class="card-body">
-        <a href="{{ url('/admin/roles/create') }}" class="btn btn-success btn-sm" title="Add New Role">
+        <a href="{{ url('/admin/roles/create') }}" class="btn btn-custom-primary btn-sm" title="Add New Role">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
 

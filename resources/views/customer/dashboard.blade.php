@@ -9,18 +9,16 @@
                 <p>You have {{ count($approvedReservations) }} upcoming reservation(s) Please see the details as follows:</p>
                 <div class="d-flex justify-content-between flex-wrap">
                     @foreach($approvedReservations as $reservation)
-                        <div class="card position-relative">
-                            <div class="card-header">
+                        <div class="card position-relative m-3">
+                            <div class="card-body">
                                 <h5 class="card-title">Code: {{ $reservation->code }}</h5>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p>Check In:</p>
-                                        <p class="full-date">{{ $reservation->start_date }}</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <p>Check Out:</p>
-                                        <p class="full-date">{{ $reservation->end_date }}</p>
-                                    </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <p class="mb-0">Check In:</p>
+                                    <p class="mb-0 full-date">{{ $reservation->start_date }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="mb-0">Check Out:</p>
+                                    <p class="mb-0 full-date">{{ $reservation->end_date }}</p>
                                 </div>
                             </div>
                         </div>
