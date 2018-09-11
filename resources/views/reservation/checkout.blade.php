@@ -53,7 +53,7 @@
                                 <td> {{ $room->name }} </td>
                                 <td> {{ $items[$room->id] }} </td>
                                 <td> {{ number_format($room->daily_rate, 2) }} </td>
-                                <td> {{ number_format((($room->daily_rate * $item[$room->id]) * $diff), 2) }} </td>
+                                <td> {{ number_format((($room->daily_rate * $items[$room->id]) * $diff), 2) }} </td>
                             </tr>
                             @php
                                 $total = $total + ($room->daily_rate * $diff);
