@@ -26,6 +26,7 @@
                                 <tr>
                                     <th>Reservation Code</th>
                                     <th>Customer Name</th>
+                                    <th>Customer Email</th>
                                     <th>Check In Date</th>
                                     <th>Check Out Date</th>
                                     <th>Status</th>

@@ -14,8 +14,8 @@ class AddGuestsFieldOnReservationsTable extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->integer('adults');
-            $table->integer('children');
+            $table->integer('adults')->default(0);
+            $table->integer('children')->default(0);
         });
     }
 

@@ -29,7 +29,6 @@ class GuestController extends Controller
             'start_date' => 'required|date|date_format:Y-m-d|before:end_date',
             'end_date' => 'required|date|date_format:Y-m-d|after:start_date',
             'adults' => 'required|numeric',
-            'children' => 'required|numeric',
         ];
 
         //this will redirect back on validation error
@@ -37,14 +36,12 @@ class GuestController extends Controller
 
         $startDate = \DateTime::createFromFormat("Y-m-d", $request->get('start_date'))->format('Y-m-d');
         $endDate = \DateTime::createFromFormat("Y-m-d", $request->get('end_date'))->format('Y-m-d');
-        $children = $request->get('children');
         $adults = $request->get('adults');
 
         $details = [
             'start_date' => $startDate,
             'end_date' => $endDate,
             'adults' => $adults,
-            'children' => $children,
         ];
 
         if(!Session::has('details')) {
@@ -91,7 +88,7 @@ class GuestController extends Controller
 
         $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
 
-        return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'children', 'adults', 'rooms'));
+        return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'adults', 'rooms'));
     }
 
     public function addToCart(Request $request)
@@ -197,7 +194,7 @@ class GuestController extends Controller
             'user_id' => $id,
             'code' => strtoupper($rand),
             'total' => 0,
-            'children' => $details['children'],
+            'children' => 0,
             'adults' => $details['adults'],
         ]);
 

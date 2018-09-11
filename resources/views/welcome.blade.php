@@ -8,8 +8,7 @@
             <ul>
                 <li><label class="d-block" for="start_date">Start Date</label><input readonly type="text" name="start_date"  placeholder="From" class="datetime-picker" /></li>
                 <li><label class="d-block" for="end_date">End Date</label><input readonly type="text" name="end_date" placeholder="To" class="datetime-picker" /></li>
-                <li><label class="d-block" for="adults"># of Adults</label><input readonly type="number" name="adults" class="no-guest spinner" value="0" min="0"/></li>
-                <li><label class="d-block" for="children"># of Children</label><input readonly type="number" name="children" class="no-guest spinner" value="0" min="0"/></li>
+                <li><label class="d-block" for="adults"># of People</label><input readonly type="number" name="adults" class="no-guest spinner" value="0" min="0"/></li>
                 <li><button class="btn btn-custom-default w-100">Book Now</button></li>
             </ul>
         @if ($errors->any())

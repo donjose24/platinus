@@ -18,6 +18,7 @@ class CreateReservationRoomsTable extends Migration
             $table->softDeletes();
             $table->integer('reservation_id')->nullable();
             $table->integer('room_id')->nullable();
+            $table->decimal('price');
             });
     }
 
