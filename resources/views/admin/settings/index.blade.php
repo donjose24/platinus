@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">Settings</div>
     <div class="card-body">
-        <a href="{{ url('/admin/settings/create') }}" class="btn btn-success btn-sm" title="Add New Setting">
+        <a href="{{ url('/admin/settings/create') }}" class="btn btn-custom-primary btn-sm" title="Add New Setting">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
 

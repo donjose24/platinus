@@ -10,7 +10,7 @@
                     <div class="card-header">ReservationRoomDetail {{ $reservationroomdetail->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/admin/reservation-room-details') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/reservation-room-details') }}" title="Back"><button class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <a href="{{ url('/admin/reservation-room-details/' . $reservationroomdetail->id . '/edit') }}" title="Edit ReservationRoomDetail"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button></a>
                         {!! Form::open([
                             'method'=>'DELETE',

@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Transactions</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/transactions/create') }}" class="btn btn-success btn-sm" title="Add New Transaction">
+                        <a href="{{ url('/admin/transactions/create') }}" class="btn btn-custom-primary btn-sm" title="Add New Transaction">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 

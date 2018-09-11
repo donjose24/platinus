@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">Room</div>
     <div class="card-body">
-        <a href="{{ url('/admin/room/create') }}" class="btn btn-success btn-sm" title="Add New Room">
+        <a href="{{ url('/admin/room/create') }}" class="btn btn-custom-primary btn-sm" title="Add New Room">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
 

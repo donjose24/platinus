@@ -35,21 +35,21 @@
             <a href="#">
                 <div class="icon-img"><i class="fa fa-bed" aria-hidden="true"></i></div>
                 <p class="title">Rooms and Rates</p>
-                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum architecto animi qui expedita!</p>
+                <p class="desc">Stay for as low as PHP 808 per night. 1 Double sized bed, No Tv, No Aircon. Fan Only, bathroom with hot and cold shower. View our rooms and rates here.</p>
             </a>
         </div>
         <div class="service-box">
             <a href="#">
                 <div class="icon-img"><i class="fa fa-users" aria-hidden="true"></i></div>
                 <p class="title">Facilities and Services</p>
-                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum architecto animi qui expedita!</p>
+                <p class="desc">View facilities and services offered. Air Conditioning, Complimentary breakfast, Grounds, Gym Fitness Center, and many more.</p>
             </a>
         </div>
         <div class="service-box">
             <a href="#">
                 <div class="icon-img"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
                 <p class="title">Location</p>
-                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum architecto animi qui expedita!</p>
+                <p class="desc">Contains the map and instructions. For a quick fun and relax vacation away from the hustle and bustle of the city, Bella Monte Hotel Subic is perfectly for you.</p>
             </a>
         </div>
     </div>

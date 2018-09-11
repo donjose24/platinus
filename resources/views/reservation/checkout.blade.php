@@ -63,7 +63,7 @@
                     </table>
                     <h5>Total Bill: {{ number_format($total, 2) }}</h5>
                     <div class="d-flex justify-content-between">
-                        <a href="{{ $backUrl }}" class="btn btn-custom-default font-weight-normal"> Back </a>
+                        <a href="{{ $backUrl }}" class="btn btn-secondary font-weight-normal"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>Back </a>
                         {{ Form::open(['url' => '/reservation', 'method' => 'POST']) }}
                             <button class="btn btn-custom-primary">Reserve</button>
                         {{ Form::close() }}

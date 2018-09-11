@@ -107,7 +107,7 @@
                                         <option value="1">Yes</option>
                                     </select>
 
-                                    <button class="btn btn-success btn-add inline btn-sm" type="button">
+                                    <button class="btn btn-custom-primary btn-add inline btn-sm" type="button">
                                         <span class="fa fa-plus"></span>
                                     </button>
                                 </div>
