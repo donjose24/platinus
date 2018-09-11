@@ -66,7 +66,6 @@
                                 <div class="d-flex justify-content-end"><button class="btn btn-danger mt-2"> Reject </button></div>
                             {{ Form::close() }}
                         </div>
-
                     </div>
                 </div>
             </fieldset>

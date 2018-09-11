@@ -46,4 +46,9 @@ class Transaction extends Model
     {
         return __CLASS__ . " model has been {$eventName}";
     }
+
+    public function reservation()
+    {
+        return $this->belongsTo('App\Reservation');
+    }
 }

@@ -21,7 +21,7 @@
                     "icon": "book"
                 },
                 {
-                    "title": "Transactions",
+                    "title": "Sales",
                     "url": "/admin/transactions",
                     "icon": "calendar"
                 },
@@ -30,7 +30,11 @@
                     "url": "/admin/room_types",
                     "icon": "cubes"
                 },
-                { "title": "Room", "url": "/admin/room", "icon": "bed" }
+                {
+                    "title": "Room",
+                    "url": "/admin/room",
+                    "icon": "bed"
+                }
             ]
         }
     ]

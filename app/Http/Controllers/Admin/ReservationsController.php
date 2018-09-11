@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use PDF;
 use App\Reservation;
 use Illuminate\Http\Request;
 
@@ -76,8 +76,13 @@ class ReservationsController extends Controller
     public function show($id)
     {
         $reservation = Reservation::findOrFail($id);
+        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
 
-        return view('admin/reservations.reservations.show', compact('reservation'));
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+
+        return view('admin/reservations.reservations.show', compact('reservation', 'diff'));
     }
 
     /**
@@ -130,5 +135,18 @@ class ReservationsController extends Controller
         Reservation::destroy($id);
 
         return redirect('admin/reservations')->with('flash_message', 'reservation deleted!');
+    }
+
+    public function printReservation($id)
+    {
+        $reservation = Reservation::find($id);
+        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+
+        $pdf = PDF::loadView('reports.reservation', compact('reservation', 'diff'));
+        return $pdf->stream();
     }
 }

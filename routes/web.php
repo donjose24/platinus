@@ -64,6 +64,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('settings', 'SettingsController');
     Route::get('generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@getGenerator']);
     Route::post('generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@postGenerator']);
+    Route::get('reservation/print/{id}', 'ReservationsController@printReservation');
 
     Route::resource('room', 'RoomController');
     Route::resource('room_types', 'RoomTypesController');
@@ -71,6 +72,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('room', 'RoomController');
     Route::resource('reservations', 'ReservationsController');
     Route::resource('transactions', 'TransactionsController');
+    Route::get('sales/print', 'TransactionsController@printTransactions');
 });
 
 Route::group(['namespace' => 'Customer', 'prefix' => 'customer', 'middleware' => ['auth', 'roles'], 'roles' => 'customer'], function () {
@@ -101,4 +103,3 @@ Route::post('/remove-reservation', 'GuestController@removeToCart');
 Route::get('/reservation/clear', 'GuestController@clearCart');
 Route::get('/reservation/checkout', 'GuestController@preview');
 Route::post('reservation', 'GuestController@reserve');
-

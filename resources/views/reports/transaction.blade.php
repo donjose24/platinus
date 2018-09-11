@@ -57,27 +57,18 @@
                 <th>Item</th>
                 <th>Price</th>
                 <th>Reservation Number</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
-           <tr>
-              <td>1</td>
-              <td>2018-08-28</td>
-              <td>2018-08-30</td>
-              <td>10012456</td>
-           </tr>
-           <tr>
-              <td>2</td>
-              <td>2018-08-28</td>
-              <td>2018-08-30</td>
-              <td>10012457</td>
-           </tr>
-           <tr>
-              <td>3</td>
-              <td>2018-08-28</td>
-              <td>2018-08-30</td>
-              <td>10012458</td>
-           </tr>
+        @foreach($transactions as $item)
+            <tr>
+                <td>{{ $loop->iteration or $item->id }}</td>
+                <td>{{ $item->item }}</td>
+                <td>{{ $item->price }}</td><td>{{ $item->reservation->code }}</td>
+                <td>{{ $item->created_at }}</td>
+            </tr>
+        @endforeach
         </tbody>
     </table> 
 </body>

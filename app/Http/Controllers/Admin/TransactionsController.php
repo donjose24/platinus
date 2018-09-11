@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use PDF;
 use App\Transaction;
 use Illuminate\Http\Request;
 
@@ -29,7 +29,7 @@ class TransactionsController extends Controller
             $transactions = Transaction::latest()->paginate($perPage);
         }
 
-        return view('admin/transactions.transactions.index', compact('transactions'));
+        return view('admin/transactions.transactions.index', compact('transactions', 'keyword'));
     }
 
     /**
@@ -126,5 +126,20 @@ class TransactionsController extends Controller
         Transaction::destroy($id);
 
         return redirect('admin/transactions')->with('flash_message', 'Transaction deleted!');
+    }
+
+    public function printTransactions(Request $request) {
+        $keyword = $request->get('search');
+         if (!empty($keyword)) {
+            $transactions = Transaction::where('item', 'LIKE', "%$keyword%")
+                ->orWhere('price', 'LIKE', "%$keyword%")
+                ->orWhere('reservation_id', 'LIKE', "%$keyword%")
+                ->latest()->get();
+        } else {
+            $transactions = Transaction::latest()->get();
+        }
+
+        $pdf = PDF::loadView('reports.transaction', compact('transactions'));
+        return $pdf->stream();
     }
 }

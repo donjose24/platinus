@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
         <div class="row">
-
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Transaction {{ $transaction->id }}</div>
@@ -25,18 +24,16 @@
                         {!! Form::close() !!}
                         <br/>
                         <br/>
-
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
                                     <tr>
                                         <th>ID</th><td>{{ $transaction->id }}</td>
                                     </tr>
-                                    <tr><th> Item </th><td> {{ $transaction->item }} </td></tr><tr><th> Price </th><td> {{ $transaction->price }} </td></tr><tr><th> Reservation ID </th><td> {{ $transaction->reservation_id }} </td></tr>
+                                    <tr><th> Item </th><td> {{ $transaction->item }} </td></tr><tr><th> Price </th><td> {{ $transaction->price }} </td></tr><tr><th> Reservation </th><td> {{ $transaction->reservation->code }} </td></tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
