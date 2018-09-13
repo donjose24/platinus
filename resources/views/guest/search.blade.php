@@ -21,7 +21,7 @@
                 @if(Session::has('items') )
                     <div class="d-flex justify-content-between">
                         <a href="/reservation/clear" class="btn d-block mr-2 w-100 p-2 btn-danger">Clear your selection</a>
-                        <a href="/reservation/checkout" class="btn d-block w-100 p-2 btn-custom-default">Checkout</a>
+                        <a href="/reservation/checkout" class="btn d-block w-100 p-2 btn-custom-default">Reserve</a>
                     </div>
                 @endif
             </div>

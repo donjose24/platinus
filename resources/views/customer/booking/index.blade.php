@@ -38,12 +38,6 @@
                                                 'url' => ['/customer/booking', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
-                                            {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', array(
-                                                    'type' => 'submit',
-                                                    'class' => 'btn btn-danger btn-sm',
-                                                    'title' => 'Delete reservation',
-                                                    'onclick'=>'return confirm("Confirm Cancellation?")'
-                                            )) !!}
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>

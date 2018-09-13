@@ -96,7 +96,6 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
 });
 
 Route::get('dashboard', 'Auth\LoginController@redirect');
-
 Route::get('/room/search', 'GuestController@search');
 Route::post('/reservation/preview', 'GuestController@addToCart');
 Route::post('/remove-reservation', 'GuestController@removeToCart');

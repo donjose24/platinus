@@ -64,7 +64,7 @@
                     <div class="d-flex justify-content-between">
                         <a href="{{ $backUrl }}" class="btn btn-secondary font-weight-normal"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>Back </a>
                         {{ Form::open(['url' => '/reservation', 'method' => 'POST']) }}
-                            <button class="btn btn-custom-primary">Reserve</button>
+                            <button class="btn btn-custom-primary">Confirm</button>
                         {{ Form::close() }}
                     </div>
                 </div>

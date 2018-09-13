@@ -2,7 +2,7 @@
     <div class="sidebar-profile">
         <div class="user-image"><img src="/images/user.jpg" alt="" /></div>
         <div class="user-desc">
-            <p class="name">Georgina Wilson</p>
+            <p class="name">{{ Auth::user()->name }}</p>
             <p class="type">
                 <a
                     href="{{ url('/logout') }}"
