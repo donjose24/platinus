@@ -200,9 +200,11 @@ class GuestController extends Controller
 
         foreach($items as $key => $value) {
             for($index = 0; $index < $value; $index++){
+                $room = RoomType::find($key);
                 ReservationRoom::create([
                     'reservation_id' => $reservation->id,
                     'room_id' => $key,
+                    'price' => $room->daily_rate,
                 ]);
             }
         }

@@ -31,7 +31,7 @@ class ReservationRoom extends Model
      *
      * @var array
      */
-    protected $fillable = ['reservation_id', 'room_id'];
+    protected $fillable = ['reservation_id', 'room_id', 'price'];
 
     
 
