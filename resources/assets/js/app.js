@@ -22,7 +22,9 @@ $(document).ready(() => {
 
     //date time pickers
     if ($('.datetime-picker').length) {
-        $('.datetime-picker').flatpickr();
+        $('.datetime-picker').flatpickr({
+            minDate: new Date()
+        });
     }
 
     if ($('.spinner').length) {
@@ -42,4 +44,11 @@ $(document).ready(() => {
             element.innerHTML = `${date}`;
         }
     }
+
+    $('#editButton').click(function(e) {
+        e.preventDefault();
+        $( "#editDialog" ).dialog({
+            modal: true
+        });
+    });
 });

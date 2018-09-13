@@ -16,6 +16,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/back-sidebar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/back-content.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 <div id="back-app">
@@ -51,6 +52,8 @@
         $('.account-settings a[href="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" }}"]').closest('li').addClass('active');
     });
 </script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 @yield('scripts')
 </body>
 </html>

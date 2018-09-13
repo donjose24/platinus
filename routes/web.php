@@ -103,3 +103,4 @@ Route::post('/remove-reservation', 'GuestController@removeToCart');
 Route::get('/reservation/clear', 'GuestController@clearCart');
 Route::get('/reservation/checkout', 'GuestController@preview');
 Route::post('reservation', 'GuestController@reserve');
+Route::get('/edit', 'CashierController@getAvailableRooms');

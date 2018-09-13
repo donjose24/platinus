@@ -37,10 +37,11 @@
                         <p class="mb-2">Total</p>
                         <h5 class="mb-0 font-weight-bold">PHP {{ number_format($room->daily_rate * $diff, 2) }}</h5>
                     </div>
-                    <div class="w-25 p-3 border-right border-bottom d-flex align-items-center">
+                    <div class="w-25 p-3 border-right border-bottom">
+                        <div class="mb-2"> Room Number</div>
                         @php
                             $ids = $room->rooms()->where('status', 'active')->pluck('id');
-                            $details = \App\ReservationRoomDetail::where('reservation_id', $reservation->id)->whereIn('id', $ids)->get();
+                            $details = \App\ReservationRoomDetail::where('reservation_id', $reservation->id)->whereIn('room_id', $ids)->get();
                             if (count($details) == 0) {
                                 $reservations = \App\Reservation::where('start_date', \Carbon\Carbon::today())->where('status', 'checked_in')->pluck('id');
                                 $details = \App\ReservationRoomDetail::whereIn('reservation_id', $reservations)->pluck('room_id');
@@ -49,16 +50,16 @@
                                 $rooms[-1] = "Please select a room";
                                 echo Form::select('rooms[]', $rooms, '-1', ['class' => 'form-control']);
                             } else {
-                                //todo display stuff
+                                echo '<h5 class="mb-0 font-weight-bold">'. $details[0]->rooms->number . ' </h5>';
                             }
 
                         @endphp
                         {{ Form::hidden('reservation_id', $reservation->id) }}
                     </div>
-                    <div class="w-25 p-3 border-bottom d-flex align-items-center justify-content-end">
-                        <div class="custom-form-input-check align-items-center justify-content-center">
-                            <input type="checkbox" id="checkIn-1"><label for="checkIn-1">Toggle</label>
-                        </div>
+                    <div class="w-25 p-3 border-bottom">
+                        <p class="mb-2">Actions</p>
+                        <button id="editButton" class="btn btn-custom-default"> Edit </button>
+                        <button class="btn btn-danger"> Remove </button>
                     </div>
                 </div>
             </div>
@@ -67,7 +68,6 @@
             <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
         @endif
         {{ Form::close() }}
-
         <h1 class="mb-3">Transactions</h1>
         @if(count($reservation->transactions()->get()) != 0)
             @foreach($reservation->transactions()->get() as $transaction)
@@ -97,5 +97,12 @@
                 <a href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-custom-primary p-2 mr-3 w-25"> Check Out </a>
             @endif
         </div>
+    </div>
+    <div id="editDialog" title="Edit Room">
+        {{ Form::open(['url' => '/reseravation/room/edit', 'method' => 'PUT']) }}
+            {{ Form::label('label', 'Room Number') }}
+            {{ Form::select('number', [], '', ['class' => 'form-control']) }}
+            {{ Form::submit('Save', ['class' => 'btn btn-primary mt-2']) }}
+        {{ Form::close() }}
     </div>
 @endsection

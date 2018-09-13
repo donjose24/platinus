@@ -171,4 +171,18 @@ class CashierController
         Session::flash('flash_message', 'Check out successful');
         return redirect()->back();
     }
+
+    public function getAvailableRooms(Request $request)
+    {
+        $roomTypeID = $request->get('room_type_id');
+
+        $room = Request::find($roomTypeID);
+        $reservations = \App\Reservation::where('start_date', \Carbon\Carbon::today())->where('status', 'checked_in')->pluck('id');
+        $details = \App\ReservationRoomDetail::whereIn('reservation_id', $reservations)->pluck('room_id');
+        $rooms = [];
+        $rooms = $room->rooms()->where('status', 'active')->whereNotIn('id', $details)->pluck('number','id');
+        $rooms[-1] = "Please select a room";
+
+        return $rooms->toJson();
+    }
 }

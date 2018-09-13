@@ -44,4 +44,9 @@ class ReservationRoomDetail extends Model
     {
         return __CLASS__ . " model has been {$eventName}";
     }
+
+    public function rooms()
+    {
+        return $this->belongsTo('App\Room', 'room_id');
+    }
 }

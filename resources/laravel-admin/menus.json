@@ -6,17 +6,12 @@
                 { "title": "Users", "url": "/admin/users", "icon": "user" },
                 { "title": "Roles", "url": "/admin/roles", "icon": "users" },
                 {
-                    "title": "Permissions",
-                    "url": "/admin/permissions",
-                    "icon": "address-book"
-                },
-                {
-                    "title": "Settings",
-                    "url": "/admin/settings",
-                    "icon": "cogs"
-                },
-                {
                     "title": "Reservations",
+                    "url": "/admin/reservations",
+                    "icon": "book"
+                },
+                {
+                    "title": "Reports",
                     "url": "/admin/reservations",
                     "icon": "book"
                 },
