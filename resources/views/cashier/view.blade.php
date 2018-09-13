@@ -19,26 +19,8 @@
                 <h6> Check Out: {{ $reservation->end_date }} </h6>
                 <h6> Number of Nights: {{ $diff }} </h6>
                 <h6> Rooms: </h6>
-                <table class="table">
-                    <tr>
-                        <td>Room Name</td>
-                        <td>Price</td>
-                    </tr>
-                    @php
-                        $total = 0
-                    @endphp
-                    @foreach($reservation->roomTypes()->get() as $room)
-                        <tr>
-                            <td> {{ $room->name }} </td>
-                            <td> {{ number_format($room->daily_rate * $diff, 2) }} </td>
-                            @php
-                                $total += ($room->daily_rate * $diff)
-                            @endphp
-                        </tr>
-                    @endforeach
-                </table>
-                <h4>Grand Total: {{ number_format($total, 2) }}</h4>
             </fieldset>
+            @include("table")
             <br>
             <br>
             <fieldset>
@@ -57,7 +39,7 @@
                                 <div class="d-flex justify-content-end"><button class="btn btn-custom-primary mt-2 mb-3"> Approve </button></div>
                             {{ Form::close() }}
                         </div>
-                        
+
                         <div>
                             {{ Form::open(['url' => '/cashier/deposit/reject']) }}
                                 {{ Form::label('Reason for rejection') }}

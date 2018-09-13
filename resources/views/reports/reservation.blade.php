@@ -47,31 +47,6 @@
     <span class="hit">Reservation Code: {{ strtoupper($reservation->code) }}</span>
     <span class="hit">Customer: {{ $reservation->user->name }}</span>
     <h3 style="text-align: center">Reservation Details</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Room Name</th>
-                <th>Unit Price</th>
-                <th>Total Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-                $total = 0;
-            @endphp
-            @foreach($reservation->roomTypes()->get() as $room)
-                <tr>
-                    <td>{{ $room->name }}</td>
-                    <td>{{ number_format($room->daily_rate, 2) }}</td>
-                    <td>{{ number_format(($room->daily_rate * $diff), 2) }}</td>
-                </tr>
-                @php
-                    {{ $total += ($room->daily_rate * $diff); }}
-                @endphp
-            @endforeach
-        </tbody>
-    </table>
-    <hr>
-    <h3 style="text-align:right">Total Amount: {{ number_format($total, 2) }}</h3>
+    @include('table')
 </body>
 </html>

@@ -26,12 +26,12 @@
         </div>
         <h1 class="mb-3">Rooms</h1>
         {{ Form::open(['url' => '/cashier/checkin']) }}
-        @foreach($reservation->roomTypes()->get() as $room)
-        <div class="card w-100 mb-0">
-            <div class="card-body d-flex p-0">
+        @foreach($reservation->roomTypes()->withPivot('price')->get() as $room)
+            <div class="card w-100 mb-0">
+                <div class="card-body d-flex p-0">
                     <div class="w-25 p-3 border-right border-bottom">
                         <h5 class="mb-2 font-weight-bold">{{ $room->name }}</h5>
-                        <p class="mb-0">PHP {{ number_format($room->daily_rate, 2) }} per night</p>
+                        <p class="mb-0">PHP {{ number_format($room->pivot->price, 2) }} per night</p>
                     </div>
                     <div class="w-25 p-3 border-right border-bottom">
                         <p class="mb-2">Total</p>
@@ -49,7 +49,7 @@
                                 $rooms[-1] = "Please select a room";
                                 echo Form::select('rooms[]', $rooms, '-1', ['class' => 'form-control']);
                             } else {
-
+                                //todo display stuff
                             }
 
                         @endphp
@@ -60,8 +60,8 @@
                             <input type="checkbox" id="checkIn-1"><label for="checkIn-1">Toggle</label>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
         @endforeach
         @if($reservation->status == "approved")
             <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
@@ -73,18 +73,18 @@
             @foreach($reservation->transactions()->get() as $transaction)
                 <div class="card w-100 mb-0">
                     <div class="card-body d-flex p-0">
-                                <div class="w-25 p-3 border-right border-bottom">
-                                    <p class="mb-2">Item</p>
-                                    <p class="mb-0 font-weight-bold">{{ $transaction->item }}</p>
-                                </div>
-                                <div class="w-25 p-3 border-right border-bottom">
-                                    <p class="mb-2">Price</p>
-                                    <p class="mb-0 font-weight-bold">{{ number_format($transaction->price, 2) }}</p>
-                                </div>
-                                <div class="w-50 p-3 border-bottom">
-                                    <p class="mb-2">Date Paid</p>
-                                    <p class="mb-0 font-weight-bold">{{ date_format($transaction->created_at, "F d, Y h:iA") }}</p>
-                                </div>
+                        <div class="w-25 p-3 border-right border-bottom">
+                            <p class="mb-2">Item</p>
+                            <p class="mb-0 font-weight-bold">{{ $transaction->item }}</p>
+                        </div>
+                        <div class="w-25 p-3 border-right border-bottom">
+                            <p class="mb-2">Price</p>
+                            <p class="mb-0 font-weight-bold">{{ number_format($transaction->price, 2) }}</p>
+                        </div>
+                        <div class="w-50 p-3 border-bottom">
+                            <p class="mb-2">Date Paid</p>
+                            <p class="mb-0 font-weight-bold">{{ date_format($transaction->created_at, "F d, Y h:iA") }}</p>
+                        </div>
                     </div>
                 </div>
             @endforeach
