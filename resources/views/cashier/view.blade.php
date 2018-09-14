@@ -28,7 +28,7 @@
                 <h6>Deposit Slip:</h6>
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{ $reservation->deposit_slip }}">
+                        <img class="w-75" src="{{ $reservation->deposit_slip }}">
                     </div>
                     <div class="col-md-6">
                         <div>

@@ -120,4 +120,29 @@
             }
         }
     }
+
+    &.customer-content {
+        .reservation-container {
+            &.reserve-now {
+                input {
+                    width: 100%;
+                    font-size: 15px;
+                    padding: 5px;
+                    border-radius: 4px;
+                    border: 1px solid #888;
+                    outline: none;
+                }
+            }
+
+            .ui-spinner.ui-corner-all.ui-widget.ui-widget-content {
+                width: 100%;
+                display: block;
+
+                & > input {
+                    width: 100%;
+                    border: none;
+                }
+            }
+        }
+    }
 }
