@@ -20,7 +20,7 @@ Free Wifi',
             'image_url' => 'https://occupancy.plus/images/rooms/6e74766b5cfaced732955a8f1d857f70.jpg',
             'daily_rate' => 1600,
             'weekly_rate' => 10500,
-            'capacity' => 5,
+            'capacity' => 2,
         ]);
 
         RoomType::create([
@@ -29,7 +29,7 @@ Free Wifi',
             'image_url' => 'https://occupancy.plus/images/rooms/f6a848d482ad64b01d4091fb478ec616.jpg',
             'daily_rate' => 2000,
             'weekly_rate' => 12000,
-            'capacity' => 5,
+            'capacity' => 2,
         ]);
 
         RoomType::create([
@@ -38,7 +38,7 @@ Free Wifi',
             'image_url' => 'https://occupancy.plus/images/rooms/6aa91d6eb855f24f2da5362d99ee37ab.jpg',
             'daily_rate' => 950,
             'weekly_rate' => 4500,
-            'capacity' => 5,
+            'capacity' => 2,
         ]);
 
         RoomType::create([
@@ -47,7 +47,7 @@ Free Wifi',
             'image_url' => 'https://occupancy.plus/images/rooms/e382052d9e0b7d17f3e56c698ff3948e.jpg',
             'daily_rate' => 2500,
             'weekly_rate' => 16000,
-            'capacity' => 5,
+            'capacity' => 2,
         ]);
 
         Room::create([

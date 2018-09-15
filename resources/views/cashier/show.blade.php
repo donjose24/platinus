@@ -57,9 +57,11 @@
                         {{ Form::hidden('reservation_id', $reservation->id) }}
                     </div>
                     <div class="w-25 p-3 border-bottom">
-                        <p class="mb-2">Actions</p>
-                        <button id="editButton" class="btn btn-custom-default"> Edit </button>
-                        <button class="btn btn-danger"> Remove </button>
+                        @if (count($details) != 0)
+                            <p class="mb-2">Actions</p>
+                            <button class="btn btn-custom-default edit-button" data-id="{{ $room->id }}" data-id-prev="{{ $details[0]->rooms->id }}" data-reservation="{{ $reservation->id }}"> Edit </button>
+                            <button class="btn btn-danger"> Remove </button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -99,10 +101,12 @@
         </div>
     </div>
     <div id="editDialog" title="Edit Room">
-        {{ Form::open(['url' => '/reseravation/room/edit', 'method' => 'PUT']) }}
+        {{ Form::open(['url' => '/cashier/reservation/room/edit']) }}
             {{ Form::label('label', 'Room Number') }}
-            {{ Form::select('number', [], '', ['class' => 'form-control']) }}
-            {{ Form::submit('Save', ['class' => 'btn btn-primary mt-2']) }}
+            {{ Form::select('number', [], '', ['class' => 'form-control', 'id' => 'editRoom']) }}
+            {{ Form::hidden('room_id', '', ['id' => 'editRoomID']) }}
+            {{ Form::hidden('reservation_id', '', ['id' => 'editReservationID']) }}
+            {{ Form::submit('Save', ['class' => 'btn btn-primary mt-2', 'disabled' => 'true','id' => 'editSubmitButton']) }}
         {{ Form::close() }}
     </div>
 @endsection

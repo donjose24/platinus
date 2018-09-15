@@ -7,6 +7,7 @@ use App\Mail\ReservationApproved;
 use App\Mail\ReservationRejected;
 use App\Reservation;
 use App\ReservationRoomDetail;
+use App\RoomType;
 use App\Transaction;
 use Auth;
 use Carbon\Carbon;
@@ -174,15 +175,27 @@ class CashierController
 
     public function getAvailableRooms(Request $request)
     {
-        $roomTypeID = $request->get('room_type_id');
+        $roomTypeID = $request->get('room_id');
 
-        $room = Request::find($roomTypeID);
+        $room = RoomType::find($roomTypeID);
         $reservations = \App\Reservation::where('start_date', \Carbon\Carbon::today())->where('status', 'checked_in')->pluck('id');
         $details = \App\ReservationRoomDetail::whereIn('reservation_id', $reservations)->pluck('room_id');
-        $rooms = [];
         $rooms = $room->rooms()->where('status', 'active')->whereNotIn('id', $details)->pluck('number','id');
-        $rooms[-1] = "Please select a room";
 
         return $rooms->toJson();
+    }
+
+    public function updateRoom(Request $request)
+    {
+        $roomID = $request->get('room_id');
+        $reservationID = $request->get('reservation_id');
+        $number = $request->get('number');
+
+        $details = ReservationRoomDetail::where('room_id', $roomID)->where('reservation_id', $reservationID)->first();
+        $details->room_id = $number;
+        $details->save();
+
+        Session::flash('flash_message', 'Room successfully updated');
+        return redirect()->back();
     }
 }

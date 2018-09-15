@@ -20,6 +20,12 @@ $(document).ready(() => {
         return `${months[parseInt(month, 10) - 1]} ${day}, ${year}`;
     };
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    });
+
     //date time pickers
     if ($('.datetime-picker').length) {
         $('.datetime-picker').flatpickr({
@@ -45,10 +51,33 @@ $(document).ready(() => {
         }
     }
 
-    $('#editButton').click(function(e) {
+    $('.edit-button').click(function(e) {
+        id = $(this).data('id');
+        reservationID = $(this).data('reservation');
+        prevRoomID = $(this).data('id-prev');
+
+        $("#editSubmitButton").attr('disabled', true);
         e.preventDefault();
+        $("#editRoom").empty();
+        $.ajax({
+            method: "GET",
+            url: '/cashier/rooms/available?room_id=' + id
+        }).done((data) => {
+            rooms = JSON.parse(data);
+            for (key in rooms) {
+                if (key != prevRoomID) {
+                    $("#editRoom").append('<option value="' + key + '">' + rooms[key] + '</option>');
+                }
+            }
+            $("#editSubmitButton").attr('disabled', false);
+            $("#editRoomID").val(prevRoomID);
+            $("#editReservationID").val(reservationID);
+        }).fail((e) => {
+            alert("error: " + e.toString());
+        });
+
         $( "#editDialog" ).dialog({
             modal: true
-        });
+        })
     });
 });
