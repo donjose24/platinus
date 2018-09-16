@@ -3,7 +3,6 @@
 @section('content')
     <div class="content-box">
         <div class="logo"><img src="/images/logo.png" alt="bellamonte logo" class="icon"></div>
-
         @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
@@ -28,7 +27,6 @@
                 </span>
                 @endif
             </div>
-
             <div class="form-group text-center mb-0">
                 <button type="submit" class="btn btn-small btn-custom-primary">
                     {{ __('Send Password Reset Link') }}

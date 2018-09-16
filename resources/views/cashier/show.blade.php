@@ -26,7 +26,7 @@
         </div>
         <h1 class="mb-3">Rooms</h1>
         {{ Form::open(['url' => '/cashier/checkin']) }}
-        @foreach($reservation->roomTypes()->withPivot('price')->withPivot('id')->withPivot('room_number_id')->get() as $room)
+        @foreach($reservation->roomTypes()->withPivot('price')->withPivot('id')->withPivot('room_number_id')->wherePivot('deleted_at', null)->get() as $room)
             <div class="card w-100 mb-0">
                 <div class="card-body d-flex p-0">
                     <div class="w-25 p-3 border-right border-bottom">
@@ -54,6 +54,7 @@
                         @if($reservation->status == "checked_in")
                             <p class="mb-2">Actions</p>
                             <button class="btn btn-custom-default edit-button" data-id="{{ $room->id }}" data-reservation="{{ $room->pivot->id }}"> Edit </button>
+                            <button class="btn btn-danger delete-button" data-reservation="{{ $room->pivot->id }}"> Delete </button>
                         @endif
                     </div>
                 </div>
@@ -106,7 +107,6 @@
     <div id="deleteDialog" title="Delete Room">
         {{ Form::open(['url' => '/cashier/reservation/room/delete']) }}
         {{ Form::label('confirmation', 'Are you sure you want to delete this room?') }}
-        {{ Form::hidden('room_id', '', ['id' => 'deleteRoomID']) }}
         {{ Form::hidden('reservation_id', '', ['id' => 'deleteReservationID']) }}
         {{ Form::submit('Yes', ['class' => 'btn btn-danger mt-2']) }}
         {{ Form::submit('Back', ['class' => 'btn btn-primary mt-2 back']) }}

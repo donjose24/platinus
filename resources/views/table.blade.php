@@ -10,7 +10,7 @@
     @php
         $total = 0;
     @endphp
-    @foreach($reservation->roomTypes()->withPivot('price')->get() as $room)
+    @foreach($reservation->roomTypes()->withPivot('price')->wherePivot('deleted_at', null)->get() as $room)
         <tr>
             <td>{{ $room->name }}</td>
             <td>{{ number_format($room->pivot->price, 2) }}</td>

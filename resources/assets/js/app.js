@@ -94,12 +94,8 @@ $(document).ready(() => {
         e.preventDefault();
         id = $(this).data('id');
         reservationID = $(this).data('reservation');
-        prevRoomID = $(this).data('id-prev');
-        roomTypeID = $(this).data('room-type-id');
 
-        $("#deleteRoomID").val(prevRoomID);
         $("#deleteReservationID").val(reservationID);
-        $("#deleteRoomTypeID").val(roomTypeID);
         $( "#deleteDialog" ).dialog({
             modal: true
         })

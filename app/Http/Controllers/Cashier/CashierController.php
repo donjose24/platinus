@@ -7,7 +7,6 @@ use App\Mail\ReservationApproved;
 use App\Mail\ReservationRejected;
 use App\Reservation;
 use App\ReservationRoom;
-use App\ReservationRoomDetail;
 use App\Room;
 use App\RoomType;
 use App\Transaction;
@@ -221,17 +220,18 @@ class CashierController
 
     public function deleteRoom(Request $request)
     {
-        $roomID = $request->get('room_id');
         $reservationID = $request->get('reservation_id');
-        $roomTypeID = $request->get('room_type_id');
 
-        //Delete room to free up
-        $details = ReservationRoomDetail::where('room_id', $roomID)->where('reservation_id', $reservationID)->first();
-        $details->delete();
+        $reservationLoad = ReservationRoom::find($reservationID);
+        $roomID = $reservationLoad->room_number_id;
+        $reservationLoad->delete();
 
-        //Delete record on reservation table
-        $reservation = ReservationRoom::where('reservation_id', $reservationID)->where('room_id', $roomTypeID)->first();
-        $reservation->delete();
+        if (!is_null($roomID) && !empty($roomID) && !isset($roomID)) {
+            $room = Room::find($roomID);
+            $room->status = "ready";
+            $room->save();
+        }
+
 
         Session::flash('flash_message', 'Room successfully deleted');
         return redirect()->back();

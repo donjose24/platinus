@@ -12,6 +12,11 @@ class RoomType extends Model
     use SoftDeletes;
     
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * The database table used by the model.
      *
