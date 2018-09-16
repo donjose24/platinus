@@ -29,6 +29,11 @@
                     "title": "Room",
                     "url": "/admin/room",
                     "icon": "bed"
+                },
+                {
+                    "title": "Additional Services",
+                    "url": "/admin/service",
+                    "icon": "wine-glass"
                 }
             ]
         }
