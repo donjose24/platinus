@@ -52,6 +52,7 @@ $(document).ready(() => {
     }
 
     $('.edit-button').click(function(e) {
+        $("#edit-error").hide();
         id = $(this).data('id');
         reservationID = $(this).data('reservation');
         prevRoomID = $(this).data('id-prev');
@@ -64,14 +65,22 @@ $(document).ready(() => {
             url: '/cashier/rooms/available?room_id=' + id
         }).done((data) => {
             rooms = JSON.parse(data);
+
+
             for (key in rooms) {
                 if (key != prevRoomID) {
                     $("#editRoom").append('<option value="' + key + '">' + rooms[key] + '</option>');
                 }
             }
-            $("#editSubmitButton").attr('disabled', false);
-            $("#editRoomID").val(prevRoomID);
-            $("#editReservationID").val(reservationID);
+
+            if (rooms.length != 0) {
+                $("#editSubmitButton").attr('disabled', false);
+                $("#editRoomID").val(prevRoomID);
+                $("#editReservationID").val(reservationID);
+            } else {
+                $( "#editDialog" ).append("<center style='color:red' id='edit-error'> No vacant rooms available right now. </center>");
+            }
+
         }).fail((e) => {
             alert("error: " + e.toString());
         });
@@ -79,5 +88,26 @@ $(document).ready(() => {
         $( "#editDialog" ).dialog({
             modal: true
         })
+    });
+
+    $('.delete-button').click(function(e) {
+        e.preventDefault();
+        id = $(this).data('id');
+        reservationID = $(this).data('reservation');
+        prevRoomID = $(this).data('id-prev');
+        roomTypeID = $(this).data('room-type-id');
+
+        $("#deleteRoomID").val(prevRoomID);
+        $("#deleteReservationID").val(reservationID);
+        $("#deleteRoomTypeID").val(roomTypeID);
+        $( "#deleteDialog" ).dialog({
+            modal: true
+        })
+    });
+
+    $('.back').click((e) => {
+        e.preventDefault();
+        $( "#deleteDialog" ).dialog('close');
+
     });
 });

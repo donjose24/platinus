@@ -6,7 +6,9 @@ namespace App\Http\Controllers\Cashier;
 use App\Mail\ReservationApproved;
 use App\Mail\ReservationRejected;
 use App\Reservation;
+use App\ReservationRoom;
 use App\ReservationRoomDetail;
+use App\Room;
 use App\RoomType;
 use App\Transaction;
 use Auth;
@@ -107,20 +109,32 @@ class CashierController
 
     public function checkIn(Request $request)
     {
+        $rooms = $request->get('rooms');
+
+        if (count($rooms) !== count(array_unique($rooms))) {
+            Session::flash('error_message', 'Duplicate rooms detected, please select different rooms');
+            return redirect()->back();
+        }
+
         $request->validate([
-            'rooms.*' => 'required|not_in:-1'
+            'rooms.*' => 'required|not_in:-1,'
         ], [
-            'rooms.*' => 'Please select a room number'
+            'rooms.*' => 'Invalid Room Number'
         ]);
 
-        $rooms = $request->get('rooms');
         $id = $request->get('reservation_id');
-        foreach($rooms as $room) {
-            $details = new ReservationRoomDetail();
-            $details->reservation_id = $id;
-            $details->room_id = $room;
-            $details->save();
+        $ids = $request->get('ids');
+        foreach($rooms as $key => $room) {
+            $load = ReservationRoom::find($ids[$key]);
+            $load->room_number_id = $room;
+            $load->save();
+
+            //set room as in used
+            $roomNumber = Room::find($room);
+            $roomNumber->status = "checked-in";
+            $roomNumber->save();
         }
+
 
         $reservation = Reservation::find($id);
         $reservation->check_in = Carbon::now();
@@ -178,24 +192,48 @@ class CashierController
         $roomTypeID = $request->get('room_id');
 
         $room = RoomType::find($roomTypeID);
-        $reservations = \App\Reservation::where('start_date', \Carbon\Carbon::today())->where('status', 'checked_in')->pluck('id');
-        $details = \App\ReservationRoomDetail::whereIn('reservation_id', $reservations)->pluck('room_id');
-        $rooms = $room->rooms()->where('status', 'active')->whereNotIn('id', $details)->pluck('number','id');
+        $rooms = $room->rooms()->where('status', 'ready')->pluck('number','id');
 
         return $rooms->toJson();
     }
 
     public function updateRoom(Request $request)
     {
-        $roomID = $request->get('room_id');
+        $roomID = $request->get('number');
         $reservationID = $request->get('reservation_id');
-        $number = $request->get('number');
 
-        $details = ReservationRoomDetail::where('room_id', $roomID)->where('reservation_id', $reservationID)->first();
-        $details->room_id = $number;
-        $details->save();
+        $roomLoad = ReservationRoom::find($reservationID);
+        $previousRoomID = $roomLoad->room_number_id;
+        $roomLoad->room_number_id = $roomID;
+        $roomLoad->save();
+
+        $room = Room::find($previousRoomID);
+        $room->status = 'ready';
+        $room->save();
+
+        $room = Room::find($roomID);
+        $room->status = 'checked-in';
+        $room->save();
 
         Session::flash('flash_message', 'Room successfully updated');
+        return redirect()->back();
+    }
+
+    public function deleteRoom(Request $request)
+    {
+        $roomID = $request->get('room_id');
+        $reservationID = $request->get('reservation_id');
+        $roomTypeID = $request->get('room_type_id');
+
+        //Delete room to free up
+        $details = ReservationRoomDetail::where('room_id', $roomID)->where('reservation_id', $reservationID)->first();
+        $details->delete();
+
+        //Delete record on reservation table
+        $reservation = ReservationRoom::where('reservation_id', $reservationID)->where('room_id', $roomTypeID)->first();
+        $reservation->delete();
+
+        Session::flash('flash_message', 'Room successfully deleted');
         return redirect()->back();
     }
 }

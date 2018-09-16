@@ -18,7 +18,7 @@
                 <p class="mb-1">
                     <span class="full-date mr-2">{{ $reservation->start_date }}</span>
                     <i class="fa fa-arrow-right"></i>
-                    <span class="full-date ml-2">{{ $reservation->start_date }}</span>
+                    <span class="full-date ml-2">{{ $reservation->end_date }}</span>
                 </p>
                 <p class="mb-0">{{ $diff }} Night/s</p>
 
@@ -26,7 +26,7 @@
         </div>
         <h1 class="mb-3">Rooms</h1>
         {{ Form::open(['url' => '/cashier/checkin']) }}
-        @foreach($reservation->roomTypes()->withPivot('price')->get() as $room)
+        @foreach($reservation->roomTypes()->withPivot('price')->withPivot('id')->withPivot('room_number_id')->get() as $room)
             <div class="card w-100 mb-0">
                 <div class="card-body d-flex p-0">
                     <div class="w-25 p-3 border-right border-bottom">
@@ -40,27 +40,20 @@
                     <div class="w-25 p-3 border-right border-bottom">
                         <div class="mb-2"> Room Number</div>
                         @php
-                            $ids = $room->rooms()->where('status', 'active')->pluck('id');
-                            $details = \App\ReservationRoomDetail::where('reservation_id', $reservation->id)->whereIn('room_id', $ids)->get();
-                            if (count($details) == 0) {
-                                $reservations = \App\Reservation::where('start_date', \Carbon\Carbon::today())->where('status', 'checked_in')->pluck('id');
-                                $details = \App\ReservationRoomDetail::whereIn('reservation_id', $reservations)->pluck('room_id');
-                                $rooms = [];
-                                $rooms = $room->rooms()->where('status', 'active')->whereNotIn('id', $details)->pluck('number','id');
+                            if($reservation->status == "approved") {
+                                $rooms = $room->rooms()->where('status', 'ready')->pluck('number', 'id');
                                 $rooms[-1] = "Please select a room";
                                 echo Form::select('rooms[]', $rooms, '-1', ['class' => 'form-control']);
                             } else {
-                                echo '<h5 class="mb-0 font-weight-bold">'. $details[0]->rooms->number . ' </h5>';
+                                echo '<h5 class="mb-0 font-weight-bold">'. \App\Room::find($room->pivot->room_number_id)->number . ' </h5>';
                             }
-
                         @endphp
-                        {{ Form::hidden('reservation_id', $reservation->id) }}
+                        {{ Form::hidden('ids[]', $room->pivot->id) }}
                     </div>
                     <div class="w-25 p-3 border-bottom">
-                        @if (count($details) != 0)
+                        @if($reservation->status == "checked_in")
                             <p class="mb-2">Actions</p>
-                            <button class="btn btn-custom-default edit-button" data-id="{{ $room->id }}" data-id-prev="{{ $details[0]->rooms->id }}" data-reservation="{{ $reservation->id }}"> Edit </button>
-                            <button class="btn btn-danger"> Remove </button>
+                            <button class="btn btn-custom-default edit-button" data-id="{{ $room->id }}" data-reservation="{{ $room->pivot->id }}"> Edit </button>
                         @endif
                     </div>
                 </div>
@@ -69,6 +62,7 @@
         @if($reservation->status == "approved")
             <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
         @endif
+        {{ Form::hidden('reservation_id', $reservation->id) }}
         {{ Form::close() }}
         <h1 class="mb-3">Transactions</h1>
         @if(count($reservation->transactions()->get()) != 0)
@@ -102,11 +96,20 @@
     </div>
     <div id="editDialog" title="Edit Room">
         {{ Form::open(['url' => '/cashier/reservation/room/edit']) }}
-            {{ Form::label('label', 'Room Number') }}
-            {{ Form::select('number', [], '', ['class' => 'form-control', 'id' => 'editRoom']) }}
-            {{ Form::hidden('room_id', '', ['id' => 'editRoomID']) }}
-            {{ Form::hidden('reservation_id', '', ['id' => 'editReservationID']) }}
-            {{ Form::submit('Save', ['class' => 'btn btn-primary mt-2', 'disabled' => 'true','id' => 'editSubmitButton']) }}
+        {{ Form::label('label', 'Room Number') }}
+        {{ Form::select('number', [], '', ['class' => 'form-control', 'id' => 'editRoom']) }}
+        {{ Form::hidden('room_id', '', ['id' => 'editRoomID']) }}
+        {{ Form::hidden('reservation_id', '', ['id' => 'editReservationID']) }}
+        {{ Form::submit('Save', ['class' => 'btn btn-primary mt-2', 'disabled' => 'true','id' => 'editSubmitButton']) }}
+        {{ Form::close() }}
+    </div>
+    <div id="deleteDialog" title="Delete Room">
+        {{ Form::open(['url' => '/cashier/reservation/room/delete']) }}
+        {{ Form::label('confirmation', 'Are you sure you want to delete this room?') }}
+        {{ Form::hidden('room_id', '', ['id' => 'deleteRoomID']) }}
+        {{ Form::hidden('reservation_id', '', ['id' => 'deleteReservationID']) }}
+        {{ Form::submit('Yes', ['class' => 'btn btn-danger mt-2']) }}
+        {{ Form::submit('Back', ['class' => 'btn btn-primary mt-2 back']) }}
         {{ Form::close() }}
     </div>
 @endsection
