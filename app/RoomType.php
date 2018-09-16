@@ -17,6 +17,12 @@ class RoomType extends Model
         parent::__construct();
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::bootSoftDeletes();
+    }
+
     /**
      * The database table used by the model.
      *
@@ -59,6 +65,6 @@ class RoomType extends Model
 
     public function validRooms()
     {
-        return $this->hasMany("App\Room")->where('status', 'active');
+        return $this->hasMany("App\Room")->where('status','!=', 'inactive');
     }
 }

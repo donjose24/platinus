@@ -54,7 +54,6 @@ class GuestController extends Controller
             }
         }
 
-
         $reservations = Reservation::whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->get();
 
         //this will hold the value of room id and its corresponding current quantity in the reservations selected
@@ -80,13 +79,13 @@ class GuestController extends Controller
         $dontDisplay = [];
 
         foreach($roomTypes as $type) {
-            $max = $type->rooms()->where('status', 'active')->count();
+            $max = $type->rooms()->where('status', '!=', 'inactive')->count();
             if($max <= $rooms[$type->id]) {
                 $dontDisplay[] = $type->id;
             }
         }
 
-        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
+        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->where('capacity', '>=', $adults)->get();
 
         return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'adults', 'rooms'));
     }

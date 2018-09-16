@@ -14,8 +14,13 @@ class Reservation extends Model
     public function __construct()
     {
         parent::__construct();
-        parent::boot();
     }
+
+    protected static function boot()
+{
+    parent::boot();
+    static::bootSoftDeletes();
+}
 
     /**
      * The database table used by the model.
@@ -59,7 +64,7 @@ class Reservation extends Model
      */
     public function roomTypes()
     {
-        return $this->belongsToMany('App\RoomType', 'reservation_rooms', 'reservation_id', 'room_id');
+        return $this->belongsToMany('App\RoomType', 'reservation_rooms', 'reservation_id', 'room_id')->wherePivot('deleted_at', '=', null);
     }
 
     public function user()

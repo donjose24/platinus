@@ -89,6 +89,7 @@
             No transactions yet!
         @endif
         <div class="text-right mt-3">
+            <a href="#" class="btn btn-success p-2 w-25 add-room"> Add Room </a>
             <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
             @if($reservation->status == "checked_in")
                 <a href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-custom-primary p-2 mr-3 w-25"> Check Out </a>
@@ -111,5 +112,27 @@
         {{ Form::submit('Yes', ['class' => 'btn btn-danger mt-2']) }}
         {{ Form::submit('Back', ['class' => 'btn btn-primary mt-2 back']) }}
         {{ Form::close() }}
+    </div>
+    <div id="addDialog" title="Add Room">
+        @foreach($roomTypes as $type)
+            <div class="card reservation-room">
+                <div class="card-body">
+                    {{ Form::open(['url' => '/cashier/reservation/room']) }}
+                    <h4 class="font-weight-bold card-title">{{ $type->name }}</h4>
+                    <h5 class="font-weight-bold sub-card-title">{{ $type->capacity }} persons</h5>
+                    <p class="card-text room-desc">{{ $type->description }}</p>
+                    <h5 class="font-weight-bold mb-3 room-price">PHP {{ number_format($type->daily_rate) }} per night</h5>
+                    <input class="room-id" type="hidden" name="id" value="{{ $type->id }}">
+                    @php
+                        $rooms = $type->rooms()->where('status', 'ready')->pluck('number', 'id');
+                    @endphp
+                    {{ Form::select('room_id', $rooms, '', ['class' => 'form-control']) }}
+                    {{ Form::hidden('reservation_id', $reservation->id) }}
+                    {{ Form::hidden('room_type_id', $type->id) }}
+                    <button class="btn btn-primary mt-2"> Add Room</button>
+                    {{ Form::close() }}
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection

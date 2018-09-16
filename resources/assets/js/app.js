@@ -106,4 +106,12 @@ $(document).ready(() => {
         $( "#deleteDialog" ).dialog('close');
 
     });
+
+    $('.add-room').click((e) => {
+        e.preventDefault();
+        $("#addDialog").dialog({
+            modal:true,
+            minWidth: 600,
+        });
+    })
 });
