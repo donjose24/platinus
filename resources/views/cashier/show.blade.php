@@ -21,7 +21,7 @@
                     <span class="full-date ml-2">{{ $reservation->end_date }}</span>
                 </p>
                 <p class="mb-0">{{ $diff }} Night/s</p>
-
+                <p class="mb-0">Status: <b>{{ $reservation->status }}</b></p>
             </div>
         </div>
         <h1 class="mb-3">Rooms</h1>
@@ -78,9 +78,18 @@
                             <p class="mb-2">Price</p>
                             <p class="mb-0 font-weight-bold">{{ number_format($transaction->price, 2) }}</p>
                         </div>
-                        <div class="w-50 p-3 border-bottom">
-                            <p class="mb-2">Date Paid</p>
+                        <div class="w-25 p-3 border-bottom border-right">
+                            <p class="mb-2">Date Added</p>
                             <p class="mb-0 font-weight-bold">{{ date_format($transaction->created_at, "F d, Y h:iA") }}</p>
+                        </div>
+                        <div class="w-25 p-3 border-bottom">
+                            @if($transaction->item != "Bank Deposit")
+                                <p class="mb-2">Actions</p>
+                                @if($transaction->status != "paid")
+                                    <a href="/cashier/reservation/settle/{{ $transaction->id }}" class="btn btn-custom-primary">Settle</a>
+                                @endif
+                                <a href="/cashier/reservation/services/{{ $transaction->id }}" class="btn btn-danger">Delete</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -89,6 +98,7 @@
             No transactions yet!
         @endif
         <div class="text-right mt-3">
+            <a href="#" class="btn btn-info p-2 add-service" style="color:white"> Additional Services </a>
             <a href="#" class="btn btn-success p-2 w-25 add-room"> Add Room </a>
             <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
             @if($reservation->status == "checked_in")
@@ -133,6 +143,22 @@
                     {{ Form::close() }}
                 </div>
             </div>
+        @endforeach
+    </div>
+    <div id="addServices" title="Add Services">
+        Additional Services:
+        @foreach ($services as $service)
+            {{ Form::open(['url' => '/cashier/reservation/services']) }}
+                <h3>{{ Form::label('name', $service->name ) }}</h3>
+                <h5>{{ Form::label('price', number_format($service->price, 2)) }}</h5>
+                Quantity
+                <input class="spinner" readonly name="quantity" min="1" value="1" max="" type="number">
+                {{ Form::hidden('name', $service->name) }}
+                {{ Form::hidden('price', $service->price) }}
+                {{ Form::hidden('reservation_id', $reservation->id) }}
+                <button class="btn btn-primary mt-2"> Add </button>
+                <hr>
+            {{ Form::close() }}
         @endforeach
     </div>
 @endsection

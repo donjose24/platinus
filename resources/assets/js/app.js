@@ -114,4 +114,12 @@ $(document).ready(() => {
             minWidth: 600,
         });
     })
+
+    $('.add-service').click((e) => {
+        e.preventDefault();
+        $("#addServices").dialog({
+            modal: true,
+            minWidth: 400,
+        })
+    });
 });

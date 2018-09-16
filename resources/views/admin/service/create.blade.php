@@ -20,9 +20,7 @@
                         @endif
 
                         {!! Form::open(['url' => '/admin/service', 'class' => 'form-horizontal', 'files' => true]) !!}
-
-                        @include ('admin.service.form', ['formMode' => 'create'])
-
+                            @include ('admin.service.form', ['formMode' => 'create'])
                         {!! Form::close() !!}
 
                     </div>

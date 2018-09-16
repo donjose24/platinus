@@ -9,6 +9,7 @@ use App\Reservation;
 use App\ReservationRoom;
 use App\Room;
 use App\RoomType;
+use App\Service;
 use App\Transaction;
 use Auth;
 use Carbon\Carbon;
@@ -33,6 +34,7 @@ class CashierController
         $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
         $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
         $adults = $reservation->adults;
+        $services = Service::all();
 
         $reservations = Reservation::whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->get();
 
@@ -70,7 +72,7 @@ class CashierController
         $diff = date_diff($startDate, $endDate);
         $diff = $diff->days;
 
-        return view('cashier.show', compact('reservation', 'diff', 'roomTypes'));
+        return view('cashier.show', compact('reservation', 'diff', 'roomTypes', 'services'));
     }
 
     public function deposits()
@@ -286,12 +288,48 @@ class CashierController
         $reservationLoad->save();
 
         //set the room to "checked_in"
-
         $room = Room::find($roomID);
         $room->status = "checked-in";
         $room->save();
 
         Session::flash('flash_message', 'Room successfully added');
+        return redirect()->back();
+    }
+
+    public function addServices(Request $request)
+    {
+        $name = $request->get('name');
+        $price = $request->get('price');
+        $quantity = $request->get('quantity');
+        $reservationID = $request->get('reservation_id');
+
+        $transaction = new Transaction();
+        $transaction->item = $name;
+        $transaction->price = $price * $quantity;
+        $transaction->status = "unpaid";
+        $transaction->reservation_id = $reservationID;
+        $transaction->save();
+
+        Session::flash('flash_message', 'Item successfully added');
+        return redirect()->back();
+    }
+
+    public function removeService($id)
+    {
+        $transaction = Transaction::find($id);
+        $transaction->delete();
+
+        Session::flash('flash_message', 'Item successfully removed');
+        return redirect()->back();
+    }
+
+    public function settleTransaction($id)
+    {
+        $transaction = Transaction::find($id);
+        $transaction->status = "paid";
+        $transaction->save();
+
+        Session::flash('flash_message', 'Transaction successfully settled');
         return redirect()->back();
     }
 }
