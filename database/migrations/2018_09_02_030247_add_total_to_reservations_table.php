@@ -14,7 +14,7 @@ class AddTotalToReservationsTable extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->decimal('total', 16, 2);
+            $table->decimal('total', 16, 2)->default(0);
         });
     }
 

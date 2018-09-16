@@ -11,13 +11,6 @@ class ReservationRoom extends Model
     use LogsActivity;
     use SoftDeletes;
     
-
-    public function __construct()
-    {
-        parent::__construct();
-        parent::boot();
-    }
-
     /**
      * The database table used by the model.
      *

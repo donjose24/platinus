@@ -11,17 +11,6 @@ class Reservation extends Model
     use LogsActivity;
     use SoftDeletes;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    protected static function boot()
-{
-    parent::boot();
-    static::bootSoftDeletes();
-}
-
     /**
      * The database table used by the model.
      *
@@ -74,7 +63,7 @@ class Reservation extends Model
 
     public function transactions()
     {
-        return $this->hasMany('App\Transaction') ;
+        return $this->hasMany('App\Transaction');
     }
 
     public function room()

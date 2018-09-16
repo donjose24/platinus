@@ -1,6 +1,10 @@
 @extends('layouts.cashier')
 
 @section('content')
+    @php
+        $total = 0;
+        $totalAmountRoom = 0;
+    @endphp
     <div class="view-content">
         <h1 class="mb-3">Reservation details</h1>
         @if ($errors->any())
@@ -40,13 +44,15 @@
                     <div class="w-25 p-3 border-right border-bottom">
                         <div class="mb-2"> Room Number</div>
                         @php
-                            if($reservation->status == "approved") {
+                            if($reservation->status == "approved" || $room->pivot->room_number_id == 0) {
                                 $rooms = $room->rooms()->where('status', 'ready')->pluck('number', 'id');
                                 $rooms[-1] = "Please select a room";
                                 echo Form::select('rooms[]', $rooms, '-1', ['class' => 'form-control']);
                             } else {
                                 echo '<h5 class="mb-0 font-weight-bold">'. \App\Room::find($room->pivot->room_number_id)->number . ' </h5>';
                             }
+                        $total += ($room->daily_rate * $diff);
+                        $totalAmountRoom += ($room->daily_rate * $diff);
                         @endphp
                         {{ Form::hidden('ids[]', $room->pivot->id) }}
                     </div>
@@ -60,11 +66,19 @@
                 </div>
             </div>
         @endforeach
+        <div class="text-right mt-3">
+            @if($reservation->status == "approved" || $reservation->status == "checked_in")
+                <a href="#" class="btn btn-success p-2 w-25 add-new-room"> Add Room </a>
+            @endif
+        </div>
         @if($reservation->status == "approved")
             <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
         @endif
         {{ Form::hidden('reservation_id', $reservation->id) }}
         {{ Form::close() }}
+        @php
+            $totalPaid = 0;
+        @endphp
         <h1 class="mb-3">Transactions</h1>
         @if(count($reservation->transactions()->get()) != 0)
             @foreach($reservation->transactions()->get() as $transaction)
@@ -93,16 +107,31 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    if($transaction->item != "Bank Deposit" && $transaction->item != "Balance Payment") {
+                        $total += $transaction->price;
+                    }
+                    if ($transaction->status == "paid") {
+                        $totalPaid += $transaction->price;
+                    }
+
+                @endphp
             @endforeach
         @else
             No transactions yet!
         @endif
         <div class="text-right mt-3">
-            <a href="#" class="btn btn-info p-2 add-service" style="color:white"> Additional Services </a>
-            <a href="#" class="btn btn-success p-2 w-25 add-room"> Add Room </a>
-            <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
+            <h3> Total Paid: {{ number_format($totalPaid, 2) }}</h3>
+            <h3> Total Bill: {{ number_format($total, 2) }}</h3>
+            <br>
+            @if($reservation->status == "checked_out")
+                <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
+            @endif
+
             @if($reservation->status == "checked_in")
-                <a href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-custom-primary p-2 mr-3 w-25"> Check Out </a>
+                <a href="#" class="btn btn-danger p-2 w-25 add-damages" style="color:white"> Add Damages </a>
+                <a href="#" class="btn btn-info p-2 w-25 add-service" style="color:white"> Additional Services </a>
+                <a href="#" class="btn btn-custom-primary p-2 mr-3 w-25 checkout"> Check Out </a>
             @endif
         </div>
     </div>
@@ -139,7 +168,7 @@
                     {{ Form::select('room_id', $rooms, '', ['class' => 'form-control']) }}
                     {{ Form::hidden('reservation_id', $reservation->id) }}
                     {{ Form::hidden('room_type_id', $type->id) }}
-                    <button class="btn btn-primary mt-2"> Add Room</button>
+                    <button class="btn btn-primary mt-2"> Add Room </button>
                     {{ Form::close() }}
                 </div>
             </div>
@@ -160,5 +189,36 @@
                 <hr>
             {{ Form::close() }}
         @endforeach
+    </div>
+    <div id="addDamages" title="Add Damages">
+        Add Damages:
+        {{ Form::open(['url' => '/cashier/reservation/services']) }}
+            {{ Form::label('name', "Name") }}
+            {{ Form::text('name', '', ['class' => 'form-control']) }}
+            {{ Form::label('price', 'Amount') }}
+            {{ Form::number('price', '', ['class' => 'form-control']) }}
+            {{ Form::hidden('quantity', 1) }}
+            {{ Form::hidden('reservation_id', $reservation->id) }}
+            <button class="btn btn-primary mt-2"> Save </button>
+        {{ Form::close() }}
+    </div>
+    <div id="checkoutModal" title="Checkout">
+        @php
+            $dt = new DateTime();
+            $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+            $endDate->setTime(12, 0);
+            $indicator = $endDate->diff($dt)->format("%r%a");
+            $difference = $endDate->diff($dt)->h
+        @endphp
+        {{ Form::open(['url' => '/cashier/reservation/checkout/']) }}
+        <p>Customer's Remaining Balance: <b>{{ number_format($total - $totalPaid, 2) }}</b></p>
+        <p>All unsettled transactions will be marked as settled. Are you sure you want to checkout?</p>
+        @if($indicator >= 0)
+            <p> The customer have overstayed for {{ $difference }} hour(s). A penalty of {{ number_format($difference * 100, 2) }} Will be added to the customer's bill.</p>
+        @endif
+        {{ Form::hidden('id', $reservation->id) }}
+        <button href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-primary"> Check Out </button>
+        <button href="#" class="btn btn-danger cancel">Cancel</button>
+        {{ Form::close() }}
     </div>
 @endsection

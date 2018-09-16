@@ -105,5 +105,10 @@ Free Wifi',
             'status' => 'ready',
             'note' => '',
         ]);
+
+        \App\Service::create([
+            'name' => 'Bed',
+            'price' => 100,
+        ]);
     }
 }

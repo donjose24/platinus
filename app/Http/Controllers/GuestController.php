@@ -85,7 +85,7 @@ class GuestController extends Controller
             }
         }
 
-        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->where('capacity', '>=', $adults)->get();
+        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
 
         return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'adults', 'rooms'));
     }

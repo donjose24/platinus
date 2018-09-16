@@ -93,7 +93,7 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
     Route::post('checkin', 'CashierController@checkIn');
     Route::get('reservation', 'CashierController@reservation');
     Route::get('reservation/print/{id}', 'CashierController@printReservation');
-    Route::get('reservation/checkout/{id}', 'CashierController@checkOut');
+    Route::post('reservation/checkout', 'CashierController@checkOut');
     Route::get('rooms/available', 'CashierController@getAvailableRooms');
     Route::post('reservation/room/edit', 'CashierController@updateRoom');
     Route::post('reservation/room/delete', 'CashierController@deleteRoom');

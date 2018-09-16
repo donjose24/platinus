@@ -104,16 +104,15 @@ $(document).ready(() => {
     $('.back').click((e) => {
         e.preventDefault();
         $( "#deleteDialog" ).dialog('close');
-
     });
 
-    $('.add-room').click((e) => {
+    $('.add-new-room').click((e) => {
         e.preventDefault();
         $("#addDialog").dialog({
             modal:true,
             minWidth: 600,
         });
-    })
+    });
 
     $('.add-service').click((e) => {
         e.preventDefault();
@@ -121,5 +120,26 @@ $(document).ready(() => {
             modal: true,
             minWidth: 400,
         })
+    });
+
+    $(".add-damages").click((e) => {
+        e.preventDefault();
+         $("#addDamages").dialog({
+            modal: true,
+            minWidth: 400,
+        })
+    });
+
+    $(".checkout").click((e) => {
+        e.preventDefault();
+        $("#checkoutModal").dialog({
+            modal: true,
+            minWidth: 600,
+        })
+    });
+
+    $('.cancel').click((e) => {
+        e.preventDefault();
+        $( "#checkoutModal" ).dialog('close');
     });
 });

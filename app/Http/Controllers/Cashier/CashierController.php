@@ -112,7 +112,7 @@ class CashierController
         $transaction->item = "Bank Deposit";
         $transaction->price = $amount;
         $transaction->reservation_id = $reservation->id;
-        $reservation->status = 'paid';
+        $transaction->status = 'paid';
         $transaction->save();
 
         Mail::to($reservation->user()->first()->email)->send(new ReservationApproved($reservation));
@@ -205,18 +205,76 @@ class CashierController
         $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
         $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
 
+        $transactions = Transaction::where('reservation_id', $reservation->id)->where('item', '!=', 'Bank Deposit')->where('item', '!=', 'Balance Payment')->get();
+
         $diff = date_diff($startDate, $endDate);
         $diff = $diff->days;
 
-        $pdf = PDF::loadView('reports.reservation', compact('reservation', 'diff'));
+        $pdf = PDF::loadView('reports.reservation', compact('reservation', 'diff', 'transactions'));
         return $pdf->stream();
     }
 
-    public function checkOut($id)
+    public function checkOut(Request $request)
     {
+        $id = $request->get('id');
+
         $reservation = Reservation::find($id);
         $reservation->status = "checked_out";
+        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+        $diff = date_diff($startDate, $endDate)->days;
         $reservation->save();
+
+
+        $dt = new \DateTime();
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+        $endDate->setTime(12, 0);
+        $indicator = $endDate->diff($dt)->format("%r%a");
+        $difference = $endDate->diff($dt)->h;
+        //balance computation
+        $total = 0;
+        $totalPaid = 0;
+        foreach($reservation->roomTypes()->withPivot('price')->get() as $room) {
+            $total += ($room->pivot->price * $diff);
+        }
+
+        if ($indicator >= 0) {
+            $transaction = new Transaction();
+            $transaction->name = "Penalty (Overstay)";
+            $transaction->price = $difference * 100;
+            $transaction->save();
+        }
+
+        //set all room to ready
+        $rooms = $reservation->room()->get();
+        foreach($rooms as $room) {
+            $room->status = "ready";
+            $room->save();
+        }
+
+        foreach($reservation->transactions()->get() as $transaction) {
+            if($transaction->item != "Bank Deposit") {
+                $total += $transaction->price;
+            }
+            $transaction->status = "paid";
+            $transaction->save();
+
+            if ($transaction->status == "paid") {
+                $totalPaid += $transaction->price;
+            }
+        }
+
+        // insert balance payment on the transactions table
+        if ($totalPaid < $total) {
+            $balance = $total - $totalPaid;
+
+            $transaction = new Transaction();
+            $transaction->item = "Balance Payment";
+            $transaction->reservation_id = $id;
+            $transaction->price = $balance;
+            $transaction->status = "paid";
+            $transaction->save();
+        }
 
         Session::flash('flash_message', 'Check out successful');
         return redirect()->back();

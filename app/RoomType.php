@@ -11,18 +11,6 @@ class RoomType extends Model
     use LogsActivity;
     use SoftDeletes;
     
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::bootSoftDeletes();
-    }
-
     /**
      * The database table used by the model.
      *
