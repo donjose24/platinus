@@ -127,11 +127,13 @@
             @if($reservation->status == "checked_out")
                 <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
             @endif
-
             @if($reservation->status == "checked_in")
                 <a href="#" class="btn btn-danger p-2 w-25 add-damages" style="color:white"> Add Damages </a>
                 <a href="#" class="btn btn-info p-2 w-25 add-service" style="color:white"> Additional Services </a>
                 <a href="#" class="btn btn-custom-primary p-2 mr-3 w-25 checkout"> Check Out </a>
+            @endif
+            @if($reservation->status == "waiting_for_approval" || $reservation->status == "approved")
+                <a href="#" class="btn btn-danger p-2 w-25 cancelReservation" style="color:white"> Cancel Reservation </a>
             @endif
         </div>
     </div>
@@ -219,6 +221,14 @@
         {{ Form::hidden('id', $reservation->id) }}
         <button href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-primary"> Check Out </button>
         <button href="#" class="btn btn-danger cancel">Cancel</button>
+        {{ Form::close() }}
+    </div>
+    <div id="cancelDialog" title="Cancel Reservation">
+        {{ Form::open(['url' => '/cashier/reservation/cancel']) }}
+        {{ Form::label('confirmation', 'Are you sure you want to cancel this reservation?') }}
+        {{ Form::hidden('id', $reservation->id) }}
+        {{ Form::submit('Yes', ['class' => 'btn btn-danger mt-2']) }}
+        {{ Form::submit('Back', ['class' => 'btn btn-primary mt-2 back-cancel']) }}
         {{ Form::close() }}
     </div>
 @endsection

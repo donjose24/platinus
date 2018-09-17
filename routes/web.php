@@ -101,6 +101,7 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
     Route::post('reservation/services', 'CashierController@addServices');
     Route::get('reservation/services/{id}', 'CashierController@removeService');
     Route::get('reservation/settle/{id}', 'CashierController@settleTransaction');
+    Route::post('reservation/cancel', 'CashierController@cancelReservation');
 });
 
 Route::get('dashboard', 'Auth\LoginController@redirect');

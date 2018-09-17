@@ -142,4 +142,16 @@ $(document).ready(() => {
         e.preventDefault();
         $( "#checkoutModal" ).dialog('close');
     });
+
+    $('.cancelReservation').click((e) => {
+        e.preventDefault();
+        $( "#cancelDialog" ).dialog({
+            modal: true,
+        });
+    });
+
+    $('.back-cancel').click((e) => {
+        e.preventDefault();
+        $( "#cancelDialog" ).dialog('close');
+    });
 });

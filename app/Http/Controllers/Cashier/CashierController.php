@@ -390,4 +390,18 @@ class CashierController
         Session::flash('flash_message', 'Transaction successfully settled');
         return redirect()->back();
     }
+
+    public function cancelReservation(Request $request)
+    {
+        $id = $request->get('id');
+        $reservation = Reservation::find($id);
+        $reservation->status = "cancelled";
+        $reservation->save();
+
+        //Delete all relation
+        ReservationRoom::where('reservation_id', $reservation->id)->delete();
+
+        Session::flash('flash_message', 'Reservation Cancelled!');
+        return redirect()->back();
+    }
 }

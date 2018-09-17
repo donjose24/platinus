@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -71,7 +72,9 @@ class RegisterController extends Controller
             'contact_number' => $data['contact_number'],
         ]);
 
-        $user->roles()->attach(11);
+        $role = Role::where('name', 'customer')->first();
+
+        $user->roles()->attach($role->id);
         return $user;
     }
 }
