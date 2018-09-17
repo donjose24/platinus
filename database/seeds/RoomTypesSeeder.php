@@ -52,56 +52,56 @@ Free Wifi',
 
         Room::create([
             'number'  => '401',
-            'room_type_id' => '4',
+            'room_type_id' => '31',
             'status' => 'ready',
             'note' => '',
         ]);
 
         Room::create([
             'number'  => '405',
-            'room_type_id' => '4',
+            'room_type_id' => '31',
             'status' => 'ready',
             'note' => '',
         ]);
 
         Room::create([
             'number'  => '301',
-            'room_type_id' => '3',
+            'room_type_id' => '21',
             'status' => 'ready',
             'note' => '',
         ]);
 
         Room::create([
             'number'  => '402',
-            'room_type_id' => '3',
+            'room_type_id' => '21',
             'status' => 'ready',
             'note' => '',
         ]);
 
         Room::create([
             'number'  => '101',
-            'room_type_id' => '1',
+            'room_type_id' => '11',
             'status' => 'ready',
             'note' => '',
         ]);
 
         Room::create([
             'number'  => '102',
-            'room_type_id' => '1',
+            'room_type_id' => '11',
             'status' => 'ready',
             'note' => '',
         ]);
 
         Room::create([
             'number'  => '103',
-            'room_type_id' => '2',
+            'room_type_id' => '1',
             'status' => 'ready',
             'note' => '',
         ]);
 
         Room::create([
             'number'  => '104',
-            'room_type_id' => '2',
+            'room_type_id' => '1',
             'status' => 'ready',
             'note' => '',
         ]);
