@@ -68,7 +68,7 @@
         @endforeach
         <div class="text-right mt-3">
             @if($reservation->status == "approved" || $reservation->status == "checked_in")
-                <a href="#" class="btn btn-success p-2 w-25 add-new-room"> Add Room </a>
+                <a href="#" class="btn btn-custom-default p-2 w-25 add-new-room"> Add Room </a>
             @endif
         </div>
         @if($reservation->status == "approved")
@@ -218,7 +218,7 @@
         @endif
         {{ Form::hidden('id', $reservation->id) }}
         <button href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-primary"> Check Out </button>
-        <button href="#" class="btn btn-danger cancel">Cancel</button>
+        <button href="#" class="btn btn-secondary cancel">Cancel</button>
         {{ Form::close() }}
     </div>
 @endsection

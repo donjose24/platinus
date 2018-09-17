@@ -22,12 +22,10 @@
     </div>
 </div>
 <div class="page-content location-content">
-    <h1 class="mb-5">FACILITIES & SERVICES</h1>
+    <h1 class="mb-5">FACILITIES</h1>
     <div class="container">
         <h4 class="font-weight-bold mb-2">General</h4>
         <p style="font-size: 1rem;">Air Conditioning, Grounds, Gym Fitness Center, Outdoor Swimming Pool, Safety Deposit Boxes</p>
-        <h4 class="font-weight-bold mb-2">Services</h4>
-        <p style="font-size: 1rem;">Fax/Photocopying, Ironing Service, Laundry</p>
         <h4 class="font-weight-bold mb-2">Internet</h4>
         <p style="font-size: 1rem;">Free WiFi in selected areas in the hotel</p>
         <h4 class="font-weight-bold mb-2">Parking</h4>
