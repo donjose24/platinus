@@ -121,8 +121,18 @@
             No transactions yet!
         @endif
         <div class="text-right mt-3">
+            @php
+                if($reservation->is_senior) {
+                    $totalPaid *= .8;
+                    $total *= .8;
+                }
+            @endphp
+
             <h3> Total Paid: {{ number_format($totalPaid, 2) }}</h3>
             <h3> Total Bill: {{ number_format($total, 2) }}</h3>
+            @if($reservation->is_senior)
+                <h6>(Senior Citizen Discount: 20%)</h6>
+            @endif
             <br>
             @if($reservation->status == "checked_out")
                 <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
@@ -218,7 +228,10 @@
         @if($indicator >= 0)
             <p> The customer have overstayed for {{ $difference }} hour(s). A penalty of {{ number_format($difference * 100, 2) }} Will be added to the customer's bill.</p>
         @endif
+        {{ Form::checkbox('senior_discount', 'apply', false) }}
+        {{ Form::label('senior_discount', "Apply senior citizen discount?") }}
         {{ Form::hidden('id', $reservation->id) }}
+        <br>
         <button href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-primary"> Check Out </button>
         <button href="#" class="btn btn-secondary cancel">Cancel</button>
         {{ Form::close() }}

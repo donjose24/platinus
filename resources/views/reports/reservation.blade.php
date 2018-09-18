@@ -81,7 +81,12 @@
     @endforeach
     </tbody>
 </table>
-<hr>
+    <hr>
+    @php
+        if($reservation->is_senior) {
+            $total *= .8;
+        }
+    @endphp
 <h3 style="text-align:right">Total Amount: {{ number_format($total, 2) }}</h3>
 </body>
 </html>

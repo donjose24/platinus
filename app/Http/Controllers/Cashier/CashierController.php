@@ -219,9 +219,11 @@ class CashierController
     public function checkOut(Request $request)
     {
         $id = $request->get('id');
+        $discount = $request->get('senior_discount');
 
         $reservation = Reservation::find($id);
         $reservation->status = "checked_out";
+        $reservation->is_senior = $discount == "apply";
         $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
         $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
         $diff = date_diff($startDate, $endDate)->days;
@@ -242,7 +244,7 @@ class CashierController
 
         if ($indicator >= 0) {
             $transaction = new Transaction();
-            $transaction->name = "Penalty (Overstay)";
+            $transaction->item = "Penalty (Overstay)";
             $transaction->price = $difference * 100;
             $transaction->save();
         }

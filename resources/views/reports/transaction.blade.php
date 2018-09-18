@@ -61,6 +61,9 @@
             </tr>
         </thead>
         <tbody>
+        @php
+            $total = 0;
+        @endphp
         @foreach($transactions as $item)
             <tr>
                 <td>{{ $loop->iteration or $item->id }}</td>
@@ -68,8 +71,12 @@
                 <td>{{ $item->price }}</td><td>{{ $item->reservation->code }}</td>
                 <td>{{ $item->created_at }}</td>
             </tr>
+            @php
+                $total += $item->price
+            @endphp
         @endforeach
         </tbody>
-    </table> 
+    </table>
+
 </body>
 </html>
