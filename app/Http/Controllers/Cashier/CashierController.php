@@ -72,6 +72,8 @@ class CashierController
         $diff = date_diff($startDate, $endDate);
         $diff = $diff->days;
 
+        $reservation = Reservation::find($id);
+
         return view('cashier.show', compact('reservation', 'diff', 'roomTypes', 'services'));
     }
 
