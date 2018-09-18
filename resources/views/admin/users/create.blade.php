@@ -15,13 +15,9 @@
                 @endforeach
             </ul>
         @endif
-
         {!! Form::open(['url' => '/admin/users', 'class' => 'form-horizontal']) !!}
-
-        @include ('admin.users.form', ['formMode' => 'create'])
-
+            @include ('admin.users.form', ['formMode' => 'create'])
         {!! Form::close() !!}
-
     </div>
 </div>
 @endsection

@@ -34,7 +34,7 @@
             <a href="#">
                 <div class="icon-img"><i class="fa fa-bed" aria-hidden="true"></i></div>
                 <p class="title">Rooms and Rates</p>
-                <p class="desc">Stay for as low as PHP 808 per night. 1 Double sized bed, No Tv, No Aircon. Fan Only, bathroom with hot and cold shower. View our rooms and rates here.</p>
+                <p class="desc">Stay for as low as PHP 950 per night. 1 Double sized bed, No Tv, No Aircon. Fan Only, bathroom with hot and cold shower. View our rooms and rates here.</p>
             </a>
         </div>
         <div class="service-box">

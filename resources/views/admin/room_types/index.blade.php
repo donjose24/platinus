@@ -1,10 +1,10 @@
 @extends('layouts.backend')
 
 @section('content')
-<div class="view-content">
-    <h1 class="mb-3">Room Types</h1>
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <a href="{{ url('/admin/room_types/create') }}" class="btn btn-custom-primary" title="Add New RoomType">
+<div class="card">
+    <div class="card-header">Room Types</div>
+    <div class="card-body">
+        <a href="{{ url('/admin/room_types/create') }}" class="btn btn-custom-primary btn-sm" title="Add New reservation">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
 
@@ -18,38 +18,53 @@
             </span>
         </div>
         {!! Form::close() !!}
-    </div>
 
-    <div class="d-flex justify-content-between flex-wrap">
-        @foreach($roomtypes as $item)
-            <div class="card position-relative">
-                {!! Form::open([
-                    'method' => 'DELETE',
-                    'url' => ['/admin/room_types', $item->id],
-                    'style' => 'display:inline'
-                ]) !!}
-                    {!! Form::button('<i class="fa fa-times" aria-hidden="true"></i>', array(
-                            'type' => 'submit',
-                            'class' => 'btn-delete',
-                            'title' => 'Delete Room Type',
-                            'onclick'=>'return confirm("Confirm delete?")'
-                    )) !!}
-                {!! Form::close() !!}
-                <div class="position-relative card-img-top">
-                    <img src="{{ $item->image_url }}" alt="">
-                </div>
-                <div class="card-body">
-                    <h4>{{ $item->name }}</h4>
-                    <p class="room-desc">{{ $item->description }}</p>
-                    <h6 class="mb-4">No. of Pax: {{ $item->rooms()->count() }}</h6>
-                    <div class="options-container d-flex justify-content-between align-items-center">
-                        <a class="btn btn-custom-default" href="{{ url('/admin/room_types/' . $item->id) }}" title="View RoomType">View</a>
-                        <a class="btn btn-custom-default" href="{{ url('/admin/room_types/' . $item->id . '/edit') }}" title="Edit RoomType">Edit</a>
-                    </div>
-                </div>
-            </div>
-        @endforeach
+        <br/>
+        <br/>
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Room Name</th>
+                        <th class="w-25">Description</th>
+                        <th>No. of Pax</th>
+                        <th>Daily Rate</th>
+                        <th class="w-25">Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($roomtypes as $item)
+                    <tr>
+                        <td>{{ $loop->iteration or $item->id }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->description }}</td>
+                        <td>{{ $item->capacity }}</td>
+                        <td>PHP {{ $item->daily_rate }}</td>
+                        <td><img class="w-100" src="{{ $item->image_url }}" alt=""></td>
+                        <td>
+                            <a href="{{ url('/admin/room_types/' . $item->id) }}" title="View RoomType"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                            <a href="{{ url('/admin/room_types/' . $item->id . '/edit') }}" title="Edit RoomType"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                            {!! Form::open([
+                                'method' => 'DELETE',
+                                'url' => ['/admin/room_types', $item->id],
+                                'style' => 'display:inline'
+                            ]) !!}
+                                {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', array(
+                                        'type' => 'submit',
+                                        'class' => 'btn btn-danger btn-sm',
+                                        'title' => 'Delete reservation',
+                                        'onclick'=>'return confirm("Confirm delete?")'
+                                )) !!}
+                            {!! Form::close() !!}
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <div class="pagination-wrapper"> {!! $roomtypes->appends(['search' => Request::get('search')])->render() !!} </div>
+        </div>
     </div>
 </div>
-<div class="pagination-wrapper"> {!! $roomtypes->appends(['search' => Request::get('search')])->render() !!} </div>
 @endsection
