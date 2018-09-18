@@ -31,6 +31,11 @@
                     <span><i class="fa fa-money-bill"></i>Deposit Uploads</span>
                 </a>
             </li>
+            <li>
+                <a href="/cashier/rooms">
+                    <span><i class="fa fa-door-open"></i>Room Maintenance</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

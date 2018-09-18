@@ -408,4 +408,35 @@ class CashierController
         Session::flash('flash_message', 'Reservation Cancelled!');
         return redirect()->back();
     }
+
+    public function rooms()
+    {
+        $rooms = Room::all();
+
+        return view('cashier.rooms', compact('rooms'));
+    }
+
+    public function markAsInactive(Request $request)
+    {
+        $id = $request->get('room_id');
+
+        $room = Room::findOrFail($id);
+        $room->status = "inactive";
+        $room->save();
+
+        Session::flash('flash_message', 'Room set as inactive');
+        return redirect()->back();
+    }
+
+    public function markAsActive(Request $request)
+    {
+        $id = $request->get('room_id');
+
+        $room = Room::findOrFail($id);
+        $room->status = "Active";
+        $room->save();
+
+        Session::flash('flash_message', 'Room set as active');
+        return redirect()->back();
+    }
 }
