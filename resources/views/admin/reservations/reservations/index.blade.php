@@ -7,22 +7,10 @@
         <a href="{{ url('/admin/reservations/create') }}" class="btn btn-custom-primary btn-sm" title="Add New reservation">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
-
-        {!! Form::open(['method' => 'GET', 'url' => '/admin/reservations', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
-        <div class="input-group">
-            <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-            <span class="input-group-append">
-                <button class="btn btn-secondary" type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-            </span>
-        </div>
-        {!! Form::close() !!}
-
         <br/>
         <br/>
         <div class="table-responsive">
-            <table class="table table-borderless">
+            <table class="table data-table">
                 <thead>
                     <tr>
                         <th>#</th><th>Start Date</th><th>End Date</th><th>Status</th><th>Actions</th>
