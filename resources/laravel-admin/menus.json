@@ -13,7 +13,7 @@
                 {
                     "title": "Reports",
                     "url": "/admin/reports",
-                    "icon": "book"
+                    "icon": "chart-bar"
                 },
                 {
                     "title": "Sales",
