@@ -74,6 +74,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('transactions', 'TransactionsController');
     Route::resource('service', 'ServiceController');
     Route::get('sales/print', 'TransactionsController@printTransactions');
+    Route::get('reports', 'ReportController@index');
+    Route::get('reports/sales', 'ReportController@printSalesReport');
+    Route::get('reports/reservation', 'ReportController@printReservations');
 });
 
 Route::group(['namespace' => 'Customer', 'prefix' => 'customer', 'middleware' => ['auth', 'roles'], 'roles' => 'customer'], function () {

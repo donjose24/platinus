@@ -12,7 +12,7 @@
                 },
                 {
                     "title": "Reports",
-                    "url": "/admin/reservations",
+                    "url": "/admin/reports",
                     "icon": "book"
                 },
                 {

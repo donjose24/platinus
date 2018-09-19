@@ -53,10 +53,9 @@
     <table>
         <thead>
             <tr>
-                <th>#</th>
+                <th>Reservation Number</th>
                 <th>Item</th>
                 <th>Price</th>
-                <th>Reservation Number</th>
                 <th>Date</th>
             </tr>
         </thead>
@@ -66,9 +65,9 @@
         @endphp
         @foreach($transactions as $item)
             <tr>
-                <td>{{ $loop->iteration or $item->id }}</td>
+                <td>{{ $item->reservation->code }}</td>
                 <td>{{ $item->item }}</td>
-                <td>{{ $item->price }}</td><td>{{ $item->reservation->code }}</td>
+                <td>{{ $item->price }}</td>
                 <td>{{ $item->created_at }}</td>
             </tr>
             @php
@@ -77,5 +76,6 @@
         @endforeach
         </tbody>
     </table>
+    <h3>Total: {{ number_format($total,2) }}</h3>
 </body>
 </html>

@@ -33,6 +33,11 @@ $(document).ready(() => {
         });
     }
 
+    if ($('.datetime-picker-admin').length) {
+        $('.datetime-picker-admin').flatpickr();
+
+    }
+
     if ($('.spinner').length) {
         $('.spinner').spinner();
     }
