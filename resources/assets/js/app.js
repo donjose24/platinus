@@ -16,7 +16,6 @@ $(document).ready(() => {
             'November',
             'December',
         ];
-        console.log(parseInt(month, 10))
         return `${months[parseInt(month, 10) - 1]} ${day}, ${year}`;
     };
 
@@ -31,6 +30,10 @@ $(document).ready(() => {
         $('.datetime-picker').flatpickr({
             minDate: new Date()
         });
+    }
+
+    if($('.data-table').length > 0) {
+        $('.data-table').DataTable();
     }
 
     if ($('.datetime-picker-admin').length) {
