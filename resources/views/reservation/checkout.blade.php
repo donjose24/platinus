@@ -26,6 +26,7 @@
                     <li>Please report to the Front Desk any personnel soliciting cash or tip for basic services rendered.</li>
                     <li>To avoid delay, please call the attention of the Front Desk one hour before checking out to allow our personnel to check your room amenities in accordance with our standard operating procedures.</li>
                     <li>In case of emergency, please call the attention of the Front Desk. The fire escape is located at the 'exit' areas and fire extinguishers are strategically located at every floor.</li>
+                    <li><b>Strictly no refund  after cancellation.</b></li>
                 </ol>
             </div>
             <div class="col-md-5 offset-md-1">
@@ -33,7 +34,7 @@
                     <h1 class="mb-2">Reservation Details</h1>
                     <h5 class="d-flex justify-content-between"><span>Check In Date:</span><span class="full-date">{{ $details['start_date'] }}</span></h5>
                     <h5 class="d-flex justify-content-between"><span>Check Out Date:</span><span class="full-date">{{ $details['end_date'] }}</span></h5>
-                    <h5 class="d-flex justify-content-between"><span># of Adult Guests: </span><span>{{ $details['adults'] }} pax</span></h5>
+                    <h5 class="d-flex justify-content-between"><span># of Guests: </span><span>{{ $details['adults'] }} pax</span></h5>
                     <h5 class="d-flex justify-content-between"><span>No. of Nights:</span><span>x{{ $diff }} </span></h5>
                     <br>
                     <h5>Particulars: </h5>
@@ -52,15 +53,15 @@
                             <tr>
                                 <td> {{ $room->name }} </td>
                                 <td> {{ $items[$room->id] }} </td>
-                                <td> {{ number_format($room->daily_rate, 2) }} </td>
-                                <td> {{ number_format((($room->daily_rate * $items[$room->id]) * $diff), 2) }} </td>
+                                <td>PHP {{ number_format($room->daily_rate, 2) }} </td>
+                                <td>PHP {{ number_format((($room->daily_rate * $items[$room->id]) * $diff), 2) }} </td>
                             </tr>
                             @php
                                 $total = $total + ($room->daily_rate * $diff);
                             @endphp
                         @endforeach
                     </table>
-                    <h5>Total Bill: {{ number_format($total, 2) }}</h5>
+                    <h5>Total Bill: PHP {{ number_format($total, 2) }}</h5>
                     <div class="d-flex justify-content-between">
                         <a href="{{ $backUrl }}" class="btn btn-secondary font-weight-normal"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>Back </a>
                         {{ Form::open(['url' => '/reservation', 'method' => 'POST']) }}

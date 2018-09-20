@@ -20,7 +20,7 @@ Rooms:
 @component('mail::panel')
 Room Type: {{ $room->name }}
 
-Price per night: {{ number_format($room->daily_rate, 2) }}
+Price per night: PHP {{ number_format($room->daily_rate, 2) }}
 @php
 $total = $total + ($room->daily_rate * $diff->days)
 @endphp

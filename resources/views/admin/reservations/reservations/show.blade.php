@@ -30,15 +30,15 @@
                     @foreach($reservation->roomTypes()->get() as $room)
                         <tr>
                             <td> {{ $room->name }} </td>
-                            <td> {{ number_format($room->daily_rate, 2) }}</td>
-                            <td> {{ number_format($room->daily_rate * $diff, 2) }} </td>
+                            <td>PHP {{ number_format($room->daily_rate, 2) }}</td>
+                            <td>PHP {{ number_format($room->daily_rate * $diff, 2) }} </td>
                             @php
                                 $total += ($room->daily_rate * $diff);
                             @endphp
                         </tr>
                     @endforeach
                 </table>
-                <h4>Grand Total: {{ number_format($total, 2) }}</h4>
+                <h4>Grand Total: PHP {{ number_format($total, 2) }}</h4>
             </fieldset>
             <br>
             <br>
