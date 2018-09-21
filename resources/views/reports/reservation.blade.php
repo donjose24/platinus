@@ -12,10 +12,10 @@
           text-align: center;
         }
         h1 {
-            margin-bottom: 5px;
+            margin-bottom: 15px;
         }
         .logo {
-            margin: 0 auto 15px;
+            margin: 0 auto 5px;
             width: 200px;
             text-align: center;
         }
@@ -46,8 +46,8 @@
 </head>
 <body>
     <div class="header">
-      <h1>Bella Monte Hotel</h1>
       <div class="logo"><img class="logo-img" src="https://www.thebellamontehotel.com/images/logo.png" alt="bellamontehotel logo"></div>
+      <h1>Bella Monte Hotel</h1>
       <span class="hit">#15 del Pilar St. Bo., Barretto Olongapo, Zambales, Philippines</span>
       <span class="hit">EMAIL: admin@bellamonte.com</span>
       <span class="hit">TEL : 123 456</span>
