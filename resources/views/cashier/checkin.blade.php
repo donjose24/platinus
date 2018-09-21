@@ -7,7 +7,7 @@
         <div class="card position-relative">
             <div class="card-body">
                 <div class="mb-2">
-                  <h3 class="mb-1">Joshua Turingan</h3>
+                  <h3 class="mb-1">Agatha Belonnsss</h3>
                   <p class="mb-0">3 persons</p>
                   <p class="mb-0">Standard Room</p>
                 </div>
@@ -28,7 +28,7 @@
         <div class="card position-relative">
             <div class="card-body">
                 <div class="mb-2">
-                  <h3 class="mb-1">Joshua Turingan</h3>
+                  <h3 class="mb-1">Agatha Belonnsss</h3>
                   <p class="mb-0">3 persons</p>
                   <p class="mb-0">Standard Room</p>
                 </div>
@@ -49,7 +49,7 @@
         <div class="card position-relative">
             <div class="card-body">
                 <div class="mb-2">
-                  <h3 class="mb-1">Joshua Turingan</h3>
+                  <h3 class="mb-1">Agatha Belonnsss</h3>
                   <p class="mb-0">3 persons</p>
                   <p class="mb-0">Standard Room</p>
                 </div>
