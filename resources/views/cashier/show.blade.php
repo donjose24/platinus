@@ -102,7 +102,6 @@
                                 @if($transaction->status != "paid")
                                     <a href="/cashier/reservation/settle/{{ $transaction->id }}" class="btn btn-custom-primary">Settle</a>
                                 @endif
-                                <a href="/cashier/reservation/services/{{ $transaction->id }}" class="btn btn-danger">Delete</a>
                             @endif
                         </div>
                     </div>

@@ -94,14 +94,14 @@ Free Wifi',
 
         Room::create([
             'number'  => '103',
-            'room_type_id' => '1',
+            'room_type_id' => '41',
             'status' => 'ready',
             'note' => '',
         ]);
 
         Room::create([
             'number'  => '104',
-            'room_type_id' => '1',
+            'room_type_id' => '41',
             'status' => 'ready',
             'note' => '',
         ]);
