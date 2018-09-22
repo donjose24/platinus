@@ -109,6 +109,20 @@ class CashierController
         $amount = $request->get('amount');
 
         $reservation = Reservation::findOrFail($id);
+
+
+        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+
+        $totalPrice = ReservationRoom::where('reservation_id', $reservation->id)->sum('price') * $diff;
+
+        if($totalPrice < $amount) {
+            Session::flash('error_message', 'Invalid amount entered.');
+            return redirect()->back();
+        }
         $reservation->status = "approved";
         $reservation->save();
 
