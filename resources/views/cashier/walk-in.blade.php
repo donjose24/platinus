@@ -10,7 +10,7 @@
 
                 {{ Form::label('persons', 'Number of persons') }}
                 <br>
-                {{ Form::number('persons', 1, ['class' => 'form-control spinner d-block', 'min' => "1", 'required' => 'true']) }}
+                {{ Form::number('persons', 1, ['class' => 'form-control spinner d-block', 'min' => "1", 'required' => 'true', 'max' => '50']) }}
 
                 <button class="btn btn-custom-primary mt-3 d-block">Show Rooms</button>
             {{ Form::close() }}

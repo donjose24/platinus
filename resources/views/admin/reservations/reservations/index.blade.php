@@ -13,14 +13,14 @@
             <table class="table data-table">
                 <thead>
                     <tr>
-                        <th>#</th><th>Start Date</th><th>End Date</th><th>Status</th><th>Actions</th>
+                        <th>#</th><th>Start Date</th><th>End Date</th><th>Status</th><th>Transaction Code</th><th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach($reservations as $item)
                     <tr>
                         <td>{{ $loop->iteration or $item->id }}</td>
-                        <td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->status }}</td>
+                        <td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->status }}</td><td>{{ $item->code }}</td>
                         <td>
                             <a href="{{ url('/admin/reservations/' . $item->id) }}" title="View reservation"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                             <a href="{{ url('/admin/reservations/' . $item->id . '/edit') }}" title="Edit reservation"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
