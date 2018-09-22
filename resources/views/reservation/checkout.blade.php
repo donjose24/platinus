@@ -57,7 +57,7 @@
                                 <td>PHP {{ number_format((($room->daily_rate * $items[$room->id]) * $diff), 2) }} </td>
                             </tr>
                             @php
-                                $total = $total + ($room->daily_rate * $diff);
+                                $total = $total + (($room->daily_rate * $items[$room->id]) * $diff);
                             @endphp
                         @endforeach
                     </table>
