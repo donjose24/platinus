@@ -39,9 +39,6 @@
         </div>
     </main>
 </div>
-
-<!-- Scripts -->
-
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
@@ -64,7 +61,6 @@
             $('.account-settings a[href="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" }}"]').closest('li').addClass('active');
         });
     </script>
-
-@yield('scripts')
+    @yield('scripts')
 </body>
 </html>
