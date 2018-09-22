@@ -433,7 +433,7 @@ class CashierController
         $id = $request->get('room_id');
 
         $room = Room::findOrFail($id);
-        $room->status = "Active";
+        $room->status = "ready";
         $room->save();
 
         Session::flash('flash_message', 'Room set as active');
