@@ -579,6 +579,12 @@ class CashierController
             Session::flash('error_message', 'Session expired. Please select your rooms again');
             redirect()->back();
         }
+
+        $request->validate(['name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+            ]
+        );
+
         //create the user first
         $data = $request->all();
 
