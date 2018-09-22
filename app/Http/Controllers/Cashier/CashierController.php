@@ -13,7 +13,9 @@ use App\Service;
 use App\Transaction;
 use Auth;
 use Carbon\Carbon;
+use App\User;
 use PDF;
+use Hash;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Mail;
@@ -438,5 +440,202 @@ class CashierController
 
         Session::flash('flash_message', 'Room set as active');
         return redirect()->back();
+    }
+
+    public function showWalkIn()
+    {
+        return view('cashier.walk-in');
+    }
+
+    public function showWalkInRooms(Request $request)
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        $checkOutDate = $request->get('check_out_date');
+        $pax = $request->get('persons');
+
+        $details = [
+            'start_date' => $today,
+            'end_date' => $checkOutDate,
+            'adults' => $pax,
+        ];
+
+        if(!Session::has('details')) {
+            Session::put('details', $details);
+        } else {
+            $savedDetails = Session::get('details');
+            if($savedDetails != $details) {
+                Session::put('details', $details);
+                Session::forget('items');
+            }
+        }
+
+        $reservations = Reservation::whereBetween('start_date', [$today, $checkOutDate])->orWhereBetween('end_date', [$today, $checkOutDate])->get();
+        //this will hold the value of room id and its corresponding current quantity in the reservations selected
+        $rooms = [];
+        foreach ($reservations as $reservation) {
+            $roomTypes = $reservation->roomTypes()->pluck('room_types.id');
+            foreach ($roomTypes as $room) {
+                $rooms[$room] = 0;
+            }
+        }
+
+        foreach ($reservations as $reservation) {
+            foreach($reservation->roomTypes()->get() as $type) {
+                foreach($rooms as $key => $room) {
+                    if($type->id == $key) {
+                        $rooms[$key] = $room + 1 ;
+                    }
+                }
+            }
+        }
+
+        $roomTypes = RoomType::whereIn('id', array_keys($rooms))->get();
+        $dontDisplay = [];
+
+        foreach($roomTypes as $type) {
+            $max = $type->rooms()->where('status', '!=', 'inactive')->count();
+            if($max <= $rooms[$type->id]) {
+                $dontDisplay[] = $type->id;
+            }
+        }
+
+        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->where('capacity', '>=', $pax)->get();
+
+        return view('cashier.walk-in-rooms', ['roomTypes' => $roomTypes, 'rooms' => $rooms, 'today' => $today, 'checkOutDate' => $checkOutDate, 'pax' => $pax]);
+    }
+    public function addToCart(Request $request)
+    {
+        $id = $request->get('id');
+        $quantity = $request->get('value');
+        if ($quantity == 0) {
+            Session::flash('error_message', 'Invalid Quantity. Please try again');
+            return redirect()->back();
+        }
+
+        $items = [];
+        if (Session::has('items')) {
+            $items = Session::get('items');
+        }
+
+        $items[$id] = $quantity;
+
+        Session::put('items', $items);
+        Session::flash('flash_message', 'Room successfully added to your selection');
+
+        return redirect()->back();
+    }
+
+    public function removeToCart(Request $request)
+    {
+        $items = [];
+        if (Session::has('items')) {
+            $items = Session::get('items');
+        }
+
+        $id = $request->get('id');
+        unset($items[$id]);
+
+        if (count($items) == 0){
+            Session::forget('items');
+        } else {
+            Session::put('items', $items);
+        }
+
+
+        Session::flash('flash_message', 'Room successfully removed from your selection');
+        return redirect()->back();
+    }
+
+    public function preview()
+    {
+        if(!Session::has('items') || !Session::has('details')) {
+            Session::flash('error_message', 'Session expired. Please select your rooms again');
+            redirect()->back();
+        }
+
+        $details = Session::get('details');
+        $items = Session::get('items');
+
+        $records = [];
+        $rooms = [];
+        foreach($items as $key => $item) {
+            $room = RoomType::find($key);
+            $records[$room->id] = $item;
+            $rooms[] = $room;
+        }
+        $startDate = \DateTime::createFromFormat('Y-m-d', $details['start_date']);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $details['end_date']);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+        $backUrl = url()->previous();
+
+        return view('cashier.walk-in-checkout', compact('items', 'rooms', 'details', 'diff', 'backUrl'));
+    }
+
+    public function reserve(Request $request)
+    {
+        if(!Session::has('items') || !Session::has('details')) {
+            Session::flash('error_message', 'Session expired. Please select your rooms again');
+            redirect()->back();
+        }
+        //create the user first
+        $data = $request->all();
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make('passowrd'),
+            'contact_number' => "123456",
+        ]);
+
+        //TODO: validate if the room is still available before inserting.
+
+        $details = Session::get('details');
+        $items = Session::get('items');
+        $id = $user->id;
+        $rand = substr(md5(microtime()),rand(0,26),10);
+        $startDate = \DateTime::createFromFormat('Y-m-d', $details['start_date']);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $details['end_date']);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+
+        $reservation = Reservation::create([
+            'start_date' => $details['start_date'],
+            'end_date' => $details['end_date'],
+            'status' => 'approved',
+            'deposit_slip' => '',
+            'user_id' => $id,
+            'code' => strtoupper($rand),
+            'total' => 0,
+            'children' => 0,
+            'adults' => $details['adults'],
+        ]);
+
+        foreach($items as $key => $value) {
+            for($index = 0; $index < $value; $index++){
+                $room = RoomType::find($key);
+                ReservationRoom::create([
+                    'reservation_id' => $reservation->id,
+                    'room_id' => $key,
+                    'price' => $room->daily_rate,
+                ]);
+            }
+        }
+
+        $rooms = $reservation->roomTypes()->get();
+        $total = 0;
+        foreach($rooms as $room) {
+            $total += ($room->daily_rate * $diff);
+        }
+
+        $reservation->total = $total;
+        $reservation->save();
+
+        Session::forget('details');
+        Session::forget('items');
+
+        return redirect('/cashier/reservation/' . $reservation->id);
     }
 }

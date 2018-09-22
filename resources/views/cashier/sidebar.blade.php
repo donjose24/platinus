@@ -36,6 +36,11 @@
                     <span><i class="fa fa-door-open"></i>Room Maintenance</span>
                 </a>
             </li>
+            <li>
+                <a href="/cashier/walk-in">
+                    <span><i class="fa fa-address-book"></i>New reservation</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

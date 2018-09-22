@@ -108,6 +108,12 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
     Route::get('rooms', 'CashierController@rooms');
     Route::post('room/inactive', 'CashierController@markAsInactive');
     Route::post('room/active', 'CashierController@markAsActive');
+    Route::get('walk-in', 'CashierController@showWalkIn');
+    Route::get('walk-in/reservation', 'CashierController@showWalkInRooms');
+    Route::post('walk-in/remove-reservation/', 'CashierController@removeToCart');
+    Route::post('walk-in/reservation/add', 'CashierController@addToCart');
+    Route::get('walk-in/reservation/preview', 'CashierController@preview');
+    Route::post('walk-in/reservation/checkout', 'CashierController@reserve');
 });
 
 Route::get('dashboard', 'Auth\LoginController@redirect');
