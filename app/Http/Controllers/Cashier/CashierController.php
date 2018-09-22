@@ -123,6 +123,21 @@ class CashierController
             Session::flash('error_message', 'Invalid amount entered.');
             return redirect()->back();
         }
+
+        if($diff < 7) {
+            if ($totalPrice !=  $amount) {
+                Session::flash('error_message', 'Full amount is required for booking less than 7 nights');
+                return redirect()->back();
+            }
+        }
+
+        if($diff >= 7) {
+            if(($totalPrice * .8) > $amount) {
+                Session::flash('error_message', '20% payment is required for booking more than 7 nights');
+                return redirect()->back();
+            }
+        }
+
         $reservation->status = "approved";
         $reservation->save();
 
