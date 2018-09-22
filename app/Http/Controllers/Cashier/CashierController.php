@@ -609,7 +609,7 @@ class CashierController
             redirect()->back();
         }
 
-        $request->validate(['name' => 'required|string|max:255',
+        $request->validate(['name' => 'required|string|max:255|alpha_num',
                 'email' => 'required|string|email|max:255|unique:users',
             ]
         );
