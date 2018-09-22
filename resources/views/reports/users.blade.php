@@ -59,21 +59,21 @@
         <tbody>
            <tr>
               <td>1</td>
-              <td>Joshua Turingan</td>
+              <td>Agatha Belontes</td>
               <td>0912 345 6789</td>
-              <td>jao@bellamonte.com</td>
+              <td>agabelo@bellamonte.com</td>
            </tr>
            <tr>
               <td>2</td>
-              <td>Joshua Turingan</td>
+              <td>Agatha Belontes</td>
               <td>0912 345 6789</td>
-              <td>jao@bellamonte.com</td>
+              <td>agabelo@bellamonte.com</td>
            </tr>
            <tr>
               <td>3</td>
-              <td>Joshua Turingan</td>
+              <td>Agatha Belontes</td>
               <td>0912 345 6789</td>
-              <td>jao@bellamonte.com</td>
+              <td>agabelo@bellamonte.com</td>
            </tr>
         </tbody>
     </table> 
