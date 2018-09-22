@@ -273,6 +273,14 @@ class CashierController
             $total += ($room->pivot->price * $diff);
         }
 
+        //set all room to ready
+        $records = ReservationRoom::where('reservation_id', $id)->get();
+        foreach($records as $record) {
+            $room = Room::find($record->room_number_id);
+            $room->status = "ready";
+            $room->save();
+        }
+
         if ($indicator >= 0) {
             $transaction = new Transaction();
             $transaction->item = "Penalty (Overstay)";
@@ -280,12 +288,6 @@ class CashierController
             $transaction->save();
         }
 
-        //set all room to ready
-        $rooms = $reservation->room()->get();
-        foreach($rooms as $room) {
-            $room->status = "ready";
-            $room->save();
-        }
 
         foreach($reservation->transactions()->get() as $transaction) {
             if($transaction->item != "Bank Deposit") {
