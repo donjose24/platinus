@@ -54,7 +54,7 @@ class UsersController extends Controller
         $this->validate(
             $request,
             [
-                'name' => 'required|alpha_num',
+                'name' => 'required',
                 'email' => 'required|string|max:255|email|unique:users',
                 'password' => 'required',
                 'roles' => 'required',
