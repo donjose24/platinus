@@ -29,7 +29,10 @@
                                         <button class="btn btn-danger"> Mark as inactive</button>
                                     {{ Form::close() }}
                                 @elseif ($room->status != "checked-in")
-                                    <button class="btn btn-custom-primary"> Mark as active</button>
+                                    {{ Form::open(['url' => '/cashier/room/active']) }}
+                                        {{ Form::hidden('room_id', $room->id) }}
+                                        <button class="btn btn-custom-primary"> Mark as ready</button>
+                                    {{ Form::close() }}
                                 @endif
                             </td>
                         </tr>
