@@ -4,14 +4,7 @@
     <div class="home-content">
         <h1 class="welcome-text">Experience leisure and recreation within the hustle of Barretto ,Olongapo City</h1>
         <div class="reservation-container">
-            {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
-            <ul>
-                <li><label class="d-block" for="start_date">Start Date</label><input type="text" name="start_date" value="{{$startDate}}" placeholder="From" class="datetime-picker" /></li>
-                <li><label class="d-block" for="end_date">End Date</label><input type="text" name="end_date" placeholder="To" value="{{$endDate}}" class="datetime-picker" /></li>
-                <li><label class="d-block" for="adults"># of Guests</label><input readonly type="number" name="adults" value="{{$adults}}" class="no-guest spinner" /></li>
-                <li><button class="btn btn-custom-default w-100">Book Now</button></li>
-            </ul>
-            {{Form::close()}}
+            @include('search-bar')
         </div>
     </div>
     <div class="welcome-content">
@@ -67,15 +60,23 @@
                                 @if(array_key_exists($type->id, Session::get('items')))
                                     <button class="btn w-100 p-2 btn-danger">Remove Room</button>
                                 @else
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="font-weight-bold room-price mr-2"> Number of persons </h5>
+                                        <input class="spinner" readonly name="pax" min="0" value="0" max="{{ $type->capacity }}" type="number">
+                                    </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <input class="spinner" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
                                         <button class="btn ml-2 w-75 p-2 btn-custom-primary add-room">Add Room</button>
                                     </div>
                                 @endif
                             @else
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="font-weight-bold room-price mr-2"> Number of persons </h5>
+                                    <input class="spinner" readonly name="pax" min="0" value="0" max="{{ $type->capacity }}" type="number">
+                                </div>
                                 <div class="d-flex justify-content-between align-items-center">
+                                    <button class="btn mr-2 w-75 p-2 btn-custom-primary add-room">Add Room</button>
                                     <input class="spinner" readonly name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
-                                    <button class="btn ml-2 w-75 p-2 btn-custom-primary add-room">Add Room</button>
                                 </div>
                             @endif
                             <input class="room-id" type="hidden" name="id" value="{{ $type->id }}">

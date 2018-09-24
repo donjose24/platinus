@@ -112,6 +112,10 @@ body {
     }
 }
 
+.spinner {
+    width: 60px;
+}
+
 #editDialog, #deleteDialog, #addDialog, #addServices, #addDamages, #checkoutModal, #cancelDialog {
     display:none;
 }

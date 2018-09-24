@@ -34,7 +34,6 @@
                     <h1 class="mb-2">Reservation Details</h1>
                     <h5 class="d-flex justify-content-between"><span>Check In Date:</span><span class="full-date">{{ $details['start_date'] }}</span></h5>
                     <h5 class="d-flex justify-content-between"><span>Check Out Date:</span><span class="full-date">{{ $details['end_date'] }}</span></h5>
-                    <h5 class="d-flex justify-content-between"><span># of Guests: </span><span>{{ $details['adults'] }} pax</span></h5>
                     <h5 class="d-flex justify-content-between"><span>No. of Nights:</span><span>x{{ $diff }} </span></h5>
                     <br>
                     <h5>Particulars: </h5>

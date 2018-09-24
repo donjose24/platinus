@@ -35,7 +35,6 @@ class CashierController
         $reservation = Reservation::find($id);
         $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
         $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
-        $adults = $reservation->adults;
         $services = Service::all();
 
         $reservations = Reservation::whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->get();
@@ -69,7 +68,7 @@ class CashierController
             }
         }
 
-        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->where('capacity', '>=', $adults)->get();
+        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
 
         $diff = date_diff($startDate, $endDate);
         $diff = $diff->days;
@@ -482,12 +481,10 @@ class CashierController
     {
         $today = Carbon::today()->format('Y-m-d');
         $checkOutDate = $request->get('check_out_date');
-        $pax = $request->get('persons');
 
         $details = [
             'start_date' => $today,
             'end_date' => $checkOutDate,
-            'adults' => $pax,
         ];
 
         if(!Session::has('details')) {
@@ -530,9 +527,9 @@ class CashierController
             }
         }
 
-        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->where('capacity', '>=', $pax)->get();
+        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
 
-        return view('cashier.walk-in-rooms', ['roomTypes' => $roomTypes, 'rooms' => $rooms, 'today' => $today, 'checkOutDate' => $checkOutDate, 'pax' => $pax]);
+        return view('cashier.walk-in-rooms', ['roomTypes' => $roomTypes, 'rooms' => $rooms, 'today' => $today, 'checkOutDate' => $checkOutDate]);
     }
     public function addToCart(Request $request)
     {
@@ -647,7 +644,7 @@ class CashierController
             'code' => strtoupper($rand),
             'total' => 0,
             'children' => 0,
-            'adults' => $details['adults'],
+            'adults' => 0,
         ]);
 
         foreach($items as $key => $value) {

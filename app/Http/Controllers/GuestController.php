@@ -28,7 +28,6 @@ class GuestController extends Controller
         $rules = [
             'start_date' => 'required|date|date_format:Y-m-d|before:end_date',
             'end_date' => 'required|date|date_format:Y-m-d|after:start_date',
-            'adults' => 'required|numeric',
         ];
 
         //this will redirect back on validation error
@@ -36,12 +35,10 @@ class GuestController extends Controller
 
         $startDate = \DateTime::createFromFormat("Y-m-d", $request->get('start_date'))->format('Y-m-d');
         $endDate = \DateTime::createFromFormat("Y-m-d", $request->get('end_date'))->format('Y-m-d');
-        $adults = $request->get('adults');
 
         $details = [
             'start_date' => $startDate,
             'end_date' => $endDate,
-            'adults' => $adults,
         ];
 
         if(!Session::has('details')) {
@@ -54,7 +51,7 @@ class GuestController extends Controller
             }
         }
 
-        $reservations = Reservation::whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->where('status', '!=','checked_out')->where('status', '!=', 'cancelled')->get();
+        $reservations = Reservation::where('status', '!=','checked_out')->where('status', '!=', 'cancelled')->whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->get();
 
         //this will hold the value of room id and its corresponding current quantity in the reservations selected
         $rooms = [];
@@ -87,15 +84,22 @@ class GuestController extends Controller
 
         $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
 
-        return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'adults', 'rooms'));
+        return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'rooms'));
     }
 
     public function addToCart(Request $request)
     {
         $id = $request->get('id');
         $quantity = $request->get('value');
-        if ($quantity == 0) {
+        $pax = $request->get('pax');
+        if ($quantity == 0 || $pax == 0) {
             Session::flash('error_message', 'Invalid Quantity. Please try again');
+            return redirect()->back();
+        }
+
+        $type = RoomTYpe::find($id);
+        if($type->capacity < $pax) {
+            Session::flash('error_message', 'Cannot accommodate # of persons in the room');
             return redirect()->back();
         }
 
@@ -194,7 +198,7 @@ class GuestController extends Controller
             'code' => strtoupper($rand),
             'total' => 0,
             'children' => 0,
-            'adults' => $details['adults'],
+            'adults' => 0,
         ]);
 
         foreach($items as $key => $value) {

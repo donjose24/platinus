@@ -4,21 +4,7 @@
 <div class="home-content">
     <h1 class="welcome-text">Room &amp; Rates</h1>
     <div class="reservation-container">
-      {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
-        <ul>
-            <li><label class="d-block" for="start_date">Start Date</label><input readonly type="text" name="start_date"  placeholder="From" class="datetime-picker" /></li>
-            <li><label class="d-block" for="end_date">End Date</label><input readonly type="text" name="end_date" placeholder="To" class="datetime-picker" /></li>
-            <li><label class="d-block" for="adults"># of Guests</label><input readonly type="number" name="adults" class="no-guest spinner" value="0" min="0" max="50"/></li>
-            <li><button class="btn btn-custom-default w-100">Book Now</button></li>
-        </ul>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
-            </div>
-        @endif
-      {{Form::close()}}
+        @include('search-bar')
     </div>
 </div>
 <div class="page-content reservation-content">
