@@ -500,7 +500,7 @@ class CashierController
             }
         }
 
-        $reservations = Reservation::whereBetween('start_date', [$today, $checkOutDate])->orWhereBetween('end_date', [$today, $checkOutDate])->get();
+        $reservations = Reservation::whereBetween('start_date', [$today, $checkOutDate])->orWhereBetween('end_date', [$today, $checkOutDate])->where('status', '!=','checked_out')->where('status', '!=', 'cancelled')->get();
         //this will hold the value of room id and its corresponding current quantity in the reservations selected
         $rooms = [];
         foreach ($reservations as $reservation) {
