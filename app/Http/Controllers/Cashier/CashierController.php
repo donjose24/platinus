@@ -497,7 +497,7 @@ class CashierController
             }
         }
 
-        $reservations = Reservation::whereBetween('start_date', [$today, $checkOutDate])->orWhereBetween('end_date', [$today, $checkOutDate])->where('status', '!=','checked_out')->where('status', '!=', 'cancelled')->get();
+        $reservations = Reservation::where('status', '!=','checked_out')->where('status', '!=', 'cancelled')->whereBetween('start_date', [$today, $checkOutDate])->orWhereBetween('end_date', [$today, $checkOutDate])->get();
         //this will hold the value of room id and its corresponding current quantity in the reservations selected
         $rooms = [];
         foreach ($reservations as $reservation) {
@@ -535,7 +535,8 @@ class CashierController
     {
         $id = $request->get('id');
         $quantity = $request->get('value');
-        if ($quantity == 0) {
+        $pax = $request->get('pax');
+        if ($quantity == 0 || $pax == 0) {
             Session::flash('error_message', 'Invalid Quantity. Please try again');
             return redirect()->back();
         }
