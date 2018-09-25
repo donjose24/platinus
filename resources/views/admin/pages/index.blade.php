@@ -36,18 +36,7 @@
                         <td>
                             <a href="{{ url('/admin/pages/' . $item->id) }}" title="View Page"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                             <a href="{{ url('/admin/pages/' . $item->id . '/edit') }}" title="Edit Page"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
-                            {!! Form::open([
-                                'method' => 'DELETE',
-                                'url' => ['/admin/pages', $item->id],
-                                'style' => 'display:inline'
-                            ]) !!}
-                                {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', array(
-                                        'type' => 'submit',
-                                        'class' => 'btn btn-danger btn-sm',
-                                        'title' => 'Delete Page',
-                                        'onclick'=>'return confirm("Confirm delete?")'
-                                )) !!}
-                            {!! Form::close() !!}
+                            
                         </td>
                     </tr>
                 @endforeach
