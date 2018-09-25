@@ -51,7 +51,7 @@ class GuestController extends Controller
             }
         }
 
-        $reservations = Reservation::where('status', '!=','checked_out')->where('status', '!=', 'cancelled')->whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->get();
+        $reservations = Reservation::whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->where('status', '!=','checked_out')->where('status', '!=', 'cancelled')->get();
 
         //this will hold the value of room id and its corresponding current quantity in the reservations selected
         $rooms = [];

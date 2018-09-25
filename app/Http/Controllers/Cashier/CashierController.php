@@ -535,7 +535,8 @@ class CashierController
     {
         $id = $request->get('id');
         $quantity = $request->get('value');
-        if ($quantity == 0) {
+        $pax = $request->get('pax');
+        if ($quantity == 0 || $pax == 0) {
             Session::flash('error_message', 'Invalid Quantity. Please try again');
             return redirect()->back();
         }
