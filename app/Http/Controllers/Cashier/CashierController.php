@@ -645,14 +645,42 @@ class CashierController
         return redirect()->back();
     }
 
-    public function upgrade(Request $request)
+    public function getAvailableUpgradeRooms(Request $request)
     {
-        $room = $request->get('room_id_type');
+        $room = $request->get('room_type_id');
         $id = $request->get('reservation_id');
 
-        $reservation =Reservation::find($id);
-        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
-        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+        $reservation = Reservation::find($id);
+        $roomType = RoomType::find($room);
+        $dontDisplay = RoomType::where('daily_rate', '<', $roomType->daily_rate)->pluck('id');
+        $dontDisplay[] = $room;
 
+        $roomTypes = ReservationHelper::getAvailableRooms($reservation->start_date, $reservation->end_date, $dontDisplay);
+        return json_encode($roomTypes['roomTypes']);
+    }
+
+    public function upgrade(Request $request)
+    {
+        $roomType = $request->get('room_type_id');
+        $reservationRoomID = $request->get('reservation_room_id');
+
+        $type = RoomType::find($roomType);
+        $reservationLoad = ReservationRoom::find($reservationRoomID);
+        $reservationLoad->room_id = $roomType;
+        $reservationLoad->price = $type->price;
+        $oldRoomNumber = $reservationLoad->room_number_id;
+        $reservationLoad->room_number_id = 0;
+
+        $reservationLoad->save();
+
+        if ($oldRoomNumber != 0) {
+            $room = Room::find($oldRoomNumber);
+            $room->status = "ready";
+            $room->save();
+        }
+
+
+        Session::flash('flash_message', 'Update success');
+        return redirect()->back();
     }
 }

@@ -73,8 +73,6 @@ $(document).ready(() => {
             url: '/cashier/rooms/available?room_id=' + id
         }).done((data) => {
             rooms = JSON.parse(data);
-
-
             for (key in rooms) {
                 if (key != prevRoomID) {
                     $("#editRoom").append('<option value="' + key + '">' + rooms[key] + '</option>');
@@ -161,5 +159,26 @@ $(document).ready(() => {
     $('.back-cancel').click((e) => {
         e.preventDefault();
         $( "#cancelDialog" ).dialog('close');
+    });
+
+    $('.upgrade-button').click(function(e) {
+        e.preventDefault();
+        id = $(this).data('id');
+        reservationID = $(this).data('reservation');
+        roomLoad = $(this).data('reservation-room');
+        $.ajax({
+            method: "GET",
+            url: '/cashier/upgradeRooms?room_type_id=' + id + '&reservation_id=' + reservationID
+        }).done((data) => {
+            $("#reservation_room_id").val(roomLoad);
+            $("#room_type_id").empty();
+            $("#showUpgrade").dialog({
+                modal: true,
+            });
+            rooms = JSON.parse(data);
+            for (key in rooms) {
+                $("#room_type_id").append('<option value="' + rooms[key].id + '">' + rooms[key].name + '(' + rooms[key].daily_rate + ')</option>');
+            }
+        })
     });
 });

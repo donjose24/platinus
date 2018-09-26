@@ -44,7 +44,7 @@
                     <div class="w-25 p-3 border-right border-bottom">
                         <div class="mb-2"> Room Number</div>
                         @php
-                            if($reservation->status == "approved" && $room->pivot->room_number_id == 0) {
+                            if($room->pivot->room_number_id == 0) {
                                 if(\Carbon\Carbon::today()->gte($startDate))
                                 {
                                     $rooms = $room->rooms()->where('status', 'ready')->pluck('number', 'id');
@@ -68,6 +68,7 @@
                         @if($reservation->status == "checked_in")
                             <p class="mb-2">Actions</p>
                             <button class="btn btn-custom-default edit-button" data-id="{{ $room->id }}" data-reservation="{{ $room->pivot->id }}"> Edit </button>
+                            <button class="btn btn-custom-primary upgrade-button" data-id="{{ $room->id }}" data-reservation="{{ $reservation->id }}" data-reservation-room="{{ $room->pivot->id }}"> Upgrade </button>
                             <button class="btn btn-danger delete-button" data-reservation="{{ $room->pivot->id }}"> Delete </button>
                         @endif
                     </div>
@@ -249,6 +250,14 @@
         {{ Form::hidden('id', $reservation->id) }}
         {{ Form::submit('Yes', ['class' => 'btn btn-danger mt-2']) }}
         {{ Form::submit('Back', ['class' => 'btn btn-primary mt-2 back-cancel']) }}
+        {{ Form::close() }}
+    </div>
+    <div id="showUpgrade" title="Upgrade Room">
+        {{ Form::open(['url' => '/cashier/upgrade-room/save']) }}
+            {{ Form::label('room_type_id', 'Please select a room') }}
+            {{ Form::select('room_type_id', [], null, ['id' => 'room_type_id', 'class' => 'form-control']) }}
+            {{ Form::hidden('reservation_room_id', $reservation->id, ['id' => 'reservation_room_id']) }}
+            <button class="btn btn-primary mt-2 float-right"> Upgrade </button>
         {{ Form::close() }}
     </div>
 @endsection

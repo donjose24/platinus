@@ -8,7 +8,7 @@ use Session;
 
 class ReservationHelper {
 
-    public static function getAvailableRooms($startDate, $endDate)
+    public static function getAvailableRooms($startDate, $endDate, $dontDisplay = [])
     {
         $startDate = \DateTime::createFromFormat("Y-m-d", $startDate)->format('Y-m-d');
         $endDate = \DateTime::createFromFormat("Y-m-d", $endDate)->format('Y-m-d');
@@ -50,7 +50,6 @@ class ReservationHelper {
         }
 
         $roomTypes = RoomType::whereIn('id', array_keys($rooms))->get();
-        $dontDisplay = [];
 
         foreach($roomTypes as $type) {
             $max = $type->rooms()->where('status', '!=', 'inactive')->count();

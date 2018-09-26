@@ -115,6 +115,8 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
     Route::get('walk-in/reservation/preview', 'CashierController@preview');
     Route::post('walk-in/reservation/checkout', 'CashierController@reserve');
     Route::post('reservation/reserve', 'CashierController@reserveRoom');
+    Route::get('upgradeRooms', 'CashierController@getAvailableUpgradeRooms');
+    Route::post('upgrade-room/save', 'CashierController@upgrade');
 });
 
 Route::get('dashboard', 'Auth\LoginController@redirect');
