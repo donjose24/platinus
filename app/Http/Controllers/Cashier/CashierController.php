@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cashier;
 
 
+use App\Helpers\ReservationHelper;
 use App\Mail\ReservationApproved;
 use App\Mail\ReservationRejected;
 use App\Reservation;
@@ -471,54 +472,10 @@ class CashierController
         $today = Carbon::today()->format('Y-m-d');
         $checkOutDate = $request->get('check_out_date');
 
-        $details = [
-            'start_date' => $today,
-            'end_date' => $checkOutDate,
-        ];
 
-        if(!Session::has('details')) {
-            Session::put('details', $details);
-        } else {
-            $savedDetails = Session::get('details');
-            if($savedDetails != $details) {
-                Session::put('details', $details);
-                Session::forget('items');
-            }
-        }
-
-        $reservations = Reservation::where('status', '!=','checked_out')->where('status', '!=', 'cancelled')->whereBetween('start_date', [$today, $checkOutDate])->orWhereBetween('end_date', [$today, $checkOutDate])->get();
-        return var_dump($reservations);
-        //this will hold the value of room id and its corresponding current quantity in the reservations selected
-        $rooms = [];
-        foreach ($reservations as $reservation) {
-            $roomTypes = $reservation->roomTypes()->pluck('room_types.id');
-            foreach ($roomTypes as $room) {
-                $rooms[$room] = 0;
-            }
-        }
-
-        foreach ($reservations as $reservation) {
-            foreach($reservation->roomTypes()->get() as $type) {
-                foreach($rooms as $key => $room) {
-                    if($type->id == $key) {
-                        $rooms[$key] = $room + 1 ;
-                    }
-                }
-            }
-        }
-
-        $roomTypes = RoomType::whereIn('id', array_keys($rooms))->get();
-        $dontDisplay = [];
-
-        foreach($roomTypes as $type) {
-            $max = $type->rooms()->where('status', '!=', 'inactive')->count();
-            if($max <= $rooms[$type->id]) {
-                $dontDisplay[] = $type->id;
-            }
-        }
-
-        $roomTypes = RoomType::has("validRooms")->whereNotIn('id', $dontDisplay)->get();
-
+        $result = ReservationHelper::getAvailableRooms($today, $checkOutDate);
+        $roomTypes = $result['roomTypes'];
+        $rooms = $result['rooms'];
         return view('cashier.walk-in-rooms', ['roomTypes' => $roomTypes, 'rooms' => $rooms, 'today' => $today, 'checkOutDate' => $checkOutDate]);
     }
     public function addToCart(Request $request)
@@ -686,5 +643,16 @@ class CashierController
         $item->save();
 
         return redirect()->back();
+    }
+
+    public function upgrade(Request $request)
+    {
+        $room = $request->get('room_id_type');
+        $id = $request->get('reservation_id');
+
+        $reservation =Reservation::find($id);
+        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+
     }
 }
