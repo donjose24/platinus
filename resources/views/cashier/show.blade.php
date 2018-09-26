@@ -73,16 +73,16 @@
         @endforeach
         <div class="text-right mt-3">
             @if($reservation->status == "approved" || $reservation->status == "checked_in")
-                <a href="#" class="btn btn-custom-default p-2 w-25 add-new-room"> Add Room </a>
+                <a href="#" class="btn btn-custom-default p-2 w-25 add-new-room mt-2"> Add Room </a>
             @endif
-            @if($reservation->status == "approved" && \Carbon\Carbon::today()->gte($startDate))
+            @if($reservation->status == "approved" && $startDate->gte(\Carbon\Carbon::today()))
                 {{ Form::open(['url' => '/cashier/checkin']) }}
-                    <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
+                    <button class="btn btn-custom-default w-25 p-2 mt-2"> Check In </button>
                     {{ Form::hidden('id', $reservation->id) }}
                 {{ Form::close() }}
             @endif
             @if($reservation->status == "approved")
-                <a href="#" class="btn btn-custom-default p-2 w-25 rebookBtn"> Rebook </a>
+                <a href="#" class="btn btn-custom-default p-2 w-25 rebookBtn mt-2"> Rebook </a>
             @endif
         </div>
 
@@ -246,10 +246,10 @@
     </div>
     <div id="cancelDialog" title="Cancel Reservation">
         {{ Form::open(['url' => '/cashier/reservation/cancel']) }}
-        {{ Form::label('confirmation', 'Are you sure you want to cancel this reservation?') }}
-        {{ Form::hidden('id', $reservation->id) }}
-        {{ Form::submit('Yes', ['class' => 'btn btn-danger mt-2']) }}
-        {{ Form::submit('Back', ['class' => 'btn btn-primary mt-2 back-cancel']) }}
+            {{ Form::label('confirmation', 'Are you sure you want to cancel this reservation?') }}
+            {{ Form::hidden('id', $reservation->id) }}
+            {{ Form::submit('Yes', ['class' => 'btn btn-danger mt-2']) }}
+            {{ Form::submit('Back', ['class' => 'btn btn-primary mt-2 back-cancel']) }}
         {{ Form::close() }}
     </div>
     <div id="showUpgrade" title="Upgrade Room">
