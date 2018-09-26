@@ -4,6 +4,7 @@
     @php
         $total = 0;
         $totalAmountRoom = 0;
+        $startDate = \Carbon\Carbon::createFromFormat('Y-m-d', $reservation->start_date);
     @endphp
     <div class="view-content">
         <h1 class="mb-3">Reservation details</h1>
@@ -20,16 +21,15 @@
                 <h5 class="font-weight-bold mb-3">{{ $reservation->user->name }}</h5>
                 <p class="mb-1">{{ $reservation->user->email }}</p>
                 <p class="mb-1">
-                    <span class="full-date mr-2">{{ $reservation->start_date }}</span>
-                    <i class="fa fa-arrow-right"></i>
-                    <span class="full-date ml-2">{{ $reservation->end_date }}</span>
+                <span class="full-date mr-2">{{ $reservation->start_date }}</span>
+                <i class="fa fa-arrow-right"></i>
+                <span class="full-date ml-2">{{ $reservation->end_date }}</span>
                 </p>
                 <p class="mb-0">{{ $diff }} Night/s</p>
                 <p class="mb-0">Status: <b>{{ $reservation->status }}</b></p>
             </div>
         </div>
         <h1 class="mb-3">Rooms</h1>
-        {{ Form::open(['url' => '/cashier/checkin']) }}
         @foreach($reservation->roomTypes()->withPivot('price')->withPivot('id')->withPivot('room_number_id')->wherePivot('deleted_at', null)->get() as $room)
             <div class="card w-100 mb-0">
                 <div class="card-body d-flex p-0">
@@ -44,17 +44,25 @@
                     <div class="w-25 p-3 border-right border-bottom">
                         <div class="mb-2"> Room Number</div>
                         @php
-                            if($reservation->status == "approved" || $room->pivot->room_number_id == 0) {
-                                $rooms = $room->rooms()->where('status', 'ready')->pluck('number', 'id');
-                                $rooms[-1] = "Please select a room";
-                                echo Form::select('rooms[]', $rooms, '-1', ['class' => 'form-control']);
+                            if($reservation->status == "approved" && $room->pivot->room_number_id == 0) {
+                                if(\Carbon\Carbon::today()->gte($startDate))
+                                {
+                                    $rooms = $room->rooms()->where('status', 'ready')->pluck('number', 'id');
+                                    $rooms[-1] = "Please select a room";
+                                    echo Form::open(['url' => '/cashier/reservation/reserve']);
+                                    echo Form::select('room', $rooms, '-1', ['class' => 'form-control']);
+                                    echo Form::hidden('room_type', $room->id);
+                                    echo '<button class="btn btn-primary mt-2 float-right">Reserve</button>';
+                                    echo Form::hidden('id', $room->pivot->id);
+                                    echo Form::close();
+                                }
+
                             } else {
                                 echo '<h5 class="mb-0 font-weight-bold">'. \App\Room::find($room->pivot->room_number_id)->number . ' </h5>';
                             }
-                        $total += ($room->daily_rate * $diff);
-                        $totalAmountRoom += ($room->daily_rate * $diff);
+                            $total += ($room->daily_rate * $diff);
+                            $totalAmountRoom += ($room->daily_rate * $diff);
                         @endphp
-                        {{ Form::hidden('ids[]', $room->pivot->id) }}
                     </div>
                     <div class="w-25 p-3 border-bottom">
                         @if($reservation->status == "checked_in")
@@ -71,11 +79,12 @@
                 <a href="#" class="btn btn-custom-default p-2 w-25 add-new-room"> Add Room </a>
             @endif
         </div>
-        @if($reservation->status == "approved")
-            <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
+        @if($reservation->status == "approved" && \Carbon\Carbon::today()->gte($startDate))
+            {{ Form::open(['url' => '/cashier/checkin']) }}
+                <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
+                {{ Form::hidden('id', $reservation->id) }}
+            {{ Form::close() }}
         @endif
-        {{ Form::hidden('reservation_id', $reservation->id) }}
-        {{ Form::close() }}
         @php
             $totalPaid = 0;
         @endphp
@@ -113,7 +122,6 @@
                     if ($transaction->status == "paid") {
                         $totalPaid += $transaction->price;
                     }
-
                 @endphp
             @endforeach
         @else
@@ -189,28 +197,28 @@
         Additional Services:
         @foreach ($services as $service)
             {{ Form::open(['url' => '/cashier/reservation/services']) }}
-                <h3>{{ Form::label('name', $service->name ) }}</h3>
-                <h5>{{ Form::label('price', number_format($service->price, 2)) }}</h5>
-                Quantity
-                <input class="spinner" readonly name="quantity" min="1" value="1" max="" type="number">
-                {{ Form::hidden('name', $service->name) }}
-                {{ Form::hidden('price', $service->price) }}
-                {{ Form::hidden('reservation_id', $reservation->id) }}
-                <button class="btn btn-primary mt-2"> Add </button>
-                <hr>
+            <h3>{{ Form::label('name', $service->name ) }}</h3>
+            <h5>{{ Form::label('price', number_format($service->price, 2)) }}</h5>
+            Quantity
+            <input class="spinner" readonly name="quantity" min="1" value="1" max="" type="number">
+            {{ Form::hidden('name', $service->name) }}
+            {{ Form::hidden('price', $service->price) }}
+            {{ Form::hidden('reservation_id', $reservation->id) }}
+            <button class="btn btn-primary mt-2"> Add </button>
+            <hr>
             {{ Form::close() }}
         @endforeach
     </div>
     <div id="addDamages" title="Add Damages">
         Add Damages:
         {{ Form::open(['url' => '/cashier/reservation/services']) }}
-            {{ Form::label('name', "Name") }}
-            {{ Form::text('name', '', ['class' => 'form-control']) }}
-            {{ Form::label('price', 'Amount') }}
-            {{ Form::number('price', '', ['class' => 'form-control']) }}
-            {{ Form::hidden('quantity', 1) }}
-            {{ Form::hidden('reservation_id', $reservation->id) }}
-            <button class="btn btn-primary mt-2"> Save </button>
+        {{ Form::label('name', "Name") }}
+        {{ Form::text('name', '', ['class' => 'form-control']) }}
+        {{ Form::label('price', 'Amount') }}
+        {{ Form::number('price', '', ['class' => 'form-control']) }}
+        {{ Form::hidden('quantity', 1) }}
+        {{ Form::hidden('reservation_id', $reservation->id) }}
+        <button class="btn btn-primary mt-2"> Save </button>
         {{ Form::close() }}
     </div>
     <div id="checkoutModal" title="Checkout">

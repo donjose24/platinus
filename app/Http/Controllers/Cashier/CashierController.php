@@ -176,32 +176,21 @@ class CashierController
 
     public function checkIn(Request $request)
     {
-        $rooms = $request->get('rooms');
+        $id = $request->get('id');
+        $count = ReservationRoom::where('reservation_id', $id)->where('room_number_id', 0)->count();
 
-        if (count($rooms) !== count(array_unique($rooms))) {
-            Session::flash('error_message', 'Duplicate rooms detected, please select different rooms');
+        if ($count != 0) {
+            Session::flash('error_message', 'Please complete all room reservation first');
             return redirect()->back();
         }
 
-        $request->validate([
-            'rooms.*' => 'required|not_in:-1,'
-        ], [
-            'rooms.*' => 'Invalid Room Number'
-        ]);
+        $rooms = ReservationRoom::where('reservation_id', $id)->pluck('room_number_id');
 
-        $id = $request->get('reservation_id');
-        $ids = $request->get('ids');
-        foreach($rooms as $key => $room) {
-            $load = ReservationRoom::find($ids[$key]);
-            $load->room_number_id = $room;
-            $load->save();
-
-            //set room as in used
-            $roomNumber = Room::find($room);
-            $roomNumber->status = "checked-in";
-            $roomNumber->save();
+        foreach($rooms as $room) {
+            $item = Room::find($room);
+            $item->status = 'checked-in';
+            $item->save();
         }
-
 
         $reservation = Reservation::find($id);
         $reservation->check_in = Carbon::now();
@@ -672,5 +661,29 @@ class CashierController
         Session::forget('items');
 
         return redirect('/cashier/reservation/' . $reservation->id);
+    }
+
+    public function reserveRoom(Request $request)
+    {
+        $request->validate([
+            'room' => 'required|not_in:-1,',
+        ], [
+            'rooms.*' => 'Invalid Room Number'
+        ]);
+
+        $room = $request->get('room');
+        $roomType = RoomType::find($request->get('room_type'));
+        $id = $request->get('id');
+
+        $roomLoad = ReservationRoom::find($id);
+        $roomLoad->room_number_id = $room;
+        $roomLoad->price = $roomType->daily_rate;
+        $roomLoad->save();
+
+        $item = Room::find($room);
+        $item->status = "reserved";
+        $item->save();
+
+        return redirect()->back();
     }
 }
