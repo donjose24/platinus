@@ -32,7 +32,7 @@ $(document).ready(() => {
         });
     }
 
-    if($('.data-table').length > 0) {
+    if ($('.data-table').length > 0) {
         $('.data-table').DataTable();
     }
 
@@ -59,7 +59,7 @@ $(document).ready(() => {
         }
     }
 
-    $('.edit-button').click(function(e) {
+    $('.edit-button').click(function (e) {
         $("#edit-error").hide();
         id = $(this).data('id');
         reservationID = $(this).data('reservation');
@@ -84,38 +84,38 @@ $(document).ready(() => {
                 $("#editRoomID").val(prevRoomID);
                 $("#editReservationID").val(reservationID);
             } else {
-                $( "#editDialog" ).append("<center style='color:red' id='edit-error'> No vacant rooms available right now. </center>");
+                $("#editDialog").append("<center style='color:red' id='edit-error'> No vacant rooms available right now. </center>");
             }
 
         }).fail((e) => {
             alert("error: " + e.toString());
         });
 
-        $( "#editDialog" ).dialog({
+        $("#editDialog").dialog({
             modal: true
         })
     });
 
-    $('.delete-button').click(function(e) {
+    $('.delete-button').click(function (e) {
         e.preventDefault();
         id = $(this).data('id');
         reservationID = $(this).data('reservation');
 
         $("#deleteReservationID").val(reservationID);
-        $( "#deleteDialog" ).dialog({
+        $("#deleteDialog").dialog({
             modal: true
         })
     });
 
     $('.back').click((e) => {
         e.preventDefault();
-        $( "#deleteDialog" ).dialog('close');
+        $("#deleteDialog").dialog('close');
     });
 
     $('.add-new-room').click((e) => {
         e.preventDefault();
         $("#addDialog").dialog({
-            modal:true,
+            modal: true,
             minWidth: 600,
         });
     });
@@ -130,7 +130,7 @@ $(document).ready(() => {
 
     $(".add-damages").click((e) => {
         e.preventDefault();
-         $("#addDamages").dialog({
+        $("#addDamages").dialog({
             modal: true,
             minWidth: 400,
         })
@@ -146,22 +146,22 @@ $(document).ready(() => {
 
     $('.cancel').click((e) => {
         e.preventDefault();
-        $( "#checkoutModal" ).dialog('close');
+        $("#checkoutModal").dialog('close');
     });
 
     $('.cancelReservation').click((e) => {
         e.preventDefault();
-        $( "#cancelDialog" ).dialog({
+        $("#cancelDialog").dialog({
             modal: true,
         });
     });
 
     $('.back-cancel').click((e) => {
         e.preventDefault();
-        $( "#cancelDialog" ).dialog('close');
+        $("#cancelDialog").dialog('close');
     });
 
-    $('.upgrade-button').click(function(e) {
+    $('.upgrade-button').click(function (e) {
         e.preventDefault();
         id = $(this).data('id');
         reservationID = $(this).data('reservation');
@@ -181,4 +181,11 @@ $(document).ready(() => {
             }
         })
     });
+
+    $('.rebookBtn').click((e) =>{
+        e.preventDefault();
+        $("#showRebook").dialog({
+            modal: true,
+        });
+    })
 });

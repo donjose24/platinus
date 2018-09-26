@@ -45,8 +45,6 @@
                         <div class="mb-2"> Room Number</div>
                         @php
                             if($room->pivot->room_number_id == 0) {
-                                if(\Carbon\Carbon::today()->gte($startDate))
-                                {
                                     $rooms = $room->rooms()->where('status', 'ready')->pluck('number', 'id');
                                     $rooms[-1] = "Please select a room";
                                     echo Form::open(['url' => '/cashier/reservation/reserve']);
@@ -55,8 +53,6 @@
                                     echo '<button class="btn btn-primary mt-2 float-right">Reserve</button>';
                                     echo Form::hidden('id', $room->pivot->id);
                                     echo Form::close();
-                                }
-
                             } else {
                                 echo '<h5 class="mb-0 font-weight-bold">'. \App\Room::find($room->pivot->room_number_id)->number . ' </h5>';
                             }
@@ -79,13 +75,17 @@
             @if($reservation->status == "approved" || $reservation->status == "checked_in")
                 <a href="#" class="btn btn-custom-default p-2 w-25 add-new-room"> Add Room </a>
             @endif
+            @if($reservation->status == "approved" && \Carbon\Carbon::today()->gte($startDate))
+                {{ Form::open(['url' => '/cashier/checkin']) }}
+                    <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
+                    {{ Form::hidden('id', $reservation->id) }}
+                {{ Form::close() }}
+            @endif
+            @if($reservation->status == "approved")
+                <a href="#" class="btn btn-custom-default p-2 w-25 rebookBtn"> Rebook </a>
+            @endif
         </div>
-        @if($reservation->status == "approved" && \Carbon\Carbon::today()->gte($startDate))
-            {{ Form::open(['url' => '/cashier/checkin']) }}
-                <div class="text-right mt-4"><button class="btn btn-custom-default w-25 p-2"> Check In </button></div>
-                {{ Form::hidden('id', $reservation->id) }}
-            {{ Form::close() }}
-        @endif
+
         @php
             $totalPaid = 0;
         @endphp
@@ -259,5 +259,15 @@
             {{ Form::hidden('reservation_room_id', $reservation->id, ['id' => 'reservation_room_id']) }}
             <button class="btn btn-primary mt-2 float-right"> Upgrade </button>
         {{ Form::close() }}
+    </div>
+    <div id="showRebook" title="Rebooking">
+        {{ Form::open(['url' => '/cashier/rebook', 'method' => 'get']) }}
+            {{ Form::label('start_date', 'Start Date') }}
+            {{ Form::date('start_date', '', ['class' => 'form-control', 'min'=>\Carbon\Carbon::now()->format("Y-m-d"), 'required' => 'true' ]) }}
+            {{ Form::label('end_date', 'End Date') }}
+            {{ Form::date('end_date', '', ['class' => 'form-control', 'min'=>\Carbon\Carbon::now()->format("Y-m-d"), 'required' => 'true' ]) }}
+            {{ Form::hidden('reservation_id', $reservation->id) }}
+            <button class="btn btn-primary mt-2 float-right"> Rebook </button>
+         {{ Form::close() }}
     </div>
 @endsection
