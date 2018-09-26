@@ -667,7 +667,7 @@ class CashierController
         $type = RoomType::find($roomType);
         $reservationLoad = ReservationRoom::find($reservationRoomID);
         $reservationLoad->room_id = $roomType;
-        $reservationLoad->price = $type->price;
+        $reservationLoad->price = $type->daily_rate;
         $oldRoomNumber = $reservationLoad->room_number_id;
         $reservationLoad->room_number_id = 0;
 
@@ -682,5 +682,10 @@ class CashierController
 
         Session::flash('flash_message', 'Update success');
         return redirect()->back();
+    }
+
+    public function rebook(Request $request)
+    {
+
     }
 }
