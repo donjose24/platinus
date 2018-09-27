@@ -698,9 +698,54 @@ class CashierController
         $result = ReservationHelper::getAvailableRooms($request->get('start_date'), $request->get('end_date'));
         $availableRoomTypes = $result['roomTypes']->pluck('id')->toArray();
 
-        $currentRoomTypes = $reservation->roomTypes()->wherePivot('deleted_at', null)->pluck('room_id')->toArray();
-        $different = array_diff($availableRoomTypes, $currentRoomTypes);
+        if (count($availableRoomTypes) == 0) {
+            Session::flash('error_message', 'No rooms available for the dates selected');
+            return  redirect()->back();
+        }
 
-        return view('cashier.rebook', compact('reservation', 'different'));
+        $currentRoomTypes = $reservation->roomTypes()->wherePivot('deleted_at', null)->pluck('room_id')->toArray();
+        $roomsWillBeRemoved = [];
+        foreach($currentRoomTypes as $type) {
+            if (in_array($type, $availableRoomTypes)) {
+                continue;
+            }
+            $roomsWillBeRemoved[] = $type;
+        }
+
+        return view('cashier.rebook', compact('reservation', 'roomsWillBeRemoved'));
+    }
+
+    public function rebook(Request $request)
+    {
+        $reservationID = $request->get('reservation_id');
+
+        $reservation = Reservation::find($reservationID);
+        $result = ReservationHelper::getAvailableRooms($request->get('start_date'), $request->get('end_date'));
+        $availableRoomTypes = $result['roomTypes']->pluck('id')->toArray();
+
+        if (count($availableRoomTypes) == 0) {
+            Session::flash('error_message', 'No rooms available for the dates selected');
+            return  redirect()->back();
+        }
+
+        $currentRoomTypes = $reservation->roomTypes()->wherePivot('deleted_at', null)->pluck('room_id')->toArray();
+        $roomsWillBeRemoved = [];
+        foreach($currentRoomTypes as $type) {
+            if (in_array($type, $availableRoomTypes)) {
+                continue;
+            }
+            $roomsWillBeRemoved[] = $type;
+        }
+
+        $reservation->start_date = $request->get('start_date');
+        $reservation->end_date = $request->get('end_date');
+        $reservation->save();
+
+        foreach($roomsWillBeRemoved as $room) {
+            $room = ReservationRoom::where('reservation_id',$reservationID)->where('room_id', $room)->first();
+            $room->delete();
+        }
+
+        return redirect()->to('/cashier/reservation/'. $reservation->id);
     }
 }

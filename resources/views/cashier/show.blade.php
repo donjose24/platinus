@@ -64,15 +64,15 @@
                         @if($reservation->status == "checked_in")
                             <p class="mb-2">Actions</p>
                             <button class="btn btn-custom-default edit-button" data-id="{{ $room->id }}" data-reservation="{{ $room->pivot->id }}"> Edit </button>
-                            <button class="btn btn-custom-primary upgrade-button" data-id="{{ $room->id }}" data-reservation="{{ $reservation->id }}" data-reservation-room="{{ $room->pivot->id }}"> Upgrade </button>
                             <button class="btn btn-danger delete-button" data-reservation="{{ $room->pivot->id }}"> Delete </button>
                         @endif
+                        <button class="btn btn-custom-primary upgrade-button" data-id="{{ $room->id }}" data-reservation="{{ $reservation->id }}" data-reservation-room="{{ $room->pivot->id }}"> Upgrade </button>
                     </div>
                 </div>
             </div>
         @endforeach
         <div class="text-right mt-3">
-            @if($reservation->status == "approved" || $reservation->status == "checked_in")
+            @if($reservation->status != "checked_out")
                 <a href="#" class="btn btn-custom-default p-2 w-25 add-new-room mt-2"> Add Room </a>
             @endif
             @if($reservation->status == "approved" && $startDate->lte(\Carbon\Carbon::today()))
@@ -81,9 +81,7 @@
                     {{ Form::hidden('id', $reservation->id) }}
                 {{ Form::close() }}
             @endif
-            @if($reservation->status == "approved")
                 <a href="#" class="btn btn-custom-default p-2 w-25 rebookBtn mt-2"> Rebook </a>
-            @endif
         </div>
 
         @php
