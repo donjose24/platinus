@@ -75,7 +75,7 @@
             @if($reservation->status == "approved" || $reservation->status == "checked_in")
                 <a href="#" class="btn btn-custom-default p-2 w-25 add-new-room mt-2"> Add Room </a>
             @endif
-            @if($reservation->status == "approved" && $startDate->gte(\Carbon\Carbon::today()))
+            @if($reservation->status == "approved" && $startDate->lte(\Carbon\Carbon::today()))
                 {{ Form::open(['url' => '/cashier/checkin']) }}
                     <button class="btn btn-custom-default w-25 p-2 mt-2"> Check In </button>
                     {{ Form::hidden('id', $reservation->id) }}
