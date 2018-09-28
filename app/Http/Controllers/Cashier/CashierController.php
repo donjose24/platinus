@@ -75,8 +75,9 @@ class CashierController
         $diff = $diff->days;
 
         $reservation = Reservation::find($id);
+        $tax = setting('tax');
 
-        return view('cashier.show', compact('reservation', 'diff', 'roomTypes', 'services'));
+        return view('cashier.show', compact('reservation', 'diff', 'roomTypes', 'services', 'tax'));
     }
 
     public function deposits()
@@ -94,8 +95,21 @@ class CashierController
 
         $diff = date_diff($startDate, $endDate);
         $diff = $diff->days;
+        $totalPrice = (ReservationRoom::where('reservation_id', $reservation->id)->sum('price') * $diff);
+        $tax = setting('tax');
+        $totalPrice += $totalPrice * ($tax / 100);
+        $toBeDeposited = 0;
 
-        return view('cashier.view', compact('reservation', 'diff'));
+        if ($diff < 7) {
+            $toBeDeposited = $totalPrice;
+        }
+
+        if($diff >= 7) {
+            $toBeDeposited = ($totalPrice * .8);
+        }
+
+
+        return view('cashier.view', compact('reservation', 'diff', 'toBeDeposited'));
     }
 
     public function approve(Request $request)
@@ -110,7 +124,6 @@ class CashierController
 
         $reservation = Reservation::findOrFail($id);
 
-
         $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
         $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
 
@@ -118,7 +131,8 @@ class CashierController
         $diff = $diff->days;
 
         $totalPrice = ReservationRoom::where('reservation_id', $reservation->id)->sum('price') * $diff;
-
+        $tax = setting('tax');
+        $totalPrice = $totalPrice * ($tax / 100);
         if($totalPrice < $amount) {
             Session::flash('error_message', 'Invalid amount entered.');
             return redirect()->back();
@@ -469,8 +483,16 @@ class CashierController
 
     public function showWalkInRooms(Request $request)
     {
-        $today = Carbon::today()->format('Y-m-d');
+        $today = $request->get('check_in_date');
         $checkOutDate = $request->get('check_out_date');
+
+        $rules = [
+            'check_in_date' => 'required|date|date_format:Y-m-d|before:check_out_date',
+            'check_out_date' => 'required|date|date_format:Y-m-d|after:check_in_date',
+        ];
+
+        //this will redirect back on validation error
+        $request->validate($rules);
 
         $result = ReservationHelper::getAvailableRooms($today, $checkOutDate);
         $roomTypes = $result['roomTypes'];
@@ -545,7 +567,9 @@ class CashierController
         $diff = $diff->days;
         $backUrl = url()->previous();
 
-        return view('cashier.walk-in-checkout', compact('items', 'rooms', 'details', 'diff', 'backUrl'));
+        $tax = setting('tax');
+
+        return view('cashier.walk-in-checkout', compact('items', 'rooms', 'details', 'diff', 'backUrl', 'tax'));
     }
 
     public function reserve(Request $request)

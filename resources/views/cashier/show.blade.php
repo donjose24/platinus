@@ -126,19 +126,14 @@
         @else
             No transactions yet!
         @endif
-        <div class="text-right mt-3">
+        <div class="text-left mt-3">
             @php
-                if($reservation->is_senior) {
-                    $totalPaid *= .8;
-                    $total *= .8;
-                }
+                $taxAmount = $total * ($tax / 100);
             @endphp
 
             <h3> Total Paid: {{ number_format($totalPaid, 2) }}</h3>
-            <h3> Total Bill: {{ number_format($total, 2) }}</h3>
-            @if($reservation->is_senior)
-                <h6>(Senior Citizen Discount: 20%)</h6>
-            @endif
+            <h3> {{ $tax }}% VAT: {{ $taxAmount }} </h3>
+            <h3> Total Bill: {{ number_format($total + $taxAmount, 2) }}</h3>
             <br>
             @if($reservation->status == "checked_out")
                 <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>

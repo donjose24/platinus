@@ -18,7 +18,7 @@
                 <h6> Check In: {{ $reservation->start_date }} </h6>
                 <h6> Check Out: {{ $reservation->end_date }} </h6>
                 <h6> Number of Nights: {{ $diff }} </h6>
-                <h6> Rooms: </h6>
+                <h6> Deposit Requirement: PHP {{ number_format($toBeDeposited, 2) }}</h6>
             </fieldset>
             @include("table")
             <br>
@@ -39,7 +39,6 @@
                                 <div class="d-flex justify-content-end"><button class="btn btn-custom-primary mt-2 mb-3"> Approve </button></div>
                             {{ Form::close() }}
                         </div>
-
                         <div>
                             {{ Form::open(['url' => '/cashier/deposit/reject']) }}
                                 {{ Form::label('Reason for rejection') }}

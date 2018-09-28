@@ -38,7 +38,8 @@
                                 @endphp
                             @endforeach
                         </table>
-                        <h5>Total Bill: PHP {{ number_format($total, 2) }}</h5>
+                        <h5> {{$tax}}% VAT: PHP {{ $taxAmount }} </h5>
+                        <h5>Total Bill: PHP {{ number_format($total + $taxAmount, 2) }}</h5>
 
                     </div>
                 </div>

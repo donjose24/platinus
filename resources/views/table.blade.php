@@ -17,10 +17,18 @@
             <td>{{ number_format(($room->pivot->price * $diff), 2) }}</td>
         </tr>
         @php
-            {{ $total += ($room->pivot->price * $diff); }}
+            $total += ($room->pivot->price * $diff);
         @endphp
+
     @endforeach
     </tbody>
 </table>
 <hr>
+@php
+    $tax = setting('tax');
+    $taxTotal = $total * ($tax / 100);
+
+    $total += $taxTotal;
+@endphp
+<h3 style="text-align:right"> {{$tax}}% VAT Total: {{ $taxTotal }} </h3>
 <h3 style="text-align:right">Total Amount: {{ number_format($total, 2) }}</h3>
