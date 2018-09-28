@@ -20,7 +20,7 @@
                 @foreach($transactions as $item)
                     <tr>
                         <td>{{ $loop->iteration or $item->id }}</td>
-                        <td>{{ $item->item }}</td><td>{{ $item->price }}</td><td></td>
+                        <td>{{ $item->item }}</td><td>{{ $item->price }}</td><td>{{ $item->reservation->code }}</td>
                         <td>
                             <a href="{{ url('/admin/transactions/' . $item->id) }}" title="View Transaction"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                             <a href="{{ url('/admin/transactions/' . $item->id . '/edit') }}" title="Edit Transaction"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>

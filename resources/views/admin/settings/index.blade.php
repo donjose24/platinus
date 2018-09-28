@@ -13,7 +13,7 @@
             <table class="table data-table">
                 <thead>
                     <tr>
-                        <th>Key</th><th>Value</th><th>Usage</th><th>Actions</th>
+                        <th>Key</th><th>Value</th><th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,7 +21,6 @@
                     <tr>
                         <td>{{ $item->key }}</td>
                         <td>{{ $item->value }}</td>
-                        <td><code>setting('{{ $item->key }}')</code></td>
                         <td>
                             <a href="{{ url('/admin/settings/' . $item->id) }}" title="View Setting"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                             <a href="{{ url('/admin/settings/' . $item->id . '/edit') }}" title="Edit Setting"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
