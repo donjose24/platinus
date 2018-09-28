@@ -12,6 +12,8 @@
                     {{ Form::text('start_date', '', ['class' => 'form-control datetime-picker-admin']) }}
                     {{ Form::label('end_date', 'To') }}
                     {{ Form::text('end_date', '', ['class' => 'form-control datetime-picker-admin']) }}
+                    {{ Form::label('field', 'Filter By:') }}
+                    {{ Form::select('field', $salesField, 'all', ['class' => 'form-control']) }}
                     <br>
                     <button class="btn btn-custom-primary"> Print </button>
                     {{ Form::close() }}

@@ -32,7 +32,6 @@
             </table>
             <div class="pagination-wrapper"> {!! $settings->appends(['search' => Request::get('search')])->render() !!} </div>
         </div>
-
     </div>
 </div>
 @endsection

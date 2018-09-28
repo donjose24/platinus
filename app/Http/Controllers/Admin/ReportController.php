@@ -11,18 +11,25 @@ class ReportController extends Controller
 {
     public function index()
     {
-        return view('admin.reports.index');
+        $salesField = Transaction::all()->pluck('item', 'item');
+        $salesField['all'] = "All";
+        return view('admin.reports.index', compact('salesField'));
     }
 
     public function printSalesReport(Request $request)
     {
+        $field = $request->get('field');
         $startDate = $request->get('start_date');
         $endDate = $request->get('end_date');
 
         $startDate = \DateTime::createFromFormat('Y-m-d', $startDate);
         $endDate = \DateTime::createFromFormat('Y-m-d', $endDate);
 
-        $transactions = Transaction::whereBetween('created_at', [$startDate, $endDate])->get();
+        if ($field == 'all') {
+            $transactions = Transaction::whereBetween('created_at', [$startDate, $endDate])->get();
+        } else {
+            $transactions = Transaction::whereBetween('created_at', [$startDate, $endDate])->where('item', $field)->get();
+        }
 
         $pdf = PDF::loadView('reports.transaction', compact('transactions'));
         return $pdf->stream();
