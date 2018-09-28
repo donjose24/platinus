@@ -34,6 +34,7 @@
                                 </tr>
                                 @php
                                     $total = $total + ($room->daily_rate * $diff);
+                                    $taxAmount = $total * ($tax / 100);
                                 @endphp
                             @endforeach
                         </table>

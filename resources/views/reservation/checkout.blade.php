@@ -57,10 +57,13 @@
                             </tr>
                             @php
                                 $total = $total + (($room->daily_rate * $items[$room->id]) * $diff);
+                                $taxAmount = $total * ($tax / 100);
                             @endphp
                         @endforeach
                     </table>
-                    <h5>Total Bill: PHP {{ number_format($total, 2) }}</h5>
+                    <h5>Room Total: PHP {{ number_format($total, 2) }}</h5>
+                    <h5>{{ $tax }}% VAT: PHP {{ number_format($taxAmount, 2) }}</h5>
+                    <h5> Total Bill: {{ number_format($total + $taxAmount, 2) }}</h5>
                     <div class="d-flex justify-content-between">
                         <a href="{{ $backUrl }}" class="btn btn-secondary font-weight-normal"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>Back </a>
                         {{ Form::open(['url' => '/reservation', 'method' => 'POST']) }}

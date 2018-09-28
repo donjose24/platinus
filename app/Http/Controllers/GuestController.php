@@ -120,8 +120,9 @@ class GuestController extends Controller
         $diff = date_diff($startDate, $endDate);
         $diff = $diff->days;
         $backUrl = url()->previous();
+        $tax = setting('tax');
 
-        return view('reservation.checkout', compact('items', 'rooms', 'details', 'diff', 'backUrl'));
+        return view('reservation.checkout', compact('items', 'rooms', 'details', 'diff', 'backUrl', 'tax'));
     }
 
     public function reserve()

@@ -22,13 +22,16 @@ Room Type: {{ $room->name }}
 
 Price per night: PHP {{ number_format($room->daily_rate, 2) }}
 @php
-$total = $total + ($room->daily_rate * $diff->days)
+$total = $total + ($room->daily_rate * $diff->days);
+$taxAmount = $total * ($tax / 100);
 @endphp
 
 @endcomponent
 @endforeach
 
-# Grand Total {{ number_format($total, 2) }}
+## Rooms Total: {{ number_format($total, 2) }}
+## VAT: {{ number_format($taxAmount, 2) }}
+# Total: {{ number_format($total + $taxAmount, 2) }}
 
 @component('mail::panel')
 @if($diff->days < 7)
