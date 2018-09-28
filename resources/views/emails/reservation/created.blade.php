@@ -24,12 +24,13 @@ Price per night: PHP {{ number_format($room->daily_rate, 2) }}
 @php
 $total = $total + ($room->daily_rate * $diff->days);
 $taxAmount = $total * ($tax / 100);
+$total += $taxAmount;
+$downpayment = setting('downpayment');
 @endphp
 
 @endcomponent
 @endforeach
 
-## Rooms Total: {{ number_format($total, 2) }}
 ## VAT: {{ number_format($taxAmount, 2) }}
 # Total: {{ number_format($total + $taxAmount, 2) }}
 
@@ -37,7 +38,7 @@ $taxAmount = $total * ($tax / 100);
 @if($diff->days < 7)
 *Please deposit your payment in full to the details below*
 @else
-*Please deposit at least 20% of your total bill*
+*Please deposit at least {{ $downpayment }}% ({{ number_format($total * ($downpayment / 100)) }}) of your total bill*
 @endif
 
 East West Bank

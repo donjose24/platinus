@@ -19,5 +19,9 @@ class SettingsSeeder extends Seeder
             'key' => 'tax',
             'value' => '12',
         ]);
+         \App\Setting::create([
+            'key' => 'downpayment',
+            'value' => '20',
+        ]);
     }
 }

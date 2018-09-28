@@ -144,7 +144,7 @@
                 <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
             @endif
             @if($reservation->status == "checked_in")
-                <a href="#" class="btn btn-danger p-2 w-25 add-damages" style="color:white"> Add Damages </a>
+                <a href="#" class="btn btn-danger p-2 w-25 add-damages" style="color:white"> Damages / Adjustment </a>
                 <a href="#" class="btn btn-info p-2 w-25 add-service" style="color:white"> Additional Services </a>
                 <a href="#" class="btn btn-custom-primary p-2 mr-3 w-25 checkout"> Check Out </a>
             @endif
