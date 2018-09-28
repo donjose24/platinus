@@ -39,7 +39,7 @@
                     </div>
                     <div class="w-25 p-3 border-right border-bottom">
                         <p class="mb-2">Total</p>
-                        <h5 class="mb-0 font-weight-bold">PHP {{ number_format($room->daily_rate * $diff, 2) }}</h5>
+                        <h5 class="mb-0 font-weight-bold">PHP {{ number_format($room->pivot->price * $diff, 2) }}</h5>
                     </div>
                     <div class="w-25 p-3 border-right border-bottom">
                         <div class="mb-2"> Room Number</div>
@@ -50,14 +50,18 @@
                                     echo Form::open(['url' => '/cashier/reservation/reserve']);
                                     echo Form::select('room', $rooms, '-1', ['class' => 'form-control']);
                                     echo Form::hidden('room_type', $room->id);
-                                    echo '<button class="btn btn-primary mt-2 float-right">Reserve</button>';
                                     echo Form::hidden('id', $room->pivot->id);
+                                    echo '<br><div class="form-check">';
+                                    echo Form::checkbox('senior_discount', 'apply', false, ['class' => 'form-check-input']);
+                                    echo Form::label('senior_discount', "Apply PWD/Senior discount? ", ['class' => 'form-check-label']);
+                                    echo '</div>';
+                                    echo '<button class="btn btn-primary mt-2 float-right">Reserve</button>';
                                     echo Form::close();
                             } else {
                                 echo '<h5 class="mb-0 font-weight-bold">'. \App\Room::find($room->pivot->room_number_id)->number . ' </h5>';
                             }
-                            $total += ($room->daily_rate * $diff);
-                            $totalAmountRoom += ($room->daily_rate * $diff);
+                            $total += ($room->pivot->price * $diff);
+                            $totalAmountRoom += ($room->pivot->price * $diff);
                         @endphp
                     </div>
                     <div class="w-25 p-3 border-bottom">
@@ -230,8 +234,7 @@
         @if($indicator >= 0)
             <p> The customer have overstayed for {{ $difference }} hour(s). A penalty of {{ number_format($difference * 100, 2) }} Will be added to the customer's bill.</p>
         @endif
-        {{ Form::checkbox('senior_discount', 'apply', false) }}
-        {{ Form::label('senior_discount', "Apply senior citizen discount?") }}
+
         {{ Form::hidden('id', $reservation->id) }}
         <br>
         <button href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-primary"> Check Out </button>

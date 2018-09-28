@@ -656,18 +656,21 @@ class CashierController
             'rooms.*' => 'Invalid Room Number'
         ]);
 
+
         $room = $request->get('room');
         $roomType = RoomType::find($request->get('room_type'));
         $id = $request->get('id');
 
+        $discount = $request->get('senior_discount');
+        $rate = $roomType->daily_rate;
+        if ($discount == "apply") {
+            $seniorDiscount = setting('senior_pwd_discount');
+            $rate -= $rate * ($seniorDiscount / 100);
+        }
         $roomLoad = ReservationRoom::find($id);
         $roomLoad->room_number_id = $room;
-        $roomLoad->price = $roomType->daily_rate;
+        $roomLoad->price = $rate;
         $roomLoad->save();
-
-        $item = Room::find($room);
-        $item->status = "reserved";
-        $item->save();
 
         return redirect()->back();
     }
