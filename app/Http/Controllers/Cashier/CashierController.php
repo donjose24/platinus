@@ -291,6 +291,7 @@ class CashierController
         if ($indicator >= 0) {
             $transaction = new Transaction();
             $transaction->item = "Penalty (Overstay)";
+            $transaction->reservation_id = $reservation->id;
             $transaction->price = $difference * 100;
             $transaction->save();
         }
