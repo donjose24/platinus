@@ -7,21 +7,8 @@
                 <div class="card">
                     <div class="card-header">Reservations</div>
                     <div class="card-body">
-                        {!! Form::open(['method' => 'GET', 'url' => '/cashier/reservation', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                            <span class="input-group-append">
-                                <button class="btn btn-secondary" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        {!! Form::close() !!}
-
-                        <br/>
-                        <br/>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-borderless data-table">
                                 <thead>
                                 <tr>
                                     <th>Reservation Code</th>
@@ -44,7 +31,6 @@
                                         <td>{{ $item->status }}</td>
                                         <td>
                                             <a href="{{ url('/cashier/reservation/' . $item->id) }}" title="View ReservationRoomDetail"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                            <a href="{{ url('/cashier/reservation/' . $item->id . '/edit') }}" title="Edit ReservationRoomDetail"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
                                         </td>
                                     </tr>
                                 @endforeach
