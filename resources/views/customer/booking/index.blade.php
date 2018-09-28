@@ -23,19 +23,19 @@
                             <table class="table table-borderless">
                                 <thead>
                                 <tr>
-                                    <th>#</th><th>Start Date</th><th>End Date</th><th>Status</th><th>Actions</th>
+                                    <th>Booking Code</th><th>Start Date</th><th>End Date</th><th>Status</th><th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($reservations as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration or $item->id }}</td>
+                                        <td>{{ $item->code }}</td>
                                         <td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->status }}</td>
                                         <td>
                                             <a href="{{ url('/customer/booking/' . $item->id) }}" title="View reservation"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                                             {!! Form::open([
                                                 'method' => 'DELETE',
-                                                'url' => ['/customer/booking', $item->id],
+                                                'url' => ['/customer/booking/', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                             {!! Form::close() !!}

@@ -15,4 +15,16 @@ class BookingController
 
         return view('customer.booking.index', compact('reservations'));
     }
+
+    public function show($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $startDate = \DateTime::createFromFormat('Y-m-d', $reservation->start_date);
+        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
+
+        $diff = date_diff($startDate, $endDate);
+        $diff = $diff->days;
+
+        return view('customer.booking.view', compact('reservation', 'diff'));
+    }
 }

@@ -1,7 +1,7 @@
-@extends('layouts.backend')
+@extends('layouts.customer')
 @section('content')
     <div class="view-content">
-        <h1 class="mb-3">Viewing Details Slip of: {{ $reservation->user->name }}</h1>
+        <h1 class="mb-3">Reservation Details</h1>
         @if ($errors->any())
             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
@@ -10,7 +10,6 @@
             </ul>
         @endif
         <div class="panel">
-            <legend>Reservation Details</legend>
             <fieldset>
                 <h6> Customer: {{ $reservation->user->name }} </h6>
                 <h6> Email: {{ $reservation->user->email }} </h6>
