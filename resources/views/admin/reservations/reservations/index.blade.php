@@ -4,9 +4,6 @@
 <div class="card">
     <div class="card-header">Reservations</div>
     <div class="card-body">
-        <a href="{{ url('/admin/reservations/create') }}" class="btn btn-custom-primary btn-sm" title="Add New reservation">
-            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-        </a>
         <br/>
         <br/>
         <div class="table-responsive">
@@ -23,8 +20,7 @@
                         <td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->status }}</td><td>{{ $item->code }}</td>
                         <td>
                             <a href="{{ url('/admin/reservations/' . $item->id) }}" title="View reservation"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                            <a href="{{ url('/admin/reservations/' . $item->id . '/edit') }}" title="Edit reservation"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
-                            
+
                         </td>
                     </tr>
                 @endforeach
