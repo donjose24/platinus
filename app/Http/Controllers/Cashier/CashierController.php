@@ -132,7 +132,7 @@ class CashierController
 
         $totalPrice = ReservationRoom::where('reservation_id', $reservation->id)->sum('price') * $diff;
         $tax = setting('tax');
-        $totalPrice = $totalPrice * ($tax / 100);
+        $totalPrice += $totalPrice * ($tax / 100);
         if($totalPrice < $amount) {
             Session::flash('error_message', 'Invalid amount entered.');
             return redirect()->back();
@@ -245,8 +245,9 @@ class CashierController
 
         $diff = date_diff($startDate, $endDate);
         $diff = $diff->days;
+        $tax = setting('tax');
 
-        $pdf = PDF::loadView('reports.reservation', compact('reservation', 'diff', 'transactions'));
+        $pdf = PDF::loadView('reports.reservation', compact('reservation', 'diff', 'transactions', 'tax'));
         return $pdf->stream();
     }
 
@@ -303,6 +304,9 @@ class CashierController
                 $totalPaid += $transaction->price;
             }
         }
+
+        $tax = setting('tax');
+        $total += $total * ($tax / 100);
 
         // insert balance payment on the transactions table
         if ($totalPaid < $total) {

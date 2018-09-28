@@ -95,10 +95,10 @@
 </table>
     <hr>
     @php
-        if($reservation->is_senior) {
-            $total *= .8;
-        }
+        $taxTotal = $total * ($tax / 100);
+        $total += $taxTotal;
     @endphp
+<h5 style="text-align:right">Total Tax({{$tax}}%): {{ number_format($taxTotal, 2) }}</h5>
 <h3 style="text-align:right">Total Amount: {{ number_format($total, 2) }}</h3>
 </body>
 </html>

@@ -61,8 +61,8 @@
                         @endphp
                     </div>
                     <div class="w-25 p-3 border-bottom">
+                        <p class="mb-2">Actions</p>
                         @if($reservation->status == "checked_in")
-                            <p class="mb-2">Actions</p>
                             <button class="btn btn-custom-default edit-button" data-id="{{ $room->id }}" data-reservation="{{ $room->pivot->id }}"> Edit </button>
                             <button class="btn btn-danger delete-button" data-reservation="{{ $room->pivot->id }}"> Delete </button>
                         @endif
@@ -129,11 +129,12 @@
         <div class="text-left mt-3">
             @php
                 $taxAmount = $total * ($tax / 100);
+                $total += $total * ($tax / 100);
             @endphp
 
             <h3> Total Paid: {{ number_format($totalPaid, 2) }}</h3>
             <h3> {{ $tax }}% VAT: {{ $taxAmount }} </h3>
-            <h3> Total Bill: {{ number_format($total + $taxAmount, 2) }}</h3>
+            <h3> Total Bill: {{ number_format($total, 2) }}</h3>
             <br>
             @if($reservation->status == "checked_out")
                 <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
