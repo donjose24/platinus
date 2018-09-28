@@ -59,8 +59,7 @@
 </div>
 <br>
 <br>
-<span class="hit">Date: September 1, 2018</span>
-<span class="hit">Reservations</span>
+<span class="hit">Reservations: {{ $status }}</span>
 <br>
 <table>
     <thead>

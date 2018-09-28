@@ -47,12 +47,16 @@ class ReportController extends Controller
         $reservations = Reservation::whereBetween('created_at', [$startDate, $endDate]);
 
         if ($status != 'all') {
-            $reservations = $reservations->where('status', $status);
+            if ($status != "rebooked") {
+                $reservations = $reservations->where('status', $status);
+            } else {
+                $reservations = $reservations->where('is_rebooked', true);
+            }
         }
 
         $reservations = $reservations->get();
 
-        $pdf = PDF::loadView('reports.reservations', compact('reservations'));
+        $pdf = PDF::loadView('reports.reservations', compact('reservations', 'status'));
         return $pdf->stream();
     }
 }

@@ -774,6 +774,7 @@ class CashierController
 
         $reservation->start_date = $request->get('start_date');
         $reservation->end_date = $request->get('end_date');
+        $reservation->is_rebooked = true;
         $reservation->save();
 
         foreach($roomsWillBeRemoved as $room) {
