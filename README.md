@@ -12,8 +12,8 @@
 * Run composer install
 * Run `vendor/bin/homestead make` This should make homestead files
 * Locate your hosts file. [this](https://gist.github.com/zenorocha/18b10a14b2deb214dc4ce43a2d2e2992) should help
-* Add another entry: 192.168.10.10 bellamonte.test
-* You should see the homepage on https://bellamonte.test
+* Add another entry: 192.168.10.10 platinus.test
+* You should see the homepage on https://platinus.test
 
 #### Migration
 Migration creates your database tables. Run the by doing the following steps:

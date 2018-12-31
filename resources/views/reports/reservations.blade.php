@@ -50,7 +50,7 @@
 </head>
 <body>
 <div class="header">
-    <div class="logo"><img class="logo-img" src="https://www.thebellamontehotel.com/images/logo.png" alt="bellamontehotel logo"></div>
+    <div class="logo"><img class="logo-img" src="https://www.thebellamontehotel.com/images/logo.jpg" alt="bellamontehotel logo"></div>
     <h1>Bella Monte Hotel</h1>
     <span class="hit">#15 del Pilar St. Bo., Barretto Olongapo, Zambales, Philippines</span>
     <span class="hit">EMAIL: admin@bellamonte.com</span>

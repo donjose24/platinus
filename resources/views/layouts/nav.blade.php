@@ -1,6 +1,6 @@
 <header>
   <div class="header-nav">
-    <div class="logo"><img src="/images/logo.png" alt="bellamonte logo" class="icon"></div>
+    <div class="logo"><img src="/images/logo.jpg" alt="bellamonte logo" class="icon"></div>
     <div class="navigation">
       <ul>
         <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
