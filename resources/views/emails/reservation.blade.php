@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content-box">
-        <div class="logo"><img src="/images/logo.jpg" alt="bellamonte logo" class="icon"></div>
+        <div class="logo"><img src="/images/logo.jpg" alt="platanus logo" class="icon"></div>
         @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}

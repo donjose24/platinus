@@ -1,14 +1,17 @@
 .header-nav {
-    background-color: #fff;
+    background-color: rgb(75,120,30);
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+    a {
+        color: #fff;
+    }
+
     .logo {
         padding: 9px;
-
         img {
-            width: 200px;
+            width: 100px;
         }
     }
 

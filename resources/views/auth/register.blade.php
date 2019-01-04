@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-box">
-    <div class="logo"><img src="/images/logo.jpg" alt="bellamonte logo" class="icon"></div>
+    <div class="logo"><img src="/images/logo.jpg" alt="platanus logo" class="icon"></div>
 
     <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
         @csrf

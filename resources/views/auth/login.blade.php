@@ -10,7 +10,7 @@
                 </div>
             </div>
         @endif
-        <div class="logo"><img src="/images/logo.jpg" alt="bellamonte logo" class="icon"></div>
+        <div class="logo"><img src="/images/logo.jpg" alt="platanus logo" class="icon"></div>
         <div class="content-body">
 
             <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">

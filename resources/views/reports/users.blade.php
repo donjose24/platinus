@@ -38,7 +38,7 @@
     <div class="header">
       <h1>Bella Monte Hotel</h1>
       <span class="hit">#15 del Pilar St. Bo., Barretto Olongapo, Zambales, Philippines</span>
-      <span class="hit">EMAIL: admin@bellamonte.com</span>
+      <span class="hit">EMAIL: admin@platanus.com</span>
       <span class="hit">TEL : 123 456</span>
       <span class="hit">MOBILE: 0912 345 6789</span>
     </div>
@@ -61,19 +61,19 @@
               <td>1</td>
               <td>Agatha Belontes</td>
               <td>0912 345 6789</td>
-              <td>agabelo@bellamonte.com</td>
+              <td>agabelo@platanus.com</td>
            </tr>
            <tr>
               <td>2</td>
               <td>Agatha Belontes</td>
               <td>0912 345 6789</td>
-              <td>agabelo@bellamonte.com</td>
+              <td>agabelo@platanus.com</td>
            </tr>
            <tr>
               <td>3</td>
               <td>Agatha Belontes</td>
               <td>0912 345 6789</td>
-              <td>agabelo@bellamonte.com</td>
+              <td>agabelo@platanus.com</td>
            </tr>
         </tbody>
     </table> 

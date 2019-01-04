@@ -43,7 +43,7 @@ $downpayment = setting('downpayment');
 
 East West Bank
 
-Hotel Bellamonte Inc.
+Hotel platanus Inc.
 
 10802000974
 

@@ -29,7 +29,7 @@
         @if (count($reservations) != 0)
             <p>You have pending {{ count($reservations) }} reservation(s). Please deposit the down payment to:</p>
             <p class="mb-0 font-weight-bold">East West Bank</p>
-            <p class="mb-0 font-weight-bold">Hotel Bellamonte Inc.</p>
+            <p class="mb-0 font-weight-bold">Hotel platanus Inc.</p>
             <p class="mb-0 font-weight-bold">10802000974</p>
             <br>
             <p class="font-weight-light mb-3">After depositing, Take a photo of your deposit slip and upload it</p>

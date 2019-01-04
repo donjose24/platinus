@@ -25,7 +25,7 @@ Please upload a valid deposit slip to:
 
 East West Bank
 
-Hotel Bellamonte Inc.
+Hotel platanus Inc.
 
 10802000974
 
