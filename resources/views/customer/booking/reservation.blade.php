@@ -11,6 +11,6 @@
             </div>
         </div>
     </div>
-    <div class="text-right mt-3"><button class="btn btn-custom-default w-25">Book Now</button></div>
+    <div class="text-right mt-3"><button class="btn btn-success w-25">Book Now</button></div>
     {{ Form::close() }}
 @endsection

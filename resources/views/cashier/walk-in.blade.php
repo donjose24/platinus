@@ -9,7 +9,7 @@
                 {{ Form::date('check_in_date', '', ['class' => 'form-control', 'min'=>\Carbon\Carbon::now()->format("Y-m-d"), 'required' => 'true' ]) }}
                 {{ Form::label('check_in_date', 'Check Out Date') }}
                 {{ Form::date('check_out_date', '', ['class' => 'form-control', 'min'=>\Carbon\Carbon::now()->format("Y-m-d"), 'required' => 'true' ]) }}
-                <button class="btn btn-custom-primary mt-3 d-block">Show Rooms</button>
+                <button class="btn btn-success mt-3 d-block">Show Rooms</button>
             {{ Form::close() }}
         </div>
     </div>

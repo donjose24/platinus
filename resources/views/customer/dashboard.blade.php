@@ -51,7 +51,7 @@
                     <div class="options-container">
                         {{ Form::file('image') }}
                         {{ Form::hidden('id', $reservation->id) }}
-                        <button class="btn btn-custom-default w-100 mt-2"> Submit Deposit Slip </button>
+                        <button class="btn btn-success w-100 mt-2"> Submit Deposit Slip </button>
                     </div>
                     {{ Form::close() }}
                 </div>

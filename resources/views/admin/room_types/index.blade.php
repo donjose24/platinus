@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">Room Types</div>
     <div class="card-body">
-        <a href="{{ url('/admin/room_types/create') }}" class="btn btn-custom-primary btn-sm" title="Add New reservation">
+        <a href="{{ url('/admin/room_types/create') }}" class="btn btn-success btn-sm" title="Add New reservation">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
         <br/>

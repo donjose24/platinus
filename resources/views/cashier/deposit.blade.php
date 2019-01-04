@@ -23,7 +23,7 @@
                         <p class="full-date">{{ $reservation->end_date }}</p>
                     </div>
                     <div class="options-container">
-                        <a href="/cashier/deposit/{{ $reservation->id }}" class="btn btn-custom-default w-100 mt-2"> More Info </a>
+                        <a href="/cashier/deposit/{{ $reservation->id }}" class="btn btn-success w-100 mt-2"> More Info </a>
                     </div>
                 </div>
             </div>

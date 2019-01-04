@@ -30,7 +30,7 @@
         </div>
 
         <div class="form-group text-center mb-0">
-            <button type="submit" class="btn btn-small btn-custom-primary">
+            <button type="submit" class="btn btn-small btn-success">
                 {{ __('Send Password Reset Link') }}
             </button>
         </div>

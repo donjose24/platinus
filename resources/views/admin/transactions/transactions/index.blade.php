@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">Transactions</div>
     <div class="card-body">
-        <a href="{{ url('/admin/transactions/create') }}" class="btn btn-custom-primary btn-sm" title="Add New Transaction">
+        <a href="{{ url('/admin/transactions/create') }}" class="btn btn-success btn-sm" title="Add New Transaction">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
         <br/>
@@ -31,7 +31,7 @@
                 </tbody>
             </table>
             <div class="text-right mt-3">
-                <a href="/admin/sales/print{{ !empty($keyword) ? "?search=" . $keyword : ""   }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
+                <a href="/admin/sales/print{{ !empty($keyword) ? "?search=" . $keyword : ""   }}" class="btn btn-success p-2 w-25" target="_blank"> Print </a>
             </div>
             <div class="pagination-wrapper"> {!! $transactions->appends(['search' => Request::get('search')])->render() !!} </div>
         </div>

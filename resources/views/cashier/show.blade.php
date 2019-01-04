@@ -67,25 +67,25 @@
                     <div class="w-25 p-3 border-bottom">
                         <p class="mb-2">Actions</p>
                         @if($reservation->status == "checked_in")
-                            <button class="btn btn-custom-default edit-button" data-id="{{ $room->id }}" data-reservation="{{ $room->pivot->id }}"> Edit </button>
+                            <button class="btn btn-success edit-button" data-id="{{ $room->id }}" data-reservation="{{ $room->pivot->id }}"> Edit </button>
                             <button class="btn btn-danger delete-button" data-reservation="{{ $room->pivot->id }}"> Delete </button>
                         @endif
-                        <button class="btn btn-custom-primary upgrade-button" data-id="{{ $room->id }}" data-reservation="{{ $reservation->id }}" data-reservation-room="{{ $room->pivot->id }}"> Upgrade </button>
+                        <button class="btn btn-success upgrade-button" data-id="{{ $room->id }}" data-reservation="{{ $reservation->id }}" data-reservation-room="{{ $room->pivot->id }}"> Upgrade </button>
                     </div>
                 </div>
             </div>
         @endforeach
         <div class="text-right mt-3">
             @if($reservation->status != "checked_out")
-                <a href="#" class="btn btn-custom-default p-2 w-25 add-new-room mt-2"> Add Room </a>
+                <a href="#" class="btn btn-success p-2 w-25 add-new-room mt-2"> Add Room </a>
             @endif
             @if($reservation->status == "approved" && $startDate->gte(\Carbon\Carbon::today()))
                 {{ Form::open(['url' => '/cashier/checkin']) }}
-                    <button class="btn btn-custom-default w-25 p-2 mt-2"> Check In </button>
+                    <button class="btn btn-success w-25 p-2 mt-2"> Check In </button>
                     {{ Form::hidden('id', $reservation->id) }}
                 {{ Form::close() }}
             @endif
-                <a href="#" class="btn btn-custom-default p-2 w-25 rebookBtn mt-2"> Rebook </a>
+                <a href="#" class="btn btn-success p-2 w-25 rebookBtn mt-2"> Rebook </a>
         </div>
 
         @php
@@ -112,7 +112,7 @@
                             @if($transaction->item != "Bank Deposit")
                                 <p class="mb-2">Actions</p>
                                 @if($transaction->status != "paid")
-                                    <a href="/cashier/reservation/settle/{{ $transaction->id }}" class="btn btn-custom-primary">Settle</a>
+                                    <a href="/cashier/reservation/settle/{{ $transaction->id }}" class="btn btn-success">Settle</a>
                                 @endif
                             @endif
                         </div>
@@ -141,12 +141,12 @@
             <h3> Total Bill: {{ number_format($total, 2) }}</h3>
             <br>
             @if($reservation->status == "checked_out")
-                <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-custom-default p-2 w-25" target="_blank"> Print </a>
+                <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-success p-2 w-25" target="_blank"> Print </a>
             @endif
             @if($reservation->status == "checked_in")
                 <a href="#" class="btn btn-danger p-2 w-25 add-damages" style="color:white"> Damages / Adjustment </a>
                 <a href="#" class="btn btn-info p-2 w-25 add-service" style="color:white"> Additional Services </a>
-                <a href="#" class="btn btn-custom-primary p-2 mr-3 w-25 checkout"> Check Out </a>
+                <a href="#" class="btn btn-success p-2 mr-3 w-25 checkout"> Check Out </a>
             @endif
             @if($reservation->status == "waiting_for_approval" || $reservation->status == "approved")
                 <a href="#" class="btn btn-danger p-2 w-25 cancelReservation" style="color:white"> Cancel Reservation </a>

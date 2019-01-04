@@ -91,7 +91,7 @@
         </div>
 
         <div class="form-group text-center mb-0">
-            <button type="submit" class="btn w-25 btn-custom-primary">
+            <button type="submit" class="btn w-25 btn-success">
                 {{ __('Register') }}
             </button>
         </div>

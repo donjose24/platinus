@@ -83,7 +83,7 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <a href="{{ $backUrl }}" class="btn btn-secondary font-weight-normal"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>Back </a>
-                        <button class="btn btn-custom-primary">Confirm</button>
+                        <button class="btn btn-success">Confirm</button>
                     </div>
                    {{ Form::close() }}
                 </div>

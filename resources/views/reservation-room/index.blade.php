@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">Reservationroom</div>
                     <div class="card-body">
-                        <a href="{{ url('/reservation-room/create') }}" class="btn btn-custom-primary btn-sm" title="Add New ReservationRoom">
+                        <a href="{{ url('/reservation-room/create') }}" class="btn btn-success btn-sm" title="Add New ReservationRoom">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 

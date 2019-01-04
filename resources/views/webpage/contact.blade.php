@@ -44,7 +44,7 @@
                         <textarea class="form-control" rows="4"></textarea>
                     </div>
                     <div class="form-group mb-0">
-                        <button class="btn btn-custom-default w-100 p-2">Submit</button>
+                        <button class="btn btn-success w-100 p-2">Submit</button>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         <li>Check your e-mail for your instant confirmation!</li>
                     </ol>
 
-                    <button class="btn btn-custom-default w-100 p-2">Reserve Now</button>
+                    <button class="btn btn-success w-100 p-2">Reserve Now</button>
                 </div>
             </div>
         </div>

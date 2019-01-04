@@ -21,7 +21,7 @@
                 </div>
                 <p>ASDF5648QWERT</p>
                 <div class="options-container">
-                    <button class="btn btn-custom-default w-100">Check In</button>
+                    <button class="btn btn-success w-100">Check In</button>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 </div>
                 <p>ASDF5648QWERT</p>
                 <div class="options-container">
-                    <button class="btn btn-custom-default w-100">Check In</button>
+                    <button class="btn btn-success w-100">Check In</button>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
                 </div>
                 <p>ASDF5648QWERT</p>
                 <div class="options-container">
-                    <button class="btn btn-custom-default w-100">Check In</button>
+                    <button class="btn btn-success w-100">Check In</button>
                 </div>
             </div>
         </div>

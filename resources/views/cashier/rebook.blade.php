@@ -22,7 +22,7 @@
         {{ Form::hidden('end_date', app('request')->end_date) }}
         {{ Form::hidden('reservation_id', $reservation->id) }}
         <a href="/cashier/reservation/{{$reservation->id}}" class="btn btn-danger"> Cancel </a>
-        <button class="btn btn-custom-primary"> Rebook </button>
+        <button class="btn btn-success"> Rebook </button>
         {{ Form::close() }}
     </div>
 @endsection

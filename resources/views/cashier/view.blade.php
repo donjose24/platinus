@@ -36,7 +36,7 @@
                                 {{ Form::label('Amount Deposited') }}
                                 {{ Form::number('amount', '', ['class' => 'form-control']) }}
                                 {{ Form::hidden('id', $reservation->id) }}
-                                <div class="d-flex justify-content-end"><button class="btn btn-custom-primary mt-2 mb-3"> Approve </button></div>
+                                <div class="d-flex justify-content-end"><button class="btn btn-success mt-2 mb-3"> Approve </button></div>
                             {{ Form::close() }}
                         </div>
                         <div>

@@ -5,7 +5,7 @@
         <h1 class="mb-3">Create new reservation</h1>
         <div class="d-flex justify-content-between flex-wrap">
             @if(Session::has('items') )
-                <a href="/cashier/walk-in/reservation/preview" class="btn d-block w-100 p-2 btn-custom-default">Reserve</a>
+                <a href="/cashier/walk-in/reservation/preview" class="btn d-block w-100 p-2 btn-success">Reserve</a>
             @endif
             @foreach($roomTypes as $type)
                 <div class="card reservation-room">
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <input class="spinner" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
-                                    <button class="btn ml-2 w-75 p-2 btn-custom-primary add-room">Add Room</button>
+                                    <button class="btn ml-2 w-75 p-2 btn-success add-room">Add Room</button>
                                 </div>
                             @endif
                         @else
@@ -47,7 +47,7 @@
                                 <input class="spinner" readonly name="pax" min="0" value="0" max="20" type="number">
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <button class="btn mr-2 w-75 p-2 btn-custom-primary add-room">Add Room</button>
+                                <button class="btn mr-2 w-75 p-2 btn-success add-room">Add Room</button>
                                 <input class="spinner" readonly name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
                             </div>
                         @endif

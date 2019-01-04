@@ -31,7 +31,7 @@
                                 @elseif ($room->status != "checked-in")
                                     {{ Form::open(['url' => '/cashier/room/active']) }}
                                         {{ Form::hidden('room_id', $room->id) }}
-                                        <button class="btn btn-custom-primary"> Mark as ready</button>
+                                        <button class="btn btn-success"> Mark as ready</button>
                                     {{ Form::close() }}
                                 @endif
                             </td>
