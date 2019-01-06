@@ -11,7 +11,7 @@
         <p class="small">Platanus is an established hotel in Barrio Barretto that offers leisure and recreation within the hustle of Barretto, Olongapo City. Only 10 minutes away from the bars and restaurants that offer a broad selection of diverse cuisines from all over the world.</p>
         <p class="small">The hotel ensures guests comfort and gives them the quality service. With 9 spacious air-conditioned rooms, among the amenities offered are complimentary Wi-Fi access, non-smoking rooms, cable TV, air-conditioned rooms, private bathroom with hot and cold water, some rooms have access to a balcony.</p>
         <p class="small">Take a breather in the hotel's incredible facilities like an outdoor swimming pool, fitness center, massage, and garden area where you can sit back and laze.</p>
-        <p class="small">Hotel Bella Monte is an excellent choice for quality accommodation in Barretto for daily and long term stay.</p>
+        <p class="small">Hotel Platanus is an excellent choice for quality accommodation in Barretto for daily and long term stay.</p>
     </div>
     <div class="services-section">
         <div class="service-box">
@@ -32,7 +32,7 @@
             <a href="#">
                 <div class="icon-img"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
                 <p class="title">Location</p>
-                <p class="desc">Contains the map and instructions. For a quick fun and relax vacation away from the hustle and bustle of the city, Bella Monte Hotel Subic is perfectly for you.</p>
+                <p class="desc">Contains the map and instructions. For a quick fun and relax vacation away from the hustle and bustle of the city, Platanus Hotel Subic is perfectly for you.</p>
             </a>
         </div>
     </div>

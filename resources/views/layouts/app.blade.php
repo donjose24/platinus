@@ -20,7 +20,7 @@
         <aside class="side-content">
             <div class="side-notes">
                 <h1>Hotel platanus Olongapo City</h1>
-                <p>Hotel Bella Monte is an established hotel in Barrio Barretto that offers leisure 
+                <p>Hotel Platanus is an established hotel in Barrio Barretto that offers leisure
                     and recreation within the hustle of Barretto, Olongapo City. Only 10 minutes away 
                     from the bars and restaurants that offer a broad selection of diverse cuisines from all over the world.
                 </p>

@@ -30,7 +30,7 @@
         <div class="col-6">
           <h3>AREA INFORMATION</h3>
           <ul class="m-0 p-0">
-            <li class="mb-3">For a quick fun and relaxing vacation away from the hustle and bustle of the city, Bella Monte Hotel Subic is perfectly situated at #15 Del Pilar Street Baloy Baretto. Nestled near the beaches, restaurants and bars, your stay at our resort will absolutely satisfy your awaited vacation. </li>
+            <li class="mb-3">For a quick fun and relaxing vacation away from the hustle and bustle of the city, Platanus Hotel Subic is perfectly situated at #15 Del Pilar Street Baloy Baretto. Nestled near the beaches, restaurants and bars, your stay at our resort will absolutely satisfy your awaited vacation. </li>
             <li class="mb-3">For a perfect night out with friends even with your family, our resort is very accessible to some of the nightlife bars such as: Midnight Ranbler Bar and Angel Witch. Baretto Mini Mart and Savers Appliance Depot are located just few minutes away from our property.</li>
             <li>A large swimming pool can be enjoyed in our vicinity. We provide everything you deserve to make your stay as pleasurable as possible. </li>
           </ul>

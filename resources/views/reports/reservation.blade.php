@@ -47,7 +47,7 @@
 <body>
     <div class="header">
       <div class="logo"><img class="logo-img" src="https://www.theplatanushotel.com/images/logo.jpg" alt="platanushotel logo"></div>
-      <h1>Bella Monte Hotel</h1>
+      <h1>Platanus Hotel</h1>
       <span class="hit">#15 del Pilar St. Bo., Barretto Olongapo, Zambales, Philippines</span>
       <span class="hit">EMAIL: admin@platanus.com</span>
       <span class="hit">TEL : 123 456</span>
