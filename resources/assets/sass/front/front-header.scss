@@ -1,11 +1,14 @@
 .header-nav {
-    background-color: #006937;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     a {
-        color: #fff;
+        color: #006937;
+    }
+
+    a:hover {
+        color:#008321;
     }
 
     .logo {

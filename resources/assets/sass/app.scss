@@ -3,6 +3,14 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
 
+a {
+    color: #006937;
+}
+
+a:hover {
+    color:#008321;
+}
+
 // Variables
 @import 'variables';
 
@@ -44,8 +52,8 @@ body {
     display: flex;
 
     .btn-success {
-        border: 1px solid #4c66ff;
-        background-color: #4c66ff;
+        border: 1px solid #008321;
+        background-color: #008321;
         font-size: 1rem;
         paddng: 10px;
         color: #fff;
@@ -62,7 +70,7 @@ body {
     & > .side-content {
         width: 40%;
         position: relative;
-        background-color: $indigo;
+        background-color: #008321;
 
         color: #fff;
 

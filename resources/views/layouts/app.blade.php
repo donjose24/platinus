@@ -19,10 +19,9 @@
     <div id="app-login">
         <aside class="side-content">
             <div class="side-notes">
-                <h1>Hotel platanus Olongapo City</h1>
-                <p>Hotel Platanus is an established hotel in Barrio Barretto that offers leisure
-                    and recreation within the hustle of Barretto, Olongapo City. Only 10 minutes away 
-                    from the bars and restaurants that offer a broad selection of diverse cuisines from all over the world.
+                <h1>Hotel platanus</h1>
+                <p>
+                    Set in Clark, 32 km from Mount Pinatubo, Platanus Hotel features an outdoor swimming pool. Featuring a restaurant, the property also has a garden. The property offers a 24-hour front desk.
                 </p>
             </div>
         </aside>
