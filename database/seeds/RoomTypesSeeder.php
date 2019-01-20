@@ -42,7 +42,7 @@ Free Wifi',
         ]);
 
         RoomType::create([
-            'name'  => 'Studio Type',
+            'name'  => 'Single Room',
             'description' => 'Air conditioned, hot and cold shower, free Wifi, swimming pool, and cable T.V.  Double bed',
             'image_url' => 'https://occupancy.plus/images/rooms/e382052d9e0b7d17f3e56c698ff3948e.jpg',
             'daily_rate' => 2500,
