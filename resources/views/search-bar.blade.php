@@ -1,5 +1,8 @@
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
+        &nbsp;
+    </div>
+    <div class="col-md-4 search-bar">
         <h1 class="welcome-text align-content-center">Experience Platanus</h1>
         {{Form::open(['url' => '/room/search', 'method' => 'get'])}}
         <label class="d-block" for="start_date">Check In</label><input readonly type="text" name="start_date"  value="{{ app('request')->input('start_date') }}" placeholder="From" class="datetime-picker form-control" />
