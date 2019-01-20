@@ -13,6 +13,5 @@
         <p class="small">Take a breather in the hotel's incredible facilities like an outdoor swimming pool, fitness center, massage, and garden area where you can sit back and laze.</p>
         <p class="small">Hotel Platanus is an excellent choice for quality accommodation in Barretto for daily and long term stay.</p>
     </div>
-    </div>
 </div>
 @endsection
