@@ -36,8 +36,8 @@ class GuestController extends Controller
         $result = ReservationHelper::getAvailableRooms($request->get('start_date'), $request->get('end_date'));
         $roomTypes = $result['roomTypes'];
         $rooms = $result['rooms'];
-        $startDate = $request->get('start_date'):
-        $endDate = $request->get('endDate_date'):
+        $startDate = $request->get('start_date');
+        $endDate = $request->get('endDate_date');
 
         return view('guest.search', compact('roomTypes', 'startDate', 'endDate', 'rooms'));
     }
