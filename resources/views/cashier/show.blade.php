@@ -85,7 +85,6 @@
                     {{ Form::hidden('id', $reservation->id) }}
                 {{ Form::close() }}
             @endif
-                <a href="#" class="btn btn-success p-2 w-25 rebookBtn mt-2"> Rebook </a>
         </div>
 
         @php

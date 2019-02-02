@@ -4,7 +4,6 @@
             "section": "Resources",
             "items": [
                 { "title": "Users", "url": "/admin/users", "icon": "user" },
-                { "title": "Roles", "url": "/admin/roles", "icon": "users" },
                 {
                     "title": "Settings",
                     "url": "/admin/settings",
