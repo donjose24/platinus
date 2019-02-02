@@ -98,16 +98,8 @@ class CashierController
         $totalPrice = (ReservationRoom::where('reservation_id', $reservation->id)->sum('price') * $diff);
         $tax = setting('tax');
         $totalPrice += $totalPrice * ($tax / 100);
-        $toBeDeposited = 0;
         $downpayment = setting('downpayment');
-
-        if ($diff < 7) {
-            $toBeDeposited = $totalPrice;
-        }
-
-        if($diff >= 7) {
-            $toBeDeposited = ($totalPrice * ($downpayment / 100));
-        }
+        $toBeDeposited = ($totalPrice * ($downpayment / 100));
 
 
         return view('cashier.view', compact('reservation', 'diff', 'toBeDeposited'));
@@ -141,18 +133,9 @@ class CashierController
 
         $downpayment = setting('downpayment');
 
-        if($diff < 7) {
-            if ($totalPrice !=  $amount) {
-                Session::flash('error_message', 'Full amount is required for booking less than 7 nights');
-                return redirect()->back();
-            }
-        }
-
-        if($diff >= 7) {
-            if(($totalPrice * ($downpayment / 100)) > $amount) {
-                Session::flash('error_message', $downpayment . '% payment is required for booking more than 7 nights');
-                return redirect()->back();
-            }
+        if(($totalPrice * ($downpayment / 100)) > $amount) {
+            Session::flash('error_message', $downpayment . '% payment is required for booking');
+            return redirect()->back();
         }
 
         $reservation->status = "approved";
