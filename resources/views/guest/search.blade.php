@@ -69,10 +69,6 @@
                                     </div>
                                 @endif
                             @else
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="font-weight-bold room-price mr-2"> Number of persons </h5>
-                                    <input class="spinner" readonly name="pax" min="0" value="0" max="20" type="number">
-                                </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <button class="btn mr-2 w-75 p-2 btn-success add-room">Add Room</button>
                                     <input class="spinner" readonly name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
