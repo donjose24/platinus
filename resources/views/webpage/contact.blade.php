@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="home-content">
-    <h1 class="welcome-text align-content-center">Experience leisure and recreation within the hustle of Barretto ,Olongapo City</h1>
     <div class="reservation-container">
         @include('search-bar')
     </div>
