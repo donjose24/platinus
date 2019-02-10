@@ -26,7 +26,8 @@
                     <li>Please report to the Front Desk any personnel soliciting cash or tip for basic services rendered.</li>
                     <li>To avoid delay, please call the attention of the Front Desk one hour before checking out to allow our personnel to check your room amenities in accordance with our standard operating procedures.</li>
                     <li>In case of emergency, please call the attention of the Front Desk. The fire escape is located at the 'exit' areas and fire extinguishers are strategically located at every floor.</li>
-                    <li><b>Strictly no refund  after cancellation.</b></li>
+                    <li>Payments must be deposited before 3pm or the reservation will be invalid</li>
+                    <li><b>50% of payment will be refunded in case of cancellation</b></li>
                 </ol>
             </div>
             <div class="col-md-5 offset-md-1">
