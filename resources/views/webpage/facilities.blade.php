@@ -12,7 +12,7 @@
         <div class="card reservation-room">
             <div class="position-relative card-img-top-container">
                 <img
-                    class="card-img-top w-100"
+                    class="card-img-top w-25"
                     src="https://imgur.com/TUeyqTr.jpg"
                     alt="Standard room"
                 />
