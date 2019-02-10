@@ -13,7 +13,7 @@
             <div class="position-relative card-img-top-container">
                 <img
                     class="card-img-top w-100"
-                    src="https://imgur.com/TUeyqTr"
+                    src="https://imgur.com/TUeyqTr.jpg"
                     alt="Standard room"
                 />
             </div>
