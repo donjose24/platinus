@@ -580,9 +580,12 @@ class CashierController
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make('passowrd'),
+            'password' => Hash::make('password'),
             'contact_number' => "123456",
         ]);
+
+        $user->roles()->attach(21);
+        $user->save();
 
         //TODO: validate if the room is still available before inserting.
 
