@@ -7,16 +7,22 @@
     </div>
 </div>
 <div class="page-content location-content">
-    <h1 class="mb-5">FACILITIES</h1>
-    <div class="container">
-        <h4 class="font-weight-bold mb-2">General</h4>
-        <p style="font-size: 1rem;">Air Conditioning, Grounds, Gym Fitness Center, Outdoor Swimming Pool, Safety Deposit Boxes</p>
-        <h4 class="font-weight-bold mb-2">Internet</h4>
-        <p style="font-size: 1rem;">Free WiFi in selected areas in the hotel</p>
-        <h4 class="font-weight-bold mb-2">Parking</h4>
-        <p style="font-size: 1rem;">Private Parking Area (Charges may apply)</p>
-        <h4 class="font-weight-bold mb-2">Food and Beverages</h4>
-        <p style="font-size: 1rem;">The hotel is home to chill-out venues that have a wide selection of beverages.</p>
+    <h1 class="mb-5">Facilities and Services</h1>
+    <div class="d-flex justify-content-between flex-wrap">
+        <div class="card reservation-room">
+            <div class="position-relative card-img-top-container">
+                <img
+                    class="card-img-top w-100"
+                    src="https://imgur.com/TUeyqTr"
+                    alt="Standard room"
+                />
+            </div>
+            <div class="card-body">
+                <h4 class="font-weight-bold card-title">Transport Services</h4>
+                <h6 class="font-weight-bold sub-card-title">10-15 Persons</h6>
+                <p class="card-text">From Clark Pampanga to our Hotel</p>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
