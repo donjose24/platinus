@@ -50,7 +50,8 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'name' => 'required'
+			'name' => 'required',
+            'quantity' => 'required|not_in:0',
 		]);
         $requestData = $request->all();
         
@@ -98,7 +99,8 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'name' => 'required'
+			'name' => 'required',
+            'quantity' => 'required|not_in:0',
 		]);
         $requestData = $request->all();
         

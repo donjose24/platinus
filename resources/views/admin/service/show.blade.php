@@ -29,6 +29,7 @@
                         <th>ID</th><td>{{ $service->id }}</td>
                     </tr>
                     <tr><th> Name </th><td> {{ $service->name }} </td></tr><tr><th> Price </th><td> {{ $service->price }} </td></tr>
+                    <tr><th>Quantity</th><td>{{ $service->quantity }}</td></tr>
                 </tbody>
             </table>
         </div>

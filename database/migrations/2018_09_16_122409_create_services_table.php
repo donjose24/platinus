@@ -18,6 +18,7 @@ class CreateServicesTable extends Migration
             $table->softDeletes();
             $table->string('name')->nullable();
             $table->decimal('price')->nullable();
+            $table->decimal('quantity')->nullable();
             });
     }
 
