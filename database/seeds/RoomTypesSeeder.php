@@ -63,7 +63,7 @@ Free Wifi',
         \App\Service::create([
             'name' => 'Bed',
             'price' => 100,
-            'quantiy' => 15,
+            'quantity' => 15,
         ]);
     }
 }
