@@ -24,7 +24,7 @@ Free Wifi',
         ]);
 
         RoomType::create([
-            'name'  => 'Studio Twin Room',
+            'name'  => 'Studio Twin Room Deluxe',
             'description' => 'Air conditioned, hot and cold shower, free Wifi, swimming pool, and cable T.V.  twin bed',
             'image_url' => 'https://occupancy.plus/images/rooms/f6a848d482ad64b01d4091fb478ec616.jpg',
             'daily_rate' => 2000,

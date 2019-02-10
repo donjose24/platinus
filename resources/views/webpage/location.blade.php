@@ -25,7 +25,7 @@
     <h5 class="mb-2">#15 del Pilar St. Bo., Barretto Olongapo, Zambales, Philippines</h5>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12 mb-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3856.52103743157!2d120.26052116537923!3d14.852115524843787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x898878ac2f214293!2sHOTEL+BELLA+MONTE!5e0!3m2!1sen!2sph!4v1535472433140" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+        <div class="col-12 mb-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30805.108386683107!2d120.5148475453964!3d15.17818240209679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33968d5827f57a21%3A0xe0155f15c9a813c8!2sPlatanus+Hotel!5e0!3m2!1sen!2sph!4v1549810004232" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
         <div class="col-6">
           <h3>AREA INFORMATION</h3>
           <ul class="m-0 p-0">
