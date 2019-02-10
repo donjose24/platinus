@@ -26,14 +26,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    /**
-     * Get user roles
-     *
-     * @return mixed
-     */
-    public function roles()
-    {
-        return $this->belongsTo('App\Role');
-    }
 }

@@ -8,7 +8,7 @@
 
             <a href="{{ url('/admin/users') }}" title="Back"><button class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
             <a href="{{ url('/admin/users/' . $user->id . '/edit') }}" title="Edit User"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button></a>
-            @if (!$user->role()->first() === 'admin')
+            @if (!$user->hasRole('admin'))
                 {!! Form::open([
                     'method' => 'DELETE',
                     'url' => ['/admin/users', $user->id],
