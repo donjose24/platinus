@@ -42,11 +42,20 @@
                     $taxAmount = $total * ($tax / 100);
                     $total += $total * ($tax / 100);
                 @endphp
-                <h4> VAT: PHP {{ $taxAmount }}</h4>
+                <h4> VAT: PHP {{ number_format($taxAmount, 2) }}</h4>
                 <h4>Grand Total: PHP {{ number_format($total, 2) }}</h4>
+                <button href="#" class="btn btn-secondary cancel">Cancel</button>
             </fieldset>
             <br>
             <br>
         </div>
+    </div>
+    <div id="cancelDialog" title="Cancel Reservation">
+        {{ Form::open(['url' => '/customer/reservation/cancel']) }}
+        {{ Form::label('confirmation', 'Are you sure you want to cancel this reservation?') }}
+        {{ Form::hidden('id', $reservation->id) }}
+        {{ Form::submit('Yes', ['class' => 'btn btn-danger mt-2']) }}
+        {{ Form::submit('Back', ['class' => 'btn btn-primary mt-2 back-cancel']) }}
+        {{ Form::close() }}
     </div>
 @endsection

@@ -85,6 +85,7 @@ Route::group(['namespace' => 'Customer', 'prefix' => 'customer', 'middleware' =>
     Route::get('booking', 'BookingController@index');
     Route::put('reservation', 'CustomerController@uploadDepositSlip');
     Route::get('booking/{id}', 'BookingController@show');
+    Route::post('reservation/cancel', 'CustomerController@cancelReservation');
 });
 
 Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => ['auth', 'roles'], 'roles' => 'cashier'], function () {

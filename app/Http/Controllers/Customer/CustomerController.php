@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Reservation;
+use App\ReservationRoom;
+use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Imgur;
+use App\Helpers\ReservationHelper;
 
 class CustomerController extends Controller
 {
@@ -42,5 +45,59 @@ class CustomerController extends Controller
     public function showReservationForm()
     {
         return view('customer.booking.reservation');
+    }
+
+    public function cancelReservation(Request $request)
+    {
+        $id = $request->get('id');
+        $reservation = Reservation::find($id);
+        $reservation->status = "cancelled";
+        $reservation->save();
+
+        //Delete all relation
+        ReservationRoom::where('reservation_id', $reservation->id)->delete();
+
+        Session::flash('flash_message', 'Reservation Cancelled!');
+        return redirect()->back();
+    }
+
+    public function rebook(Request $request)
+    {
+        $reservationID = $request->get('reservation_id');
+
+        $reservation = Reservation::find($reservationID);
+        $result = ReservationHelper::getAvailableRooms($request->get('start_date'), $request->get('end_date'));
+        $availableRoomTypes = $result['roomTypes']->pluck('id')->toArray();
+
+        if (count($availableRoomTypes) == 0) {
+            Session::flash('error_message', 'No rooms available for the dates selected');
+            return  redirect()->back();
+        }
+
+        $currentRoomTypes = $reservation->roomTypes()->wherePivot('deleted_at', null)->pluck('room_id')->toArray();
+        $roomsWillBeRemoved = [];
+        foreach($currentRoomTypes as $type) {
+            if (in_array($type, $availableRoomTypes)) {
+                continue;
+            }
+            $roomsWillBeRemoved[] = $type;
+        }
+
+        $reservation->start_date = $request->get('start_date');
+        $reservation->end_date = $request->get('end_date');
+        $reservation->is_rebooked = true;
+        $reservation->save();
+
+        foreach($roomsWillBeRemoved as $room) {
+            $room = ReservationRoom::where('reservation_id',$reservationID)->where('room_id', $room)->first();
+            $room->delete();
+        }
+
+        $transaction = Transaction::where('item', 'Bank Deposit')->where('reservation_id', $reservation->id);
+        if($transaction) {
+            $transaction->price = $transaction->price * .5;
+            $transaction->save();
+        }
+        return redirect()->to('/customer/booking/'. $reservation->id);
     }
 }
