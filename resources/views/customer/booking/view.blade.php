@@ -44,7 +44,7 @@
                 @endphp
                 <h4> VAT: PHP {{ number_format($taxAmount, 2) }}</h4>
                 <h4>Grand Total: PHP {{ number_format($total, 2) }}</h4>
-                @if($reservation->status != "checked_in" || $reservation->status != "checked_out")
+                @if($reservation->status != "checked_in" || $reservation->status != "checked_out" || $reservation->status != 'cancelled')
                     <a href="#" class="btn btn-danger p-2 w-25 cancelReservation" style="color:white"> Cancel Reservation </a>
                 @endif
             </fieldset>
