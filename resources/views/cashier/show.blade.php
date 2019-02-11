@@ -147,7 +147,7 @@
                 <a href="#" class="btn btn-info p-2 w-25 add-service" style="color:white"> Additional Services </a>
                 <a href="#" class="btn btn-success p-2 mr-3 w-25 checkout"> Check Out </a>
             @endif
-            @if($reservation->status != "checked_in" || $reservation->status != "checked_out")
+            @if($reservation->status == "waiting_for_approval" || $reservation->status == "approved")
                 <a href="#" class="btn btn-danger p-2 w-25 cancelReservation" style="color:white"> Cancel Reservation </a>
             @endif
         </div>
