@@ -24,7 +24,7 @@ class BookingController
 
         $diff = date_diff($startDate, $endDate);
         $diff = $diff->days;
-        $expiration = date_diff(new DateTime(), $startDate);
+        $expiration = date_diff(new \DateTime(), $startDate);
 
         return view('customer.booking.view', compact('reservation', 'diff', 'expiration'));
     }
