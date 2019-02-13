@@ -149,6 +149,7 @@
             @endif
             @if($reservation->status != "checked_in" && $reservation->status != "checked_out" && $reservation->status != 'cancelled' && $expiration >= 15)
                 <a href="#" class="btn btn-danger p-2 w-25 cancelReservation" style="color:white"> Cancel Reservation </a>
+                <a href="#" class="btn btn-custom-default p-2 w-25 rebookBtn mt-2"> Rebook </a>
             @endif
         </div>
     </div>
