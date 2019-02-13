@@ -17,6 +17,7 @@
                 <h6> Check Out: {{ $reservation->end_date }} </h6>
                 <h6> Number of Nights: {{ $diff }} </h6>
                 <h6> Rooms: </h6>
+                <h6> Expi: {{ $expiration }}</h6>
                 <table class="table">
                     <tr>
                         <td>Room Name</td>

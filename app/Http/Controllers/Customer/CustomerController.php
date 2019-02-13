@@ -100,4 +100,36 @@ class CustomerController extends Controller
         }
         return redirect()->to('/customer/booking/'. $reservation->id);
     }
+
+    public function showRebook(Request $request)
+    {
+        $rules = [
+            'start_date' => 'required|date|date_format:Y-m-d|before:end_date',
+            'end_date' => 'required|date|date_format:Y-m-d|after:start_date',
+        ];
+
+        //this will redirect back on validation error
+        $request->validate($rules);
+        $reservationID = $request->get('reservation_id');
+
+        $reservation = Reservation::find($reservationID);
+        $result = ReservationHelper::getAvailableRooms($request->get('start_date'), $request->get('end_date'));
+        $availableRoomTypes = $result['roomTypes']->pluck('id')->toArray();
+
+        if (count($availableRoomTypes) == 0) {
+            Session::flash('error_message', 'No rooms available for the dates selected');
+            return  redirect()->back();
+        }
+
+        $currentRoomTypes = $reservation->roomTypes()->wherePivot('deleted_at', null)->pluck('room_id')->toArray();
+        $roomsWillBeRemoved = [];
+        foreach($currentRoomTypes as $type) {
+            if (in_array($type, $availableRoomTypes)) {
+                continue;
+            }
+            $roomsWillBeRemoved[] = $type;
+        }
+
+        return view('cashier.rebook', compact('reservation', 'roomsWillBeRemoved'));
+    }
 }
