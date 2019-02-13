@@ -39,6 +39,7 @@ class CashierController
         $services = Service::all();
 
         $reservations = Reservation::whereBetween('start_date', [$startDate, $endDate])->orWhereBetween('end_date', [$startDate, $endDate])->get();
+        $expiration = date_diff(new \DateTime(), $startDate)->days;
 
         //this will hold the value of room id and its corresponding current quantity in the reservations selected
         $rooms = [];
@@ -77,7 +78,7 @@ class CashierController
         $reservation = Reservation::find($id);
         $tax = setting('tax');
 
-        return view('cashier.show', compact('reservation', 'diff', 'roomTypes', 'services', 'tax'));
+        return view('cashier.show', compact('reservation', 'diff', 'roomTypes', 'services', 'tax', 'expiration'));
     }
 
     public function deposits()
