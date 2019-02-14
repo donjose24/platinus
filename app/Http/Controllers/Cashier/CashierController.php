@@ -671,8 +671,7 @@ class CashierController
         $id = $request->get('reservation_id');
 
         $reservation = Reservation::find($id);
-        $roomType = RoomType::find($room);
-        $dontDisplay = RoomType::where('daily_rate', '<', $roomType->daily_rate)->pluck('id');
+        $dontDisplay = RoomType::pluck('id');
         $dontDisplay[] = $room;
 
         $roomTypes = ReservationHelper::getAvailableRooms($reservation->start_date, $reservation->end_date, $dontDisplay);

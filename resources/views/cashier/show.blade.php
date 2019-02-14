@@ -70,7 +70,7 @@
                             <button class="btn btn-success edit-button" data-id="{{ $room->id }}" data-reservation="{{ $room->pivot->id }}"> Edit </button>
                             <button class="btn btn-danger delete-button" data-reservation="{{ $room->pivot->id }}"> Delete </button>
                         @endif
-                        <button class="btn btn-success upgrade-button" data-id="{{ $room->id }}" data-reservation="{{ $reservation->id }}" data-reservation-room="{{ $room->pivot->id }}"> Upgrade </button>
+                        <button class="btn btn-success upgrade-button" data-id="{{ $room->id }}" data-reservation="{{ $reservation->id }}" data-reservation-room="{{ $room->pivot->id }}"> Upgrade/Downgrade Room </button>
                     </div>
                 </div>
             </div>
