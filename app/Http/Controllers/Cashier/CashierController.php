@@ -775,7 +775,7 @@ class CashierController
         $id = $request->get('id');
         $reservation = Reservation::find($id);
 
-        $reservation->staus = 'refunded';
+        $reservation->status = 'refunded';
         $reservation->save();
 
         Session::flash('Reservation successfully refunded');

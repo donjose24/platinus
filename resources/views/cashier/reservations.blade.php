@@ -30,11 +30,11 @@
                                         <td>{{ $item->end_date }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td>
-                                            <a href="{{ url('/cashier/reservation/' . $item->id) }}" title="View Reservation Room Details"><button class="btn btn-info btn-sm">View</button></a>
+                                            <a href="{{ url('/cashier/reservation/' . $item->id) }}" title="View Reservation Room Details"><button class="btn btn-info btn-sm w-100">View</button></a>
                                             @if($item->status == "cancelled")
                                                 {{ Form::open(['url' => '/cashier/refund']) }}
                                                     {{ Form::hidden('id', $item->id) }}
-                                                    {{ Form::submit('Refund', ['class' => 'btn btn-primary mt-2']) }}
+                                                    {{ Form::submit('Refund', ['class' => 'btn btn-success mt-2 w-100']) }}
                                                 {{ Form::close() }}
                                             @endif
                                         </td>
