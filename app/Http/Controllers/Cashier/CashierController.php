@@ -769,4 +769,16 @@ class CashierController
 
         return redirect()->to('/cashier/reservation/'. $reservation->id);
     }
+
+    public function refund(Request $request)
+    {
+        $id = $request->get('id');
+        $reservation = Reservation::find($id);
+
+        $reservation->staus = 'refunded';
+        $reservation->save();
+
+        Session::flash('Reservation successfully refunded');
+        return redirect()->to('/cashier/reservation/'. $reservation->id);
+    }
 }

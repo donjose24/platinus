@@ -121,6 +121,7 @@ Route::group(['namespace' => 'Cashier', 'prefix' => 'cashier', 'middleware' => [
     Route::post('upgrade-room/save', 'CashierController@upgrade');
     Route::get('rebook', 'CashierController@showRebook');
     Route::post('rebook', 'CashierController@rebook');
+    Route::post('/refund', 'CashierController@refund');
 });
 
 Route::get('dashboard', 'Auth\LoginController@redirect');
