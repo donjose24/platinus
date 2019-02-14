@@ -186,7 +186,7 @@
                     {{ Form::select('room_id', $rooms, '', ['class' => 'form-control']) }}
                     {{ Form::hidden('reservation_id', $reservation->id) }}
                     {{ Form::hidden('room_type_id', $type->id) }}
-                    @if($reservation->status != "cancelled")
+                    @if($reservation->status != "cancelled" && $reservation->status != 'refunded')
                         <button class="btn btn-primary mt-2"> Add Room </button>
                     @endif
                     {{ Form::close() }}

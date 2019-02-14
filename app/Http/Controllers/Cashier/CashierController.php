@@ -252,17 +252,9 @@ class CashierController
         $reservation->save();
 
 
-        $dt = new \DateTime();
-        $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
-        $endDate->setTime(12, 0);
-        $indicator = $endDate->diff($dt)->format("%r%a");
-        $difference = $endDate->diff($dt)->h;
         //balance computation
         $total = 0;
         $totalPaid = 0;
-        foreach($reservation->roomTypes()->withPivot('price')->get() as $room) {
-            $total += ($room->pivot->price * $diff);
-        }
 
         //set all room to ready
         $records = ReservationRoom::where('reservation_id', $id)->get();
@@ -270,14 +262,6 @@ class CashierController
             $room = Room::find($record->room_number_id);
             $room->status = "ready";
             $room->save();
-        }
-
-        if ($indicator >= 0) {
-            $transaction = new Transaction();
-            $transaction->item = "Penalty (Overstay)";
-            $transaction->reservation_id = $reservation->id;
-            $transaction->price = $difference * 100;
-            $transaction->save();
         }
 
 
@@ -778,7 +762,7 @@ class CashierController
         $reservation->status = 'refunded';
         $reservation->save();
 
-        Session::flash('Reservation successfully refunded');
+        Session::flash('flash_message', 'Reservation successfully refunded');
         return redirect()->to('/cashier/reservation/'. $reservation->id);
     }
 }
