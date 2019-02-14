@@ -87,8 +87,8 @@
         @endforeach
         </tbody>
     </table>
-    <span class="hit">Date: {{ \Carbon\Carbon::now()->toDateTimeString() }}</span>
     <h3>Total: {{ number_format($total,2) }}</h3>
-    <h5> Printed By: {{ \Illuminate\Support\Facades\Auth::user() }}</h5>
+    <h5>Date: {{ \Carbon\Carbon::now()->toDateTimeString() }}</h5>
+    <h5> Printed By: {{ \Illuminate\Support\Facades\Auth::user()->name }}</h5>
 </body>
 </html>
