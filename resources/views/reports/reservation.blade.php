@@ -46,7 +46,7 @@
 </head>
 <body>
     <div class="header">
-      <div class="logo"><img class="logo-img" src="https://www.theplatanushotel.com/images/logo.jpg" alt="platanushotel logo"></div>
+        <div class="logo"><img class="logo-img" src="https://platanus.herokuapp.com/images/logo.jpg" alt="platanushotel logo"></div>
       <h1>Platanus Hotel</h1>
       <span class="hit">#15 del Pilar St. Bo., Barretto Olongapo, Zambales, Philippines</span>
       <span class="hit">EMAIL: admin@platanus.com</span>

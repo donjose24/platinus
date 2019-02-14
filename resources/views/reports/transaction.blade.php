@@ -50,16 +50,15 @@
 </head>
 <body>
     <div class="header">
-      <div class="logo"><img class="logo-img" src="https://www.theplatanushotel.com/images/logo.jpg" alt="platanushotel logo"></div>
+      <div class="logo"><img class="logo-img" src="https://platanus.herokuapp.com/images/logo.jpg" alt="platanushotel logo"></div>
       <h1>Platanus Hotel</h1>
-      <span class="hit">#15 del Pilar St. Bo., Barretto Olongapo, Zambales, Philippines</span>
+        <span class="hit">Clark Freeport, Mabalacat, Pampanga</span>
       <span class="hit">EMAIL: admin@platanus.com</span>
       <span class="hit">TEL : 123 456</span>
       <span class="hit">MOBILE: 0912 345 6789</span>
     </div>
     <br>
     <br>
-    <span class="hit">Date: September 1, 2018</span>
     <span class="hit">Transactions</span>
     <br>
     <table>
@@ -88,6 +87,8 @@
         @endforeach
         </tbody>
     </table>
+    <span class="hit">Date: {{ \Carbon\Carbon::now()->toDateTimeString() }}</span>
     <h3>Total: {{ number_format($total,2) }}</h3>
+    <h5> Printed By: {{ \Illuminate\Support\Facades\Auth::user() }}</h5>
 </body>
 </html>
