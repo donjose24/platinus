@@ -256,6 +256,10 @@ class CashierController
         $total = 0;
         $totalPaid = 0;
 
+        foreach($reservation->roomTypes()->withPivot('price')->get() as $room) {
+            $total += ($room->pivot->price * $diff);
+        }
+
         //set all room to ready
         $records = ReservationRoom::where('reservation_id', $id)->get();
         foreach($records as $record) {
