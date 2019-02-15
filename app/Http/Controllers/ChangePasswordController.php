@@ -10,7 +10,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request
+use Illuminate\Http\Request;
 use Hash;
 
 class ChangePasswordController
