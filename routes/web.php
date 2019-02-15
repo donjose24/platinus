@@ -50,7 +50,7 @@ Route::get('/cashier/checkout', function () {
     return view('cashier.checkout');
 });
 
-Route::get('/auth/change-password', 'Auth\ChangePasswordController@showChangePassword');
+Route::get('/auth/change-password', 'ChangePasswordController@showChangePassword');
 
 Auth::routes();
 
