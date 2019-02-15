@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-between flex-wrap">
             {{ Form::open(['url' => '/auth/change-password', 'method' => 'POST']) }}
                 {{ Form::label('old_password', 'Old Password') }}
-                {{ Form::password('old_password', '', ['required' => 'true']) }}
+                {{ Form::password('old_password', ['required' => 'true']) }}
                 {{ Form::label('password', 'New Password') }}
                 {{ Form::password('password', ['required' => 'true']) }}
                 {{ Form::label('password_confirmation', 'New Password') }}
