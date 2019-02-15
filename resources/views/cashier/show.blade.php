@@ -227,15 +227,10 @@
             $dt = new DateTime();
             $endDate = \DateTime::createFromFormat('Y-m-d', $reservation->end_date);
             $endDate->setTime(12, 0);
-            $indicator = $endDate->diff($dt)->format("%r%a");
-            $difference = $endDate->diff($dt)->h
         @endphp
         {{ Form::open(['url' => '/cashier/reservation/checkout/']) }}
         <p>Customer's Remaining Balance: <b>{{ number_format($total - $totalPaid, 2) }}</b></p>
         <p>All unsettled transactions will be marked as settled. Are you sure you want to checkout?</p>
-        @if($indicator >= 0)
-            <p> The customer have overstayed for {{ $difference }} hour(s). A penalty of {{ number_format($difference * 100, 2) }} Will be added to the customer's bill.</p>
-        @endif
 
         {{ Form::hidden('id', $reservation->id) }}
         <br>
