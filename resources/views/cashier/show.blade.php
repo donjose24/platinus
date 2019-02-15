@@ -151,6 +151,13 @@
                 <a href="#" class="btn btn-danger p-2 w-25 cancelReservation" style="color:white"> Cancel Reservation </a>
                 <a href="#" class="btn btn-custom-default p-2 w-25 rebookBtn mt-2"> Rebook </a>
             @endif
+
+            @if($reservation->status == "cancelled")
+                {{ Form::open(['url' => '/cashier/refund']) }}
+                {{ Form::hidden('id', $reservation->id) }}
+                {{ Form::submit('Refund ( ' . number_format($total, 2) . ' )', ['class' => 'btn btn-danger']) }}
+                {{ Form::close() }}
+            @endif
         </div>
     </div>
     <div id="editDialog" title="Edit Room">
@@ -238,12 +245,6 @@
         <button href="#" class="btn btn-secondary cancel">Cancel</button>
         {{ Form::close() }}
 
-        @if($reservation->status == "cancelled")
-            {{ Form::open(['url' => '/cashier/refund']) }}
-            {{ Form::hidden('id', $reservation->id) }}
-            {{ Form::submit('Refund ( ' . number_format($total, 2) . ' )', ['class' => 'btn btn-danger']) }}
-            {{ Form::close() }}
-        @endif
 
     </div>
     <div id="cancelDialog" title="Cancel Reservation">
