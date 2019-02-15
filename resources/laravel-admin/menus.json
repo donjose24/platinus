@@ -38,6 +38,11 @@
                     "title": "Additional Services",
                     "url": "/admin/service",
                     "icon": "wine-glass"
+                },
+                {
+                    "title": "Change Password",
+                    "url": "/auth/change-password",
+                    "icon": "wine-glass"
                 }
             ]
         }

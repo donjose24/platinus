@@ -14,17 +14,62 @@ use Hash;
 
 class ChangePasswordController
 {
+    public function showChangePassword(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->hasRole('customer')) {
+            $layout = 'customer';
+        }
+
+        if ($user->hasRole('cashier')) {
+            $layout = 'cashier';
+        }
+
+        if ($user->hasRole('admin')) {
+            $layout = 'admin';
+        }
+
+        return view('auth.changepassword', ['layout' => $layout]);
+
+    }
+
     public function changePassword(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email|max:255|unique:users',
+            'old_password' => 'required',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
+
         $user = Auth::user();
+
+        if (Auth::attempt([
+            'email' => $user->email,
+            'password' => $request->get('old_password'),
+        ])) {
+            session()->flash('error_message', 'Incorrect password!');
+            return redirect('back');
+        }
+
         $user->password = Hash::make($request->get('password'));
         $user->save();
 
         \session()->flash('flash_message', 'Change password success');
+
+        $layout = '';
+
+        if ($user->hasRole('customer')) {
+            $layout = 'customer';
+        }
+
+        if ($user->hasRole('cashier')) {
+            $layout = 'cashier';
+        }
+
+        if ($user->hasRole('admin')) {
+            $layout = 'admin';
+        }
+
+        return view('auth.changepassword', ['layout' => $layout]);
     }
 }
