@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Reservation;
 use App\ReservationRoom;
-use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -93,11 +92,6 @@ class CustomerController extends Controller
             $room->delete();
         }
 
-        $transaction = Transaction::where('item', 'Bank Deposit')->where('reservation_id', $reservation->id);
-        if($transaction) {
-            $transaction->price = $transaction->price * .5;
-            $transaction->save();
-        }
         return redirect()->to('/customer/booking/'. $reservation->id);
     }
 

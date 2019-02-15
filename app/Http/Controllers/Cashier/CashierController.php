@@ -762,6 +762,14 @@ class CashierController
         $reservation->status = 'refunded';
         $reservation->save();
 
+        $transaction = Transaction::where('item', 'Bank Deposit')->where('reservation_id', $reservation->id)->first();
+        $refundValue = $transaction->price / 2;
+        $refundTransaction = new Transaction();
+        $refundTransaction->price = $refundValue * -1;
+        $refundTransaction->item = "Refund";
+        $refundTransaction->status = "paid";
+        $refundTransaction->save();
+
         Session::flash('flash_message', 'Reservation successfully refunded');
         return redirect()->to('/cashier/reservation/'. $reservation->id);
     }
