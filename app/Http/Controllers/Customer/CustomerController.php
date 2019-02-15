@@ -8,7 +8,9 @@ use App\Reservation;
 use App\ReservationRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Imgur;
 use App\Helpers\ReservationHelper;
 
@@ -125,5 +127,19 @@ class CustomerController extends Controller
         }
 
         return view('cashier.rebook', compact('reservation', 'roomsWillBeRemoved'));
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->get('password'));
+        $user->save();
+
+        \session()->flash('flash_message', 'Success');
     }
 }
