@@ -240,7 +240,7 @@
 
         @if($item->status == "cancelled")
             {{ Form::open(['url' => '/cashier/refund']) }}
-            {{ Form::hidden('id', $item->id) }}
+            {{ Form::hidden('id', $reservation>id) }}
             {{ Form::submit('Refund ( ' . number_format($total, 2) . ' )', ['class' => 'btn btn-danger']) }}
             {{ Form::close() }}
         @endif
