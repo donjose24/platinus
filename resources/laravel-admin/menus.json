@@ -42,7 +42,7 @@
                 {
                     "title": "Change Password",
                     "url": "/auth/change-password",
-                    "icon": "wine-glass"
+                    "icon": "lock"
                 }
             ]
         }
