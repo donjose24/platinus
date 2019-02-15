@@ -152,7 +152,7 @@
                 <a href="#" class="btn btn-custom-default p-2 w-25 rebookBtn mt-2"> Rebook </a>
             @endif
 
-            @if($reservation->status == "cancelled")
+            @if($reservation->status == "cancelled" && $total != 0)
                 {{ Form::open(['url' => '/cashier/refund']) }}
                 {{ Form::hidden('id', $reservation->id) }}
                 {{ Form::submit('Refund ( ' . number_format($total / 2, 2)  . ' )', ['class' => 'btn btn-danger']) }}
