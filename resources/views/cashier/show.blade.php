@@ -238,7 +238,7 @@
         <button href="#" class="btn btn-secondary cancel">Cancel</button>
         {{ Form::close() }}
 
-        @if($item->status == "cancelled")
+        @if($reservation->status == "cancelled")
             {{ Form::open(['url' => '/cashier/refund']) }}
             {{ Form::hidden('id', $reservation>id) }}
             {{ Form::submit('Refund ( ' . number_format($total, 2) . ' )', ['class' => 'btn btn-danger']) }}
