@@ -767,7 +767,7 @@ class CashierController
         $reservation->save();
 
         $transaction = Transaction::where('item', 'Bank Deposit')->where('reservation_id', $reservation->id)->first();
-        if (! $transaction) {
+        if ($transaction) {
             $refundValue = $transaction->price / 2;
             $refundTransaction = new Transaction();
             $refundTransaction->price = $refundValue * -1;
