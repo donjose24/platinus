@@ -50,6 +50,8 @@ Route::get('/cashier/checkout', function () {
     return view('cashier.checkout');
 });
 
+Route::get('/auth/change-password', 'Auth\ChangePasswordController@showChangePassword');
+
 Auth::routes();
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
