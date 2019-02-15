@@ -10,11 +10,12 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request
 use Hash;
 
 class ChangePasswordController
 {
-    public function showChangePassword(Request $request)
+    public function showChangePassword()
     {
         $user = Auth::user();
         if ($user->hasRole('customer')) {
