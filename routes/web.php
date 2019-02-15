@@ -51,6 +51,7 @@ Route::get('/cashier/checkout', function () {
 });
 
 Route::get('/auth/change-password', 'ChangePasswordController@showChangePassword');
+Route::post('/auth/change-password', 'ChangePasswordController@changePassword');
 
 Auth::routes();
 
@@ -63,7 +64,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('activitylogs', 'ActivityLogsController')->only([
         'index', 'show', 'destroy'
     ]);
-    Route::resource('settings', 'SettingsController');
+    Route:resource('settings', 'SettingsController');
     Route::get('generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@getGenerator']);
     Route::post('generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@postGenerator']);
     Route::get('reservation/print/{id}', 'ReservationsController@printReservation');
