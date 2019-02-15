@@ -237,6 +237,14 @@
         <button href="/cashier/reservation/checkout/{{ $reservation->id }}" class="btn btn-primary"> Check Out </button>
         <button href="#" class="btn btn-secondary cancel">Cancel</button>
         {{ Form::close() }}
+
+        @if($item->status == "cancelled")
+            {{ Form::open(['url' => '/cashier/refund']) }}
+            {{ Form::hidden('id', $item->id) }}
+            {{ Form::submit('Refund ( ' . number_format($total, 2) . ' )', ['class' => 'btn btn-danger']) }}
+            {{ Form::close() }}
+        @endif
+
     </div>
     <div id="cancelDialog" title="Cancel Reservation">
         {{ Form::open(['url' => '/cashier/reservation/cancel']) }}
