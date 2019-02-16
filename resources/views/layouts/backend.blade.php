@@ -34,6 +34,21 @@
                             </div>
                         </div>
                     @endif
+                    @if (Session::has('error_message'))
+                        <div class="container-fluid">
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ Session::get('error_message') }}
+                            </div>
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
             </div>

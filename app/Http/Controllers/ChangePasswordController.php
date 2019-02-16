@@ -43,7 +43,6 @@ class ChangePasswordController
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-
         $user = Auth::user();
 
         if (Auth::attempt([
