@@ -51,7 +51,7 @@ class ChangePasswordController
             'password' => $request->get('old_password'),
         ])) {
             session()->flash('error_message', 'Incorrect password!');
-            return redirect('back');
+            return redirect()->back();
         }
 
         $user->password = Hash::make($request->get('password'));
