@@ -31,6 +31,11 @@
                     <span><i class="fa fa-archive"></i>My Bookings</span>
                 </a>
             </li>
+            <li>
+                <a href="/auth/change-password">
+                    <span><i class="fa fa-lock"></i>Change Password</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

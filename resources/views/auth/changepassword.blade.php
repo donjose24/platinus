@@ -9,7 +9,7 @@
                 {{ Form::password('old_password', ['required' => 'true']) }}
                 {{ Form::label('password', 'New Password') }}
                 {{ Form::password('password', ['required' => 'true']) }}
-                {{ Form::label('password_confirmation', 'New Password') }}
+                {{ Form::label('password_confirmation', 'Confirm New Password') }}
                 {{ Form::password('password_confirmation', ['required' => 'true']) }}
                 <button class="btn btn-success mt-3 d-block">Save</button>
             {{ Form::close() }}
