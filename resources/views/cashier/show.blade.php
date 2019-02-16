@@ -136,8 +136,10 @@
             @endphp
 
             <h3> Total Paid: {{ number_format($totalPaid, 2) }}</h3>
-            <h3> {{ $tax }}% VAT: {{ $taxAmount }} </h3>
-            <h3> Total Bill: {{ number_format($total, 2) }}</h3>
+            @if ($reservation->status != "refunded")
+                <h3> {{ $tax }}% VAT: {{ $taxAmount }} </h3>
+                <h3> Total Bill: {{ number_format($total, 2) }}</h3>
+            @endif
             <br>
             @if($reservation->status == "checked_out")
                 <a href="/cashier/reservation/print/{{ $reservation->id }}" class="btn btn-success p-2 w-25" target="_blank"> Print </a>
