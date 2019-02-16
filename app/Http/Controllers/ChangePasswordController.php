@@ -45,7 +45,7 @@ class ChangePasswordController
 
         $user = Auth::user();
 
-        if (Auth::attempt([
+        if (!Auth::attempt([
             'email' => $user->email,
             'password' => $request->get('old_password'),
         ])) {
