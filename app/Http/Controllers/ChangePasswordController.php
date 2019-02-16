@@ -18,16 +18,18 @@ class ChangePasswordController
     public function showChangePassword()
     {
         $user = Auth::user();
+        $layout = '';
+
         if ($user->hasRole('customer')) {
-            $layout = 'customer';
+            $layout = 'layouts.customer';
         }
 
         if ($user->hasRole('cashier')) {
-            $layout = 'cashier';
+            $layout = 'layouts.cashier';
         }
 
         if ($user->hasRole('admin')) {
-            $layout = 'admin';
+            $layout = 'layouts.backend';
         }
 
         return view('auth.changepassword', ['layout' => $layout]);
