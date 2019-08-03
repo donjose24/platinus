@@ -1,4 +1,4 @@
-.header-nav {
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,7 +14,7 @@
     .logo {
         padding: 9px;
         img {
-            width: 100px;
+            width: 50px;
         }
     }
 
@@ -24,11 +24,17 @@
         margin: 0;
         padding: 0;
 
-        li a {
+        li {
             display: block;
             text-decoration: none;
             padding: 13px 25px;
             font-size: 16px;
+            text-align: center;
         }
     }
+}
+
+.nav-item {
+    text-align: center;
+    margin-right: 20px;
 }
