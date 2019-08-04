@@ -16,6 +16,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/front/front-header.scss', 'public/css')
     .sass('resources/assets/sass/front/front-content.scss', 'public/css')
     .sass('resources/assets/sass/back/back-sidebar.scss', 'public/css')
-    .sass('resources/assets/sass/back/back-content.scss', 'public/css');
+    .sass('resources/assets/sass/back/back-content.scss', 'public/css')
+    .sass('resources/assets/sass/customer.scss', 'public/css');
 
 mix.disableSuccessNotifications();

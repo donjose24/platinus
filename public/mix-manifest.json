@@ -4,5 +4,6 @@
     "/css/front-header.css": "/css/front-header.css",
     "/css/front-content.css": "/css/front-content.css",
     "/css/back-sidebar.css": "/css/back-sidebar.css",
-    "/css/back-content.css": "/css/back-content.css"
+    "/css/back-content.css": "/css/back-content.css",
+    "/css/customer.css": "/css/customer.css"
 }

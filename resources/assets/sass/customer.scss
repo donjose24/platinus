@@ -1,4 +1,4 @@
-@import '../variables';
+@import 'variables';
 
 .back-content {
     width: 72%;
@@ -186,4 +186,18 @@
 .nav-item {
     text-align: center;
     margin-right: 20px;
+}
+
+@media only screen and (max-width: 999px) {
+    .main-content {
+        padding-left:20px;
+        padding-right:20px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .main-content {
+        padding-left:100px;
+        padding-right:100px;
+    }
 }

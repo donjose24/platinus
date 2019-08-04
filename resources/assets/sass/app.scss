@@ -67,6 +67,7 @@ body {
         }
     }
 
+
     & > .side-content {
         width: 40%;
         position: relative;
@@ -89,6 +90,7 @@ body {
             }
         }
     }
+
 
     & > .main-content {
         width: 100%;
@@ -126,4 +128,15 @@ body {
 
 #editDialog, #deleteDialog, #addDialog, #addServices, #addDamages, #checkoutModal, #cancelDialog, #showUpgrade, #showRebook {
     display:none;
+}
+
+@media only screen and (max-width: 999px) {
+    .side-content {
+        display: none;
+    }
+
+    .loginForm {
+        width: 100%;
+        padding: 20px;
+    }
 }
