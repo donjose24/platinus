@@ -4,11 +4,11 @@
 <div class="content-box">
     <div class="logo"><img src="/images/logo.jpg" alt="platanus logo" class="icon"></div>
 
-    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}" class="loginForm">
         @csrf
 
         <div class="form-group">
-            <input 
+            <input
                 id="name"
                 type="text"
                 class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
