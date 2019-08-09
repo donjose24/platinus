@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Page;
 use App\Amenity;
+use App\Event;
 
 class GuestController extends Controller
 {
@@ -23,7 +24,8 @@ class GuestController extends Controller
     public function index()
     {
         $content = Page::where('title', 'Front Page')->first();
-        return view('welcome', compact('content'));
+        $events = Event::all();
+        return view('welcome', compact('content', 'events'));
     }
 
     /**

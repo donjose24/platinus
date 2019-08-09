@@ -53,7 +53,13 @@
                     "title": "Pages",
                     "url": "/admin/pages",
                     "icon": "book-open"
+                },
+                {
+                    "title": "Events",
+                    "url": "/admin/events",
+                    "icon": "bolt"
                 }
+
             ]
         }
     ]

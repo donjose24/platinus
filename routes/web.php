@@ -56,6 +56,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('users', 'UsersController');
     Route::resource('pages', 'PagesController');
     Route::resource('amenities', 'AmenityController');
+    Route::resource('events', 'EventController');
     Route::resource('activitylogs', 'ActivityLogsController')->only([
         'index', 'show', 'destroy'
     ]);
