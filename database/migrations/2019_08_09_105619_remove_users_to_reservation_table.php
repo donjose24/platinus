@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserOnReservationTable extends Migration
+class RemoveUsersToReservationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddUserOnReservationTable extends Migration
      */
     public function up()
     {
-        Schema::table('reservations', function (Blueprint $table) {
-            $table->string('user');
+        Schema::table('reservation', function (Blueprint $table) {
+            $table->dropColumn('users');
         });
     }
 
@@ -25,6 +25,8 @@ class AddUserOnReservationTable extends Migration
      */
     public function down()
     {
-        $table->dropColumn('user');
+        Schema::table('reservation', function (Blueprint $table) {
+            $table->string('users');
+        });
     }
 }
