@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
 
         $user = new User();
         $user->name = "Arnold Booker";
-        $user->email = "Cashier@platanus.com";
+        $user->email = "cashier@platanus.com";
         $user->password = Hash::make("password");
         $user->save();
 

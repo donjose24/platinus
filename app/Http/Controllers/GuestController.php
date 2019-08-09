@@ -197,4 +197,14 @@ class GuestController extends Controller
         $amenities = Amenity::all();
         return view('webpage.facilities', compact('amenities'));
     }
+
+    /**
+     * Show room rates page
+     */
+    public function roomRates()
+    {
+        $rooms = RoomType::all();
+
+        return view('webpage.roomrates', compact('rooms'));
+    }
 }

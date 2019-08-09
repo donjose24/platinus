@@ -21,9 +21,7 @@ Route::get('/location', function () {
     return view('webpage.location');
 });
 
-Route::get('/roomrates', function () {
-    return view('webpage.roomrates');
-});
+Route::get('/roomrates', 'GuestController@roomRates');
 
 Route::get('/facilities', 'GuestController@facilities');
 
