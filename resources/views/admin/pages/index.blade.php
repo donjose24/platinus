@@ -32,11 +32,11 @@
                 @foreach($pages as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->title }}</td><td>{{ $item->content }}</td>
+                        <td>{{ $item->title }}</td><td>{!! $item->content !!}</td>
                         <td>
                             <a href="{{ url('/admin/pages/' . $item->id) }}" title="View Page"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                             <a href="{{ url('/admin/pages/' . $item->id . '/edit') }}" title="Edit Page"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
-                            
+
                         </td>
                     </tr>
                 @endforeach

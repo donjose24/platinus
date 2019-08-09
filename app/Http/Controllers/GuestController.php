@@ -12,9 +12,19 @@ use App\ReservationRoom;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use App\Page;
 
 class GuestController extends Controller
 {
+    /**
+     * View index page
+     */
+    public function index()
+    {
+        $content = Page::where('title', 'Front Page')->first();
+        return view('welcome', compact('content'));
+    }
+
     /**
      * Search for rooms
      */

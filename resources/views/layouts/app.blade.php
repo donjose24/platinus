@@ -19,10 +19,11 @@
     <div id="app-login">
         <aside class="side-content">
             <div class="side-notes">
+                @php
+                    $content = App\Page::where('title', 'Side Description')->first();
+                @endphp
                 <h1>Hotel platanus</h1>
-                <p>
-                    Set in Clark, 32 km from Mount Pinatubo, Platanus Hotel features an outdoor swimming pool. Featuring a restaurant, the property also has a garden. The property offers a 24-hour front desk.
-                </p>
+                {!! $content->content !!}
             </div>
         </aside>
         <main class="main-content">

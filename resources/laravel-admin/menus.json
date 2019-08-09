@@ -43,6 +43,11 @@
                     "title": "Change Password",
                     "url": "/auth/change-password",
                     "icon": "lock"
+                },
+                {
+                    "title": "Pages",
+                    "url": "/admin/pages",
+                    "icon": "book-open"
                 }
             ]
         }
