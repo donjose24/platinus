@@ -14,7 +14,7 @@ class AddUserOnReservationTable extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->string('user');
+            $table->string('users');
         });
     }
 
@@ -25,6 +25,8 @@ class AddUserOnReservationTable extends Migration
      */
     public function down()
     {
-        $table->dropColumn('user');
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->dropColumn('users');
+        });
     }
 }
