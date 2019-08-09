@@ -40,6 +40,11 @@
                     "icon": "wine-glass"
                 },
                 {
+                    "title": "Amenities",
+                    "url": "/admin/amenities",
+                    "icon": "smile-beam"
+                },
+                {
                     "title": "Change Password",
                     "url": "/auth/change-password",
                     "icon": "lock"

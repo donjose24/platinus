@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Amenity extends Model
 {
     use LogsActivity;
-    use SoftDeletes;
 
     /**
      * The database table used by the model.

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Page;
+use App\Amenity;
 
 class GuestController extends Controller
 {
@@ -186,5 +187,14 @@ class GuestController extends Controller
         Session::forget('items');
 
         return view('reservation.success');
+    }
+
+    /**
+     * View facilities page
+     */
+    public function facilities()
+    {
+        $amenities = Amenity::all();
+        return view('webpage.facilities', compact('amenities'));
     }
 }

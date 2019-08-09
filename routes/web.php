@@ -25,9 +25,7 @@ Route::get('/roomrates', function () {
     return view('webpage.roomrates');
 });
 
-Route::get('/facilities', function () {
-    return view('webpage.facilities');
-});
+Route::get('/facilities', 'GuestController@facilities');
 
 //tests reports only
 Route::get('/reports/reservations', function () {
@@ -59,6 +57,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('permissions', 'PermissionsController');
     Route::resource('users', 'UsersController');
     Route::resource('pages', 'PagesController');
+    Route::resource('amenities', 'AmenityController');
     Route::resource('activitylogs', 'ActivityLogsController')->only([
         'index', 'show', 'destroy'
     ]);
