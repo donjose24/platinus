@@ -128,7 +128,7 @@ body {
         }
 
         .reservation-room {
-            width: 27%;
+            width: 30%;
             margin-bottom: 20px;
 
             border: none;
@@ -136,7 +136,7 @@ body {
 
             .card-img-top-container {
                 overflow: hidden;
-                height: 150px;
+                height: 250px;
 
                 .card-img-top {
                     border-radius: 0;
@@ -276,6 +276,18 @@ footer {
                 padding: 10px;
                 font-size: 0.9rem;
                 text-decoration: none;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .page-content {
+        &.reservation-content {
+            .reservation-room {
+                width: 100%;
+                display:block;
+                margin-top: 5%;
             }
         }
     }

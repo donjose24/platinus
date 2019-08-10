@@ -7,7 +7,7 @@
             @include('search-bar')
         </div>
     </div>
-    <div class="page-content reservation-content">
+    <div class="page-content location-content reservation-content">
         <h1>Room &amp; Rates</h1>
         <div class="d-flex justify-content-between flex-wrap">
             @foreach($rooms as $room)

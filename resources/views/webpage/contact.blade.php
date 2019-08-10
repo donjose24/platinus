@@ -10,7 +10,7 @@
     <h1>Contact Us</h1>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-6 contact-form">
+            <div class="col-md-6 contact-form col-sm-12">
                 <div class="contact-form-container">
                     <div class="form-group">
                         <label for="">Send To</label>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 offset-2">
+            <div class="col-md-4 col-sm-12 mt-2">
                 <div class="contact-instruction p-3">
                     <h4 class="mb-3">QUICK STEPS TO GETTING YOUR ROOM:</h4>
                     <ol>

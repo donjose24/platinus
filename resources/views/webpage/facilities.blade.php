@@ -6,11 +6,11 @@
         @include('search-bar')
     </div>
 </div>
-<div class="page-content location-content">
+<div class="page-content welcome-content reservation-content">
     <h1 class="mb-5">Facilities and Services</h1>
     <div class="d-flex justify-content-between flex-wrap">
         @foreach($amenities as $amenity)
-            <div class="card reservation-room" style="width: 27%">
+            <div class="card reservation-room">
                 <div class="position-relative card-img-top-container">
                     <img
                      class="card-img-top w-100"
