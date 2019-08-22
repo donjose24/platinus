@@ -67,7 +67,7 @@
                             @else
                                 <div class="d-flex justify-content-between align-items-center">
                                     <button class="btn mr-2 w-75 p-2 btn-success add-room">Add Room</button>
-                                    <input class="spinner" readonly name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
+                                    <input class="spinner" name="value" min="0" value="0" max="{{ $type->validRooms()->count() - (array_key_exists($type->id, $rooms) ? $rooms[$type->id] : 0) }}" type="number">
                                 </div>
                             @endif
                             <input class="room-id" type="hidden" name="id" value="{{ $type->id }}">

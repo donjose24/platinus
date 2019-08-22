@@ -65,12 +65,21 @@
                     <h5>Room Total: PHP {{ number_format($total, 2) }}</h5>
                     <h5>{{ $tax }}% VAT: PHP {{ number_format($taxAmount, 2) }}</h5>
                     <h5> Total Bill: {{ number_format($total + $taxAmount, 2) }}</h5>
-                    <div class="d-flex justify-content-between">
-                        <a href="{{ $backUrl }}" class="btn btn-secondary font-weight-normal"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>Back </a>
+                    <div class="justify-content-between">
                         {{ Form::open(['url' => '/reservation', 'method' => 'POST']) }}
-                            <button class="btn btn-success">Confirm</button>
+                        <input type="checkbox" name="terms_and_condition"> <span> I have read and agree to the terms and conditions </span> <br/>
+                        <button class="btn btn-success">Confirm</button>
+                        <a href="{{ $backUrl }}" class="btn btn-secondary font-weight-normal"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>Back </a>
                         {{ Form::close() }}
                     </div>
+                    <br/>
+                    @if ($errors->any())
+                        <ul class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>

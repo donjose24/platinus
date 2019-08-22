@@ -133,9 +133,13 @@ class GuestController extends Controller
         return view('reservation.checkout', compact('items', 'rooms', 'details', 'diff', 'backUrl', 'tax'));
     }
 
-    public function reserve()
+    public function reserve(Request $request)
     {
-        if(!Session::has('items') || !Session::has('details')) {
+        $request->validate([
+            'terms_and_condition' => 'required',
+        ]);
+
+        if (!Session::has('items') || !Session::has('details')) {
             Session::flash('error_message', 'Session expired. Please select your rooms again');
             redirect()->back();
         }
@@ -144,7 +148,7 @@ class GuestController extends Controller
         $details = Session::get('details');
         $items = Session::get('items');
         $id = Auth::user()->id;
-        $rand = substr(md5(microtime()),rand(0,26),10);
+        $rand = substr(md5(microtime()), rand(0, 26), 10);
         $startDate = \DateTime::createFromFormat('Y-m-d', $details['start_date']);
         $endDate = \DateTime::createFromFormat('Y-m-d', $details['end_date']);
 
