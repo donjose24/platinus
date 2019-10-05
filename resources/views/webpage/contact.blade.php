@@ -33,8 +33,6 @@ Mabalacat, Pampanga</h5>
                         <li>Input your details and review the summary of your reservation!</li>
                         <li>Check your e-mail for your instant confirmation!</li>
                     </ol>
-
-                    <button class="btn btn-success w-100 p-2">Reserve Now</button>
                 </div>
             </div>
         </div>
