@@ -11,43 +11,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 contact-form col-sm-12">
-                <div class="contact-form-container">
-                    <div class="form-group">
-                        <label for="">Send To</label>
-                        <select class="form-control">
-                            <option>Information</option>
-                            <option>Admin</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <input class="form-control" type="text" />
-                    </div>
-                    <div class="form-group">
-                        <label for="">E-mail</label>
-                        <input class="form-control" type="text" />
-                    </div>
-                    <div class="form-group">
-                        <label for="">Contact Number</label>
-                        <input class="form-control" type="text" />
-                    </div>
-                    <div class="form-group">
-                        <label for="">Preferred Contact</label>
-                        <select class="form-control">
-                            <option>By Phone</option>
-                            <option>By Email</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Message</label>
-                        <textarea class="form-control" rows="4"></textarea>
-                    </div>
-                    <div class="form-group mb-0">
-                        <button class="btn btn-success w-100 p-2">Submit</button>
-                    </div>
-                </div>
+                <br>
+                <br>
+                <h2>Address: </h2>
+                <h5>45-B, Regency Park Townhouse, Jose Abd Santos St., Cor E., Aguinaldo St., Clark Special Economy Zone
+Mabalacat, Pampanga</h5>
+                <br>
+                <h2>Contact Number</h2>
+                <h5>Call (045) 499 8017</h5>
+                <br>
+                <h2>Email Address</h2>
+                <h5>hotelplatanusgmainc@gmail.com</h5>
+                <br>
             </div>
-            <div class="col-md-4 col-sm-12 mt-2">
+            <div class="col-md-6 col-sm-12 mt-2">
                 <div class="contact-instruction p-3">
                     <h4 class="mb-3">QUICK STEPS TO GETTING YOUR ROOM:</h4>
                     <ol>
