@@ -14,7 +14,7 @@ class RemoveUsersToReservationTable extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->dropColumn('user');
+            $table->dropColumn('users');
         });
     }
 
@@ -26,7 +26,7 @@ class RemoveUsersToReservationTable extends Migration
     public function down()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->string('user');
+            $table->string('users');
         });
     }
 }
