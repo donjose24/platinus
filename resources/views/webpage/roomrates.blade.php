@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="home-content">
-        <h1 class="welcome-text">Room &amp; Rates</h1>
         <div class="reservation-container">
             @include('search-bar')
         </div>
